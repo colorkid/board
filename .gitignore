@@ -1,0 +1,15 @@
+# dependencies
+node_modules
+package-lock.json
+
+# build
+build
+
+# webstorm
+.idea
+
+# editors
+.vscode
+
+# config
+.env
