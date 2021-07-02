@@ -5,7 +5,7 @@ import store from './redux/store';
 import App from './components/App';
 import getFirebase from '../firebase';
 
-export const firebase = getFirebase();
+export const firebaseInstance = getFirebase();
 
 if (store) {
     ReactDOM.render(

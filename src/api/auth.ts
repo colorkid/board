@@ -1,26 +1,25 @@
-import { firebase } from '../index';
-import firebaseModule from 'firebase';
+import firebase from 'firebase';
+import { firebaseInstance } from '../index';
 
 export type userDataRequestType = {
     email: string;
     password: string;
 };
 
-export const signInFireBase = async (
+export const signInFireBase = (
     data: userDataRequestType
-): Promise<firebaseModule.auth.UserCredential | undefined> => {
+): Promise<firebase.auth.UserCredential> | undefined => {
     const { email, password } = data;
-    return firebase?.auth().signInWithEmailAndPassword(email, password);
+    return firebaseInstance?.auth().signInWithEmailAndPassword(email, password);
 };
 
-export const signUpFireBase = async (
+export const signUpFireBase = (
     data: userDataRequestType
-): Promise<firebaseModule.auth.UserCredential | undefined> => {
+): Promise<firebase.auth.UserCredential> | undefined => {
     const { email, password } = data;
-    await firebase?.auth().createUserWithEmailAndPassword(email, password);
-    return signInFireBase(data);
+    return firebaseInstance?.auth().createUserWithEmailAndPassword(email, password);
 };
 
-export const signOutFireBase = async (): Promise<void> => {
-    return firebase?.auth().signOut();
+export const signOutFireBase = (): Promise<void> | undefined => {
+    return firebaseInstance?.auth().signOut();
 };

@@ -43,7 +43,9 @@ describe('Auth User render ', () => {
             );
         });
 
-        expect(container.querySelector('[data-testid="userEmail"]').textContent).toBe(initialState.user.email);
+        expect(container.querySelector('[data-testid="userEmail"]').textContent).toBe(
+            initialState.user.email
+        );
         expect(container.querySelector('button').textContent).toBe(LOG_OUT);
     });
 
@@ -100,7 +102,7 @@ describe('Auth User render ', () => {
         const buttonSignUp = document.querySelector(`[data-testid='${SIGN_UP}']`);
 
         act(() => {
-            buttonSignUp.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+            buttonSignUp.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         });
 
         expect(container.querySelector('button').textContent).toBe(SIGN_UP);
@@ -155,6 +157,8 @@ describe('Auth User render ', () => {
             );
         });
 
-        expect(container.querySelector('[data-testid="errorMessage"]').textContent).toBe('Test error');
+        expect(container.querySelector('[data-testid="errorMessage"]').textContent).toBe(
+            'Test error'
+        );
     });
 });

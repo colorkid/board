@@ -3,17 +3,13 @@ import UserInfo from './components/UserInfo';
 import { CircularProgress } from '@material-ui/core';
 import AuthForm from './components/AuthForm';
 import useStyles from './styles';
-
-type UserRequestType = {
-    email: string;
-    password: string;
-};
+import { userDataRequestType } from '@src/api/auth';
 
 export interface IAuthForm {
-    requestMethod: (arg: UserRequestType) => void;
+    requestMethod: (arg: userDataRequestType) => void;
     typeAuth: string;
     setTypeAuth: (arg: string) => void;
-    error?: string,
+    error?: string;
 }
 
 export interface UserType extends IAuthForm {
@@ -23,7 +19,8 @@ export interface UserType extends IAuthForm {
 }
 
 const AuthUser = (props: UserType): ReactElement => {
-    const { isFetching, email, signOutRequest, requestMethod, typeAuth, setTypeAuth, error } = props;
+    const { isFetching, email, signOutRequest, requestMethod, typeAuth, setTypeAuth, error } =
+        props;
     const classes = useStyles();
 
     return (

@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '../redux/store';
-import { signIn, signOut, signUp } from '../redux/userReducer';
 import AuthUser from '../components/AuthUser';
 import { SIGN_IN } from '../constants';
 import { userDataRequestType } from '@src/api/auth';
+import { signIn, signOut, signUp } from '@src/redux/user/userThunks';
 
 const AuthUserContainer = (): ReactElement => {
     const [typeAuth, setTypeAuth] = useState<string>(SIGN_IN);

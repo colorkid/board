@@ -1,5 +1,12 @@
 import { it } from '@jest/globals';
-import { UserReducer, DEFAULT_ERROR_MESSAGES, signIn, signOut } from '@src/redux/userReducer';
+import {
+    DEFAULT_ERROR_MESSAGES,
+    errorMessage,
+    fetch,
+    signInRequest,
+    signOutRequest,
+    UserReducer,
+} from '@src/redux/user/userReducer';
 
 describe('userReducer ', () => {
     it('SignIn fulfilled', () => {
@@ -10,7 +17,7 @@ describe('userReducer ', () => {
         };
 
         const action = {
-            type: signIn.fulfilled.type,
+            type: signInRequest,
             payload: {
                 user: payload,
             },
@@ -31,7 +38,7 @@ describe('userReducer ', () => {
         const initialState = { token: '', email: '', isFetching: false, error: '' };
 
         const action = {
-            type: signIn.fulfilled.type,
+            type: signInRequest,
         };
 
         const expectedState = { ...initialState };
@@ -41,11 +48,11 @@ describe('userReducer ', () => {
         expect(state).toEqual(expectedState);
     });
 
-    it('SignIn pending', () => {
+    it('Fetch', () => {
         const initialState = { token: '', email: '', isFetching: false, error: '' };
 
         const action = {
-            type: signIn.pending.type,
+            type: fetch,
         };
 
         const expectedState = {
@@ -59,15 +66,13 @@ describe('userReducer ', () => {
         expect(state).toEqual(expectedState);
     });
 
-    it('SignIn rejected', () => {
+    it('Error message', () => {
         const initialState = { token: '', email: '', isFetching: false, error: '' };
         const payload = 'Test Error';
 
         const action = {
-            type: signIn.rejected.type,
-            error: {
-                message: payload,
-            },
+            type: errorMessage,
+            payload,
         };
 
         const expectedState = {
@@ -81,18 +86,18 @@ describe('userReducer ', () => {
         expect(state).toEqual(expectedState);
     });
 
-    it('SignIn rejected with unknown error', () => {
+    it('Default error message', () => {
         const initialState = { token: '', email: '', isFetching: false, error: '' };
 
         const action = {
-            type: signIn.rejected.type,
+            type: signInRequest,
         };
 
         const expectedState = {
             token: initialState.token,
             email: initialState.email,
             isFetching: initialState.isFetching,
-            error: DEFAULT_ERROR_MESSAGES.rejected,
+            error: DEFAULT_ERROR_MESSAGES.fulfilled,
         };
 
         const state = UserReducer(initialState, action);
@@ -108,7 +113,7 @@ describe('userReducer ', () => {
         };
 
         const action = {
-            type: signOut.fulfilled.type,
+            type: signOutRequest,
         };
 
         const expectedState = {
