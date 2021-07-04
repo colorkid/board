@@ -1,1 +1,1 @@
-export { default } from './DrawerBar';
+export { default } from './DrawerBarContainer';

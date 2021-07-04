@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import AuthUserContainer from '../../containers/AuthUserContainer';
+import AuthUserContainer from './AuthUserContainer';
 import { afterEach, beforeEach, expect, it } from '@jest/globals';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';

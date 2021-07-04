@@ -1,6 +1,8 @@
 import { Action, compose, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { UserReducer } from './user/userReducer';
+import { SprintReducer } from './sprint/sprintReducer';
+import { UiReducer } from './ui/uiReducer';
 import { ThunkAction } from 'redux-thunk';
 
 const customizedMiddleware = getDefaultMiddleware({
@@ -16,6 +18,8 @@ const store =
         ? configureStore({
               reducer: {
                   user: UserReducer,
+                  sprints: SprintReducer,
+                  ui: UiReducer,
               },
               // @ts-ignore
               composeEnhancers,

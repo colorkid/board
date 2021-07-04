@@ -11,6 +11,12 @@ const useStyles = makeStyles(() =>
             width: DRAWER_WIDTH,
             padding: COMMON_PADDING,
         },
+        buttons: {
+            display: 'flex',
+        },
+        marginRight: {
+            marginRight: COMMON_PADDING,
+        },
     })
 );
 

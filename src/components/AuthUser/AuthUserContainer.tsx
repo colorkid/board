@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
-import { RootState, useAppDispatch, useAppSelector } from '../redux/store';
-import AuthUser from '../components/AuthUser';
-import { SIGN_IN } from '../constants';
+import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
+import AuthUser from './AuthUser';
+import { SIGN_IN } from '@src/constants';
 import { userDataRequestType } from '@src/api/auth';
 import { signIn, signOut, signUp } from '@src/redux/user/userThunks';
 

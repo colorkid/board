@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
 import { AppBar, CssBaseline, Toolbar } from '@material-ui/core';
+import DrawerBar from "@src/components/DrawerBar";
+import Modal from "@src/components/Modal";
 import useStyles from './styles';
-import DrawerBarContainer from '../DrawerBar';
 
 const App = (): ReactElement => {
     const classes = useStyles();
@@ -12,8 +13,11 @@ const App = (): ReactElement => {
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>Toolbar - Board</Toolbar>
             </AppBar>
-            <DrawerBarContainer />
-            <div className={classes.body}>body</div>
+            <DrawerBar />
+            <div className={classes.body}>
+                body
+            </div>
+            <Modal />
         </div>
     );
 };

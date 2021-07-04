@@ -1,1 +1,1 @@
-export { default } from './AuthUser';
+export { default } from './AuthUserContainer';

@@ -12,13 +12,13 @@ export interface IAuthForm {
     error?: string;
 }
 
-export interface UserType extends IAuthForm {
+interface IUser extends IAuthForm {
     isFetching: boolean;
     email: string | null;
     signOutRequest: () => void;
 }
 
-const AuthUser = (props: UserType): ReactElement => {
+const AuthUser = (props: IUser): ReactElement => {
     const { isFetching, email, signOutRequest, requestMethod, typeAuth, setTypeAuth, error } =
         props;
     const classes = useStyles();
