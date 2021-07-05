@@ -10,10 +10,11 @@ import { SPRINT_BACKLOG } from '@src/constants';
 describe('sprintReducer ', () => {
     it('Create sprint', () => {
         const initialState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
+            list: {
+                [SPRINT_BACKLOG]: {
+                    number: SPRINT_BACKLOG,
+                    dates: '',
+                },
             },
         };
 
@@ -30,10 +31,12 @@ describe('sprintReducer ', () => {
 
         const expectedState = {
             ...initialState,
-            SPRINT_ID_8822781: {
-                number: '7977',
-                dates: '21.05.1987',
-                isActive: false,
+            list: {
+                ...initialState.list,
+                SPRINT_ID_8822781: {
+                    number: '7977',
+                    dates: '21.05.1987',
+                },
             },
         };
 
@@ -43,15 +46,16 @@ describe('sprintReducer ', () => {
 
     it('Delete sprint', () => {
         const initialState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
-            },
-            SPRINT_ID_8822781: {
-                number: '7977',
-                dates: '21.05.1987',
-                isActive: false,
+            list: {
+                [SPRINT_BACKLOG]: {
+                    number: SPRINT_BACKLOG,
+                    dates: '',
+                },
+                SPRINT_ID_8822781: {
+                    number: '7977',
+                    dates: '21.05.1987',
+                    isActive: false,
+                },
             },
         };
 
@@ -65,10 +69,12 @@ describe('sprintReducer ', () => {
         };
 
         const expectedState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
+            ...initialState,
+            list: {
+                [SPRINT_BACKLOG]: {
+                    number: SPRINT_BACKLOG,
+                    dates: '',
+                },
             },
         };
 
@@ -78,21 +84,21 @@ describe('sprintReducer ', () => {
 
     it('Set active sprint', () => {
         const initialState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
+            list: {
+                [SPRINT_BACKLOG]: {
+                    number: SPRINT_BACKLOG,
+                    dates: '',
+                },
+                SPRINT_ID_8822781: {
+                    number: '7977',
+                    dates: '21.05.1987',
+                },
             },
-            SPRINT_ID_8822781: {
-                number: '7977',
-                dates: '21.05.1987',
-                isActive: false,
-            },
+            activeSprint: '',
         };
 
         const payload = {
             id: 'SPRINT_ID_8822781',
-            state: true,
         };
 
         const action = {
@@ -101,57 +107,17 @@ describe('sprintReducer ', () => {
         };
 
         const expectedState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
+            list: {
+                [SPRINT_BACKLOG]: {
+                    number: SPRINT_BACKLOG,
+                    dates: '',
+                },
+                SPRINT_ID_8822781: {
+                    number: '7977',
+                    dates: '21.05.1987',
+                },
             },
-            SPRINT_ID_8822781: {
-                number: '7977',
-                dates: '21.05.1987',
-                isActive: true,
-            },
-        };
-
-        const state = SprintReducer(initialState, action);
-        expect(state).toEqual(expectedState);
-    });
-
-    it('Set is not active sprint', () => {
-        const initialState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
-            },
-            SPRINT_ID_8822781: {
-                number: '7977',
-                dates: '21.05.1987',
-                isActive: true,
-            },
-        };
-
-        const payload = {
-            id: 'SPRINT_ID_8822781',
-            state: false,
-        };
-
-        const action = {
-            type: toggleActiveSprint,
-            payload,
-        };
-
-        const expectedState = {
-            [SPRINT_BACKLOG]: {
-                number: SPRINT_BACKLOG,
-                dates: '',
-                isActive: false,
-            },
-            SPRINT_ID_8822781: {
-                number: '7977',
-                dates: '21.05.1987',
-                isActive: false,
-            },
+            activeSprint: 'SPRINT_ID_8822781',
         };
 
         const state = SprintReducer(initialState, action);

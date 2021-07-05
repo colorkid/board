@@ -2,19 +2,23 @@ import { SPRINT_BACKLOG } from '@src/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type sprintInitialStateType = {
-    [key: string]: {
-        number: string | number;
-        dates: string;
-        isActive: boolean;
+    list: {
+        [key: string]: {
+            number: string | number;
+            dates: string;
+        };
     };
+    activeSprint: string;
 };
 
 export const initialState = {
-    [SPRINT_BACKLOG]: {
-        number: SPRINT_BACKLOG,
-        dates: '',
-        isActive: false,
+    list: {
+        [SPRINT_BACKLOG]: {
+            number: SPRINT_BACKLOG,
+            dates: '',
+        },
     },
+    activeSprint: '',
 } as sprintInitialStateType;
 
 const sprintReducer = createSlice({
@@ -23,19 +27,18 @@ const sprintReducer = createSlice({
     reducers: {
         addSprint(state, action) {
             const { payload } = action;
-            state[payload.id] = {
+            state.list[payload.id] = {
                 number: payload.number,
                 dates: payload.dates,
-                isActive: false,
             };
         },
         toggleActiveSprint(state, action) {
             const { payload } = action;
-            state[payload.id].isActive = payload.state;
+            state.activeSprint = payload.id || initialState.activeSprint;
         },
         deleteSprint(state, action) {
             const { payload } = action;
-            delete state[payload.id];
+            delete state.list[payload.id];
         },
     },
 });

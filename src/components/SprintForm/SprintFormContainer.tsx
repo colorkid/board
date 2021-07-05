@@ -1,5 +1,4 @@
 import React, { ReactElement, useState } from 'react';
-import { format } from 'date-fns';
 import SprintForm from './SprintForm';
 import { DateRange } from '@material-ui/pickers';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
@@ -22,7 +21,7 @@ const SprintFormContainer = (props: ISprintFormContainer): ReactElement => {
                 addSprint({
                     id: generateUUID(),
                     number: Object.keys(sprints).length,
-                    dates: `${format(dates[0], 'dd.MM.yyyy')}-${format(dates[1], 'dd.MM.yyyy')}`,
+                    dates,
                 })
             );
         }
