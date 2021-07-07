@@ -4,6 +4,7 @@ import { UserReducer } from './user/userReducer';
 import { SprintReducer } from './sprint/sprintReducer';
 import { UiReducer } from './ui/uiReducer';
 import { ThunkAction } from 'redux-thunk';
+import { TaskReducer } from '@src/redux/task/taskReducer';
 
 const customizedMiddleware = getDefaultMiddleware({
     serializableCheck: false,
@@ -19,6 +20,7 @@ const store =
               reducer: {
                   user: UserReducer,
                   sprints: SprintReducer,
+                  tasks: TaskReducer,
                   ui: UiReducer,
               },
               // @ts-ignore

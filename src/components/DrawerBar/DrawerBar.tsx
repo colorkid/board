@@ -8,10 +8,11 @@ import { SPRINT_MODAL } from '@src/constants';
 
 interface IDrawerBar {
     showSprintModal: () => void;
+    showTaskModal: () => void;
 }
 
 const DrawerBar = (props: IDrawerBar): ReactElement => {
-    const { showSprintModal } = props;
+    const { showSprintModal, showTaskModal } = props;
     const classes = useStyles();
 
     return (
@@ -34,7 +35,12 @@ const DrawerBar = (props: IDrawerBar): ReactElement => {
                 >
                     Sprint
                 </Button>
-                <Button variant="contained" color="primary" startIcon={<AddCircleOutlineIcon />}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AddCircleOutlineIcon />}
+                    onClick={showTaskModal}
+                >
                     Task
                 </Button>
             </div>

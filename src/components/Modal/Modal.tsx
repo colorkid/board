@@ -1,8 +1,9 @@
-import React, { ReactElement, useMemo, useRef } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import { Backdrop, Fade, Modal as ModalUI } from '@material-ui/core';
 import useStyles from '@src/components/Modal/styles';
-import { SPRINT_MODAL } from '@src/constants';
+import { SPRINT_MODAL, TASK_MODAL } from '@src/constants';
 import SprintForm from '../SprintForm';
+import TaskForm from '../TaskForm';
 
 interface IModalContent {
     modal: string;
@@ -12,14 +13,16 @@ interface IModalContent {
 const Modal = (props: IModalContent): ReactElement => {
     const { modal, handleClose } = props;
     const classes = useStyles();
-    const ComponentRef = useRef<ReactElement | null>(null);
 
     const Component = useMemo(() => {
         switch (modal) {
             case SPRINT_MODAL:
-                ComponentRef.current = <SprintForm handleCloseModal={handleClose} />;
+                return <SprintForm handleCloseModal={handleClose} />;
+            case TASK_MODAL:
+                return <TaskForm handleCloseModal={handleClose} />;
+            default:
+                return null;
         }
-        return ComponentRef.current;
     }, [handleClose, modal]);
 
     return (

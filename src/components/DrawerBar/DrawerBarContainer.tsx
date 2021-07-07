@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import DrawerBar from './DrawerBar';
 import { useAppDispatch } from '@src/redux/store';
-import { SPRINT_MODAL } from '@src/constants';
+import { SPRINT_MODAL, TASK_MODAL } from '@src/constants';
 import { showModal } from '@src/redux/ui/uiReducer';
 
 const DrawerBarContainer = (): ReactElement => {
@@ -11,7 +11,11 @@ const DrawerBarContainer = (): ReactElement => {
         dispatch(showModal(SPRINT_MODAL));
     };
 
-    return <DrawerBar showSprintModal={showSprintModal} />;
+    const showTaskModal = () => {
+        dispatch(showModal(TASK_MODAL));
+    };
+
+    return <DrawerBar showSprintModal={showSprintModal} showTaskModal={showTaskModal} />;
 };
 
 export default DrawerBarContainer;
