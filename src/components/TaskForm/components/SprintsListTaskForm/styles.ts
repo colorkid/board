@@ -1,5 +1,5 @@
 import {createStyles, makeStyles} from '@material-ui/core';
-import {COMMON_PADDING} from '@src/styleConstants';
+import {COMMON_PADDING} from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({

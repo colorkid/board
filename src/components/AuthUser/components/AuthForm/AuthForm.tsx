@@ -8,7 +8,7 @@ import useStyles from './styles';
 import { IAuthForm } from '../../AuthUser';
 import { validationSchema } from './validationSchema';
 import ErrorMessage from '@src/components/ErrorMessage';
-import { COMMON_PADDING } from '@src/styleConstants';
+import { COMMON_PADDING } from '@src/constants';
 
 const authTypes = [SIGN_IN, SIGN_UP];
 
