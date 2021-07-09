@@ -2,14 +2,16 @@ import { SPRINT_BACKLOG } from '@src/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type SprintItemType = {
-    [key: string]: {
-        number: string;
-        dates: string;
-    };
+    number: string;
+    dates: string;
+};
+
+export type SprintListType = {
+    [key: string]: SprintItemType;
 };
 
 export type SprintInitialStateType = {
-    list: SprintItemType;
+    list: SprintListType;
     activeSprint: string;
 };
 
@@ -40,7 +42,7 @@ const sprintReducer = createSlice({
         },
         deleteSprint(state, action) {
             const { payload } = action;
-            delete state.list[payload.id];
+            delete state.list[payload];
         },
     },
 });

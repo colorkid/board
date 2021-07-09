@@ -5,6 +5,7 @@ import AppTitle from '../AppTitle';
 import AuthUser from '../AuthUser/AuthUserContainer';
 import useStyles from './styles';
 import { SPRINT_MODAL } from '@src/constants';
+import SprintList from '../SprintList';
 
 interface IDrawerBar {
     showSprintModal: () => void;
@@ -44,6 +45,7 @@ const DrawerBar = (props: IDrawerBar): ReactElement => {
                     Task
                 </Button>
             </div>
+            <SprintList />
             <AuthUser />
         </Drawer>
     );

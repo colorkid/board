@@ -6,12 +6,12 @@ import useStyles from './styles';
 import Select from '../Select';
 import { PRIORITY_LIST, SPRINT_BACKLOG, STATE_LIST } from '@src/constants';
 import { TaskType } from '@src/redux/task/taskReducer';
-import { SprintItemType } from '@src/redux/sprint/sprintReducer';
+import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import SprintsList from './components/SprintsListTaskForm';
 
 interface ITaskForm {
     formik: FormikContextType<TaskType>;
-    sprints: SprintItemType;
+    sprints: SprintListType;
     checkedSprints: string[];
     setCheckedSprints: (arg: string[]) => void;
 }
