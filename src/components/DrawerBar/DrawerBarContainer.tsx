@@ -15,7 +15,12 @@ const DrawerBarContainer = (): ReactElement => {
         dispatch(showModal(TASK_MODAL));
     };
 
-    return <DrawerBar showSprintModal={showSprintModal} showTaskModal={showTaskModal} />;
+    return (
+        <DrawerBar
+            showSprintModal={showSprintModal}
+            showTaskModal={showTaskModal}
+        />
+    );
 };
 
 export default DrawerBarContainer;

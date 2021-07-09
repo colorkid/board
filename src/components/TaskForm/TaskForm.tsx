@@ -1,28 +1,29 @@
 import React, { ReactElement } from 'react';
 import { Button, TextField, Typography } from '@material-ui/core';
-import { useFormik } from 'formik';
-import { validationSchema } from './validationSchema';
+import { FormikContextType } from 'formik';
+import cn from 'classnames';
 import useStyles from './styles';
 import Select from '../Select';
-import { DEFAULT_VALUE_STATE, STATE_LIST } from '@src/constants';
+import { PRIORITY_LIST, SPRINT_BACKLOG, STATE_LIST } from '@src/constants';
+import { TaskType } from '@src/redux/task/taskReducer';
+import { SprintItemType } from '@src/redux/sprint/sprintReducer';
+import SprintsList from './components/SprintsListTaskForm';
 
 interface ITaskForm {
-    saveTask: () => void;
+    formik: FormikContextType<TaskType>;
+    sprints: SprintItemType;
+    checkedSprints: string[];
+    setCheckedSprints: (arg: string[]) => void;
 }
 
 const TaskForm = (props: ITaskForm): ReactElement => {
+    const { formik, sprints, checkedSprints, setCheckedSprints } = props;
     const classes = useStyles();
 
-    const formik = useFormik({
-        initialValues: {
-            title: '',
-            description: '',
-        },
-        validationSchema: validationSchema,
-        onSubmit: (values) => {
-            console.log(values);
-        },
-    });
+    const handleClear = () => {
+        formik.resetForm();
+        setCheckedSprints([SPRINT_BACKLOG]);
+    };
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -32,38 +33,77 @@ const TaskForm = (props: ITaskForm): ReactElement => {
                 </Typography>
             </header>
             <div className={classes.body}>
-                <TextField
-                    required
-                    fullWidth
-                    id="title"
-                    name="title"
-                    label="Title"
-                    value={formik.values.title}
-                    onChange={formik.handleChange}
-                    error={formik.touched.title && Boolean(formik.errors.title)}
-                    helperText={formik.touched.title && formik.errors.title}
-                />
-                <TextField
-                    fullWidth
-                    id="description"
-                    name="description"
-                    label="Description"
-                    multiline
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                    error={formik.touched.description && Boolean(formik.errors.description)}
-                    helperText={formik.touched.description && formik.errors.description}
-                    rows={4}
-                />
-                <Select
-                    id="state"
-                    label="State"
-                    defaultValue={DEFAULT_VALUE_STATE}
-                    list={STATE_LIST}
-                    setFieldValue={formik.setFieldValue}
-                />
+                <div className={cn(classes.cell, classes.cellLeft)}>
+                    <TextField
+                        className={classes.field}
+                        required
+                        fullWidth
+                        id="title"
+                        name="title"
+                        label="Title"
+                        value={formik.values.title}
+                        onChange={formik.handleChange}
+                        error={formik.touched.title && Boolean(formik.errors.title)}
+                        helperText={formik.touched.title && formik.errors.title}
+                    />
+                    <TextField
+                        className={cn(classes.field, classes.textArea)}
+                        fullWidth
+                        id="description"
+                        name="description"
+                        label="Description"
+                        multiline
+                        value={formik.values.description}
+                        onChange={formik.handleChange}
+                        error={formik.touched.description && Boolean(formik.errors.description)}
+                        helperText={formik.touched.description && formik.errors.description}
+                        rows={4}
+                    />
+                    <SprintsList
+                        className={classes.field}
+                        sprints={sprints}
+                        checkedSprints={checkedSprints}
+                        setCheckedSprints={setCheckedSprints}
+                    />
+                </div>
+                <div className={cn(classes.cell, classes.cellRight)}>
+                    <Select
+                        className={classes.field}
+                        id="state"
+                        label="State"
+                        list={STATE_LIST}
+                        setFieldValue={formik.setFieldValue}
+                        value={formik.values.state}
+                    />
+                    <Select
+                        className={classes.field}
+                        id="priority"
+                        label="Priority"
+                        list={PRIORITY_LIST}
+                        setFieldValue={formik.setFieldValue}
+                        value={formik.values.priority}
+                    />
+                    <TextField
+                        className={classes.field}
+                        fullWidth
+                        id="estimation"
+                        name="estimation"
+                        label="Estimation"
+                        value={formik.values.estimation}
+                        onChange={formik.handleChange}
+                        error={formik.touched.estimation && Boolean(formik.errors.estimation)}
+                        helperText={formik.touched.estimation && formik.errors.estimation}
+                    />
+                </div>
             </div>
-            <Button type="submit">save</Button>
+            <footer className={classes.footer}>
+                <Button color="secondary" onClick={handleClear}>
+                    Clear
+                </Button>
+                <Button color="primary" type="submit">
+                    Create
+                </Button>
+            </footer>
         </form>
     );
 };

@@ -1,4 +1,5 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement } from 'react';
+import cn from 'classnames';
 import { FormControl, InputLabel, MenuItem, Select as SelectEl } from '@material-ui/core';
 import useStyles from './styles';
 
@@ -10,35 +11,24 @@ type ListItemType = {
 interface ISelect {
     id: string;
     label?: string;
-    defaultValue?: ListItemType;
     list: ListItemType[];
     setFieldValue: (field: string, value: string, shouldValidate?: boolean) => void;
+    value: string;
+    className?: string;
 }
 
 const Select = (props: ISelect): ReactElement => {
-    const { id, defaultValue, list, setFieldValue, label } = props;
-    const [state, setState] = useState<string>('');
+    const { id, list, setFieldValue, label, value, className } = props;
     const classes = useStyles();
 
-    useEffect(() => {
-        if (defaultValue) {
-            setChanges(defaultValue.value);
-        }
-    }, [defaultValue]);
-
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setChanges(event.target.value as string);
-    };
-
-    const setChanges = (value: string) => {
-        setState(value);
-        setFieldValue(id, value);
+        setFieldValue(id, event.target.value as string);
     };
 
     return (
-        <FormControl className={classes.formControl}>
+        <FormControl className={cn(classes.formControl, className)}>
             {label && <InputLabel id={`${id}-label`}>{label}</InputLabel>}
-            <SelectEl labelId={`${id}-label`} id={id} value={state} onChange={handleChange}>
+            <SelectEl labelId={`${id}-label`} id={id} value={value} onChange={handleChange}>
                 {list.map((item) => (
                     <MenuItem key={item.value} value={item.value}>
                         {item.title}

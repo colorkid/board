@@ -12,7 +12,7 @@ interface ISprintFormContainer {
 const SprintFormContainer = (props: ISprintFormContainer): ReactElement => {
     const { handleCloseModal } = props;
     const [dates, setDates] = useState<DateRange<Date>>([null, null]);
-    const sprints = useAppSelector((state: RootState) => state.sprints);
+    const sprints = useAppSelector((state: RootState) => state.sprints.list);
     const dispatch = useAppDispatch();
 
     const saveSprint = () => {

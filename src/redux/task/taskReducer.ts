@@ -1,17 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export type sprintInitialStateType = {
-    [key: string]: {
-        title: string;
-        description: string;
-        state: string;
-        estimation: string;
-        range: string;
-        sprints: string;
-    };
+export type TaskType = {
+    title: string;
+    description: string;
+    state: string;
+    estimation: string;
+    priority: string;
+    sprints: string[];
 };
 
-export const initialState = {} as sprintInitialStateType;
+export type TaskInitialStateType = {
+    [key: string]: TaskType;
+};
+
+export const initialState = {} as TaskInitialStateType;
 
 const taskReducer = createSlice({
     name: 'tasks',
@@ -24,7 +26,7 @@ const taskReducer = createSlice({
                 description: payload.description,
                 state: payload.state,
                 estimation: payload.estimation,
-                range: payload.range,
+                priority: payload.priority,
                 sprints: payload.sprints,
             };
         },

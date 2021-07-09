@@ -14,4 +14,11 @@ export const STATE_LIST = [
     { title: 'Done', value: 'done' },
 ];
 
+export const PRIORITY_LIST = [
+    { title: 'Low', value: 'low' },
+    { title: 'Middle', value: 'middle' },
+    { title: 'High', value: 'high' },
+];
+
 export const DEFAULT_VALUE_STATE = STATE_LIST[0];
+export const DEFAULT_VALUE_PRIORITY = PRIORITY_LIST[0];
