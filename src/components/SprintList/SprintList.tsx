@@ -3,8 +3,13 @@ import cn from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import LabelSprint from '@src/components/LabelSprint';
-import { AFTER_COUNT_SPRINTS_SHOW_SCROLL_COMMON, SPRINT_BACKLOG } from '@src/constants';
+import {
+    AFTER_COUNT_SPRINTS_SHOW_SCROLL_COMMON,
+    REMOVE_SPRINT_CONFIRM_MESSAGE,
+    SPRINT_BACKLOG,
+} from '@src/constants';
 import useStyles from './styles';
+import Confirm from '@src/components/Confirm';
 
 interface ISprintList {
     sprints: SprintListType;
@@ -27,11 +32,16 @@ const SprintList = (props: ISprintList): ReactElement => {
 
         return (
             <div key={numberSprint} className={classes.sprintListItem}>
-                <DeleteIcon
-                    onClick={() => deleteHandler(item)}
-                    className={classes.sprintListDelete}
-                    color={isBacklog ? 'disabled' : 'secondary'}
-                />
+                <Confirm
+                    disabled={isBacklog}
+                    okMethod={() => deleteHandler(item)}
+                    message={REMOVE_SPRINT_CONFIRM_MESSAGE}
+                >
+                    <DeleteIcon
+                        className={classes.sprintListDelete}
+                        color={isBacklog ? 'disabled' : 'secondary'}
+                    />
+                </Confirm>
                 <LabelSprint
                     sprint={sprints[item]}
                     isBacklog={isBacklog}

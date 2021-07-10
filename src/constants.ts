@@ -28,3 +28,5 @@ export const AFTER_COUNT_SPRINTS_SHOW_SCROLL_TASK_FORM = 4;
 
 export const DRAWER_WIDTH = 290;
 export const COMMON_PADDING = 15;
+
+export const REMOVE_SPRINT_CONFIRM_MESSAGE = 'Are you sure you want to delete the sprint?';

@@ -1,5 +1,5 @@
-import {createStyles, makeStyles} from '@material-ui/core';
-import {COMMON_PADDING} from '@src/constants';
+import { createStyles, makeStyles } from '@material-ui/core';
+import { COMMON_PADDING } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() =>
         },
         overFlowY: {
             overflowY: 'scroll',
-        }
+        },
     })
 );
 
