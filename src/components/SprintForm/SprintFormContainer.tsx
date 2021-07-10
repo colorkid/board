@@ -4,6 +4,7 @@ import { DateRange } from '@material-ui/pickers';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import { addSprint } from '@src/redux/sprint/sprintReducer';
 import { generateUUID } from '@src/utils';
+import { lastSprintNumberSelector } from '@src/redux/selectors';
 
 interface ISprintFormContainer {
     handleCloseModal?: () => void;
@@ -11,8 +12,8 @@ interface ISprintFormContainer {
 
 const SprintFormContainer = (props: ISprintFormContainer): ReactElement => {
     const { handleCloseModal } = props;
+    const numberLastSprint = useAppSelector((state: RootState) => lastSprintNumberSelector(state));
     const [dates, setDates] = useState<DateRange<Date>>([null, null]);
-    const sprints = useAppSelector((state: RootState) => state.sprints.list);
     const dispatch = useAppDispatch();
 
     const saveSprint = () => {
@@ -20,7 +21,7 @@ const SprintFormContainer = (props: ISprintFormContainer): ReactElement => {
             dispatch(
                 addSprint({
                     id: generateUUID(),
-                    number: Object.keys(sprints).length,
+                    number: numberLastSprint + 1,
                     dates,
                 })
             );

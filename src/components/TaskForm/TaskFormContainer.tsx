@@ -6,6 +6,7 @@ import { DEFAULT_VALUE_PRIORITY, DEFAULT_VALUE_STATE, SPRINT_BACKLOG } from '@sr
 import { validationSchema } from '@src/components/TaskForm/validationSchema';
 import { addTask, TaskType } from '@src/redux/task/taskReducer';
 import { generateUUID } from '@src/utils';
+import { getSprintsList } from '@src/redux/selectors';
 
 interface ITaskFormContainer {
     handleCloseModal?: () => void;
@@ -13,7 +14,7 @@ interface ITaskFormContainer {
 
 const TaskFormContainer = (props: ITaskFormContainer): ReactElement => {
     const { handleCloseModal } = props;
-    const sprints = useAppSelector((state: RootState) => state.sprints.list);
+    const sprints = useAppSelector((state: RootState) => getSprintsList(state));
     const [checkedSprints, setCheckedSprints] = useState<string[]>([]);
     const dispatch = useAppDispatch();
 
