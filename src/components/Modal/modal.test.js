@@ -9,6 +9,7 @@ import { SPRINT_MODAL } from '@src/constants';
 import App from '@src/components/App';
 import { UserReducer } from '@src/redux/user/userReducer';
 import { UiReducer } from '@src/redux/ui/uiReducer';
+import { initialState as initialStateSprints } from '@src/redux/sprint/sprintReducer';
 
 let container;
 beforeEach(() => {
@@ -30,6 +31,7 @@ describe('Modal ', () => {
             ui: {
                 isModalVisible: SPRINT_MODAL,
             },
+            sprints: initialStateSprints,
         };
 
         const store = mockStore(initialState);
@@ -52,7 +54,8 @@ describe('Modal ', () => {
         const initialState = {
             user: UserReducer,
             ui: UiReducer,
-        }
+            sprints: initialStateSprints,
+        };
 
         const store = mockStore(initialState);
 

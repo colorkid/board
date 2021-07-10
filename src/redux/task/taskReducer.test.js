@@ -11,8 +11,8 @@ describe('taskReducer ', () => {
             description: 'description',
             state: '1',
             estimation: '4h',
-            range: 'low',
-            sprints: '12',
+            priority: 'low',
+            sprints: ['12'],
         };
 
         const action = {
@@ -26,8 +26,8 @@ describe('taskReducer ', () => {
                 description: 'description',
                 state: '1',
                 estimation: '4h',
-                range: 'low',
-                sprints: '12',
+                priority: 'low',
+                sprints: ['12'],
             },
         };
 

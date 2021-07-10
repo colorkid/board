@@ -59,9 +59,7 @@ describe('sprintReducer ', () => {
             },
         };
 
-        const payload = {
-            id: 'SPRINT_ID_8822781',
-        };
+        const payload = 'SPRINT_ID_8822781';
 
         const action = {
             type: deleteSprint,
