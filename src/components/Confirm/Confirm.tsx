@@ -27,7 +27,7 @@ const Confirm = (props: IConfirm): ReactElement => {
     const handleOk = () => {
         okMethod();
         handleClose();
-    }
+    };
 
     const id = !!anchorEl ? 'simple-popover' : undefined;
 

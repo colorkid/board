@@ -31,7 +31,7 @@ const SprintList = (props: ISprintList): ReactElement => {
         const isBacklog = numberSprint === SPRINT_BACKLOG;
 
         return (
-            <div key={numberSprint} className={classes.sprintListItem}>
+            <div key={numberSprint} className={classes.sprintListItem} data-testid="sprint">
                 <Confirm
                     disabled={isBacklog}
                     okMethod={() => deleteHandler(item)}

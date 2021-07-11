@@ -54,7 +54,6 @@ describe('sprintReducer ', () => {
                 SPRINT_ID_8822781: {
                     number: '7977',
                     dates: '21.05.1987',
-                    isActive: false,
                 },
             },
         };
