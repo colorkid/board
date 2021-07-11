@@ -4,11 +4,12 @@ import AuthUser from './AuthUser';
 import { SIGN_IN } from '@src/constants';
 import { userDataRequestType } from '@src/api/auth';
 import { signIn, signOut, signUp } from '@src/redux/user/userThunks';
+import { getUserInfoSelector } from '@src/redux/selectors';
 
 const AuthUserContainer = (): ReactElement => {
     const [typeAuth, setTypeAuth] = useState<string>(SIGN_IN);
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state: RootState) => state.user);
+    const user = useAppSelector((state: RootState) => getUserInfoSelector(state));
     const { isFetching, email, error } = user;
 
     const singUpRequest = (data: userDataRequestType) => {

@@ -4,6 +4,8 @@ import { Button, Typography } from '@material-ui/core';
 import AdapterDateFns from '@material-ui/pickers/adapter/date-fns';
 import { DateRange } from '@material-ui/pickers/DateRangePicker/RangeTypes';
 import useStyles from './styles';
+import { CLEAR_PERIOD_CONFIRM_MESSAGE } from '@src/constants';
+import Confirm from '@src/components/Confirm';
 
 interface ISprintForm {
     dates: DateRange;
@@ -38,9 +40,15 @@ const SprintForm = (props: ISprintForm): ReactElement => {
                 </LocalizationProvider>
             </div>
             <footer className={classes.footer}>
-                <Button color="secondary" onClick={setInitialDates} disabled={!isEnableButtons}>
-                    Clear
-                </Button>
+                <Confirm
+                    disabled={!isEnableButtons}
+                    okMethod={setInitialDates}
+                    message={CLEAR_PERIOD_CONFIRM_MESSAGE}
+                >
+                    <Button color="secondary" disabled={!isEnableButtons}>
+                        Clear
+                    </Button>
+                </Confirm>
                 <Button color="primary" onClick={saveSprint} disabled={!isEnableButtons}>
                     Create
                 </Button>

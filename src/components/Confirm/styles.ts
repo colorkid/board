@@ -8,10 +8,9 @@ const useStyles = makeStyles(() =>
             paddingRight: COMMON_PADDING,
             paddingTop: COMMON_PADDING,
         },
-        triggerButton: {
-            backgroundColor: 'transparent',
-            border: 'none',
-            padding: 0,
+        trigger: {
+            display: 'flex',
+            alignItems: 'center',
         },
         buttons: {
             display: 'flex',

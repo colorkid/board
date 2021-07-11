@@ -4,10 +4,16 @@ import { FormikContextType } from 'formik';
 import cn from 'classnames';
 import useStyles from './styles';
 import Select from '../Select';
-import { PRIORITY_LIST, SPRINT_BACKLOG, STATE_LIST } from '@src/constants';
+import {
+    CLEAR_TASK_CONFIRM_MESSAGE,
+    PRIORITY_LIST,
+    SPRINT_BACKLOG,
+    STATE_LIST,
+} from '@src/constants';
 import { TaskType } from '@src/redux/task/taskReducer';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import SprintsList from './components/SprintsListTaskForm';
+import Confirm from '@src/components/Confirm';
 
 interface ITaskForm {
     formik: FormikContextType<TaskType>;
@@ -97,9 +103,14 @@ const TaskForm = (props: ITaskForm): ReactElement => {
                 </div>
             </div>
             <footer className={classes.footer}>
-                <Button color="secondary" onClick={handleClear}>
-                    Clear
-                </Button>
+                <Confirm
+                    okMethod={handleClear}
+                    message={CLEAR_TASK_CONFIRM_MESSAGE}
+                >
+                    <Button color="secondary" onClick={handleClear}>
+                        Clear
+                    </Button>
+                </Confirm>
                 <Button color="primary" type="submit">
                     Create
                 </Button>

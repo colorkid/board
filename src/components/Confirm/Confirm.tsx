@@ -11,10 +11,10 @@ interface IConfirm {
 
 const Confirm = (props: IConfirm): ReactElement => {
     const { children, okMethod, message, disabled } = props;
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
     const classes = useStyles();
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (!disabled) {
             setAnchorEl(event.currentTarget);
         }
@@ -24,13 +24,18 @@ const Confirm = (props: IConfirm): ReactElement => {
         setAnchorEl(null);
     };
 
+    const handleOk = () => {
+        okMethod();
+        handleClose();
+    }
+
     const id = !!anchorEl ? 'simple-popover' : undefined;
 
     return (
         <>
-            <button className={classes.triggerButton} onClick={handleClick}>
+            <div className={classes.trigger} onClick={handleClick}>
                 {children}
-            </button>
+            </div>
             <Popover
                 id={id}
                 open={!!anchorEl}
@@ -51,7 +56,7 @@ const Confirm = (props: IConfirm): ReactElement => {
                         <Button color="secondary" onClick={handleClose}>
                             No
                         </Button>
-                        <Button color="primary" onClick={okMethod}>
+                        <Button color="primary" onClick={handleOk}>
                             Yes
                         </Button>
                     </div>
