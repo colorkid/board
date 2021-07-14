@@ -9,7 +9,7 @@ export const TASK_MODAL = 'task_modal';
 
 export const STATE_LIST = [
     { title: 'To do', value: 'todo' },
-    { title: 'In process', value: 'inProcess' },
+    { title: 'In process', value: 'inprocess' },
     { title: 'Review', value: 'review' },
     { title: 'Done', value: 'done' },
 ];
@@ -33,3 +33,26 @@ export const REMOVE_SPRINT_CONFIRM_MESSAGE = 'Are you sure you want to delete th
 export const CLEAR_PERIOD_CONFIRM_MESSAGE = 'Are you sure you want to clear the selected period?';
 export const CLEAR_TASK_CONFIRM_MESSAGE =
     'Are you sure you want to clear all the entered and selected fields?';
+
+export const MAX_TITLE_TASK_LENGTH = 50;
+export const MAX_DESCRIPTION_TASK_LENGTH = 200;
+
+export const DEMO_TASKS = {
+    'id01': {
+        title: 'Take a dog for a walk',
+        description:
+            "To walk the dog along a route that I don't like, but my dog really likes. And do not forget to take an umbrella, because it may rain.",
+        state: 'todo',
+        estimation: '30 m',
+        priority: 'high',
+        sprints: [SPRINT_BACKLOG],
+    },
+    'id02': {
+        title: 'Work out in the gym',
+        description: 'Work out in the gym. Four approaches to the barbell, fifty sit-ups and an hour of cardio training. Do not forget to take a razor with you to shave in the shower after class.',
+        state: 'done',
+        estimation: '2 h',
+        priority: 'middle',
+        sprints: [SPRINT_BACKLOG],
+    },
+}

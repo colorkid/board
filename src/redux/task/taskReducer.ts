@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DEMO_TASKS } from '@src/constants';
 
 export type TaskType = {
     title: string;
@@ -13,7 +14,9 @@ export type TaskInitialStateType = {
     [key: string]: TaskType;
 };
 
-export const initialState = {} as TaskInitialStateType;
+export const initialState = {
+    ...DEMO_TASKS,
+} as TaskInitialStateType;
 
 const taskReducer = createSlice({
     name: 'tasks',

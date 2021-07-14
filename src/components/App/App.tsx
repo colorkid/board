@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
 import { AppBar, CssBaseline, Toolbar } from '@material-ui/core';
-import DrawerBar from "@src/components/DrawerBar";
-import Modal from "@src/components/Modal";
+import DrawerBar from '@src/components/DrawerBar';
+import Modal from '@src/components/Modal';
 import useStyles from './styles';
+import Board from '@src/components/Board';
 
 const App = (): ReactElement => {
     const classes = useStyles();
@@ -15,7 +16,7 @@ const App = (): ReactElement => {
             </AppBar>
             <DrawerBar />
             <div className={classes.body}>
-                body
+                <Board />
             </div>
             <Modal />
         </div>

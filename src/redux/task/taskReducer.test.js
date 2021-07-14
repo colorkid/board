@@ -2,7 +2,7 @@ import { it } from '@jest/globals';
 import { addTask, deleteTask, TaskReducer, updateTask } from '@src/redux/task/taskReducer';
 
 describe('taskReducer ', () => {
-    it('Create task', () => {
+    it('Create Task', () => {
         const initialState = {};
 
         const payload = {
@@ -35,7 +35,7 @@ describe('taskReducer ', () => {
         expect(state).toEqual(expectedState);
     });
 
-    it('Update task', () => {
+    it('Update Task', () => {
         const initialState = {
             TASK_ID_8822781: {
                 title: 'title',
@@ -75,7 +75,7 @@ describe('taskReducer ', () => {
         expect(state).toEqual(expectedState);
     });
 
-    it('Delete task', () => {
+    it('Delete Task', () => {
         const initialState = {
             TASK_ID_8822781: {
                 title: 'title',

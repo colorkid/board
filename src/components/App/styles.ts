@@ -11,6 +11,7 @@ const useStyles = makeStyles(() =>
             marginLeft: DRAWER_WIDTH,
         },
         body: {
+            width: '100%',
             marginTop: 64,
         }
     })

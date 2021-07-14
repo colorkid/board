@@ -6,3 +6,6 @@ export const generateUUID = (): string => {
         return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
     });
 };
+
+export const cutString = (str: string, length: number): string =>
+    str.length > length ? str.substring(0, length) + '...' : str;
