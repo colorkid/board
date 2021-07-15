@@ -3,12 +3,13 @@ import { RootState } from '@src/redux/store';
 import { SPRINT_BACKLOG } from '@src/constants';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { userInitialStateType } from '@src/redux/user/userReducer';
-import { TaskInitialStateType } from '@src/redux/task/taskReducer';
+import { TaskListType } from '@src/redux/task/taskReducer';
 
 export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
-export const getTasksSelector = (state: RootState): TaskInitialStateType => state.tasks;
+export const getTasksSelector = (state: RootState): TaskListType => state.tasks.list;
+export const getOpenedTaskIdSelector = (state: RootState): string => state.tasks.activeTask;
 
 export const lastSprintNumberSelector = createSelector(getSprintsListSelector, (sprints) => {
     let numbers: number[] = [];
@@ -22,3 +23,11 @@ export const lastSprintNumberSelector = createSelector(getSprintsListSelector, (
     const maxNumber = Math.max(...numbers);
     return maxNumber === -Infinity ? 0 : maxNumber;
 });
+
+export const getOpenedTaskSelector = createSelector(
+    getTasksSelector,
+    getOpenedTaskIdSelector,
+    (tasks, id) => {
+        return tasks[id];
+    }
+);

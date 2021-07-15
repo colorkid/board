@@ -11,6 +11,8 @@ interface ITask {
     data: TaskType;
     id: string;
     onDragStart: (arg: string, arg2: string) => void;
+    showTaskModal: () => void;
+    openTask: (arg: string) => void;
 }
 
 const Task = (props: ITask): ReactElement => {
@@ -19,12 +21,20 @@ const Task = (props: ITask): ReactElement => {
         value,
         id,
         onDragStart,
+        showTaskModal,
+        openTask
     } = props;
     const classes = useStyles();
+
+    const onDoubleClickHandler = () => {
+        openTask(id);
+        showTaskModal();
+    }
 
     return (
         <Paper
             onDragStart={() => onDragStart(id, value)}
+            onDoubleClick={onDoubleClickHandler}
             draggable
             // @ts-ignore
             className={cn(classes.card, classes[priority])}

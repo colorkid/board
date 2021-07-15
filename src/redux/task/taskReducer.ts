@@ -10,12 +10,18 @@ export type TaskType = {
     sprints: string[];
 };
 
-export type TaskInitialStateType = {
+export type TaskListType = {
     [key: string]: TaskType;
 };
 
+export type TaskInitialStateType = {
+    list: TaskListType;
+    activeTask: string;
+};
+
 export const initialState = {
-    ...DEMO_TASKS,
+    list: DEMO_TASKS,
+    activeTask: '',
 } as TaskInitialStateType;
 
 const taskReducer = createSlice({
@@ -24,7 +30,7 @@ const taskReducer = createSlice({
     reducers: {
         addTask(state, action) {
             const { payload } = action;
-            state[payload.id] = {
+            state.list[payload.id] = {
                 title: payload.title,
                 description: payload.description,
                 state: payload.state,
@@ -35,18 +41,22 @@ const taskReducer = createSlice({
         },
         deleteTask(state, action) {
             const { payload } = action;
-            delete state[payload.id];
+            delete state.list[payload.id];
         },
         updateTask(state, action) {
             const { payload } = action;
-            state[payload.id] = {
-                ...state[payload.id],
+            state.list[payload.id] = {
+                ...state.list[payload.id],
                 ...payload.body,
             };
         },
+        setActiveTask(state, action) {
+            const { payload } = action;
+            state.activeTask = payload;
+        }
     },
 });
 
-export const { addTask, deleteTask, updateTask } = taskReducer.actions;
+export const { addTask, deleteTask, updateTask, setActiveTask } = taskReducer.actions;
 
 export const TaskReducer = taskReducer.reducer;

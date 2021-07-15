@@ -1,8 +1,8 @@
 import React, { DragEvent, ReactElement, useState } from 'react';
 import cn from 'classnames';
-import { TaskInitialStateType } from '@src/redux/task/taskReducer';
-import useStyles from './styles';
 import Task from '@src/components/Board/components/Task';
+import { TaskListType } from '@src/redux/task/taskReducer';
+import useStyles from './styles';
 
 // TODO - MOVE TYPES TO REDUX
 
@@ -12,13 +12,15 @@ type StateType = {
 };
 
 interface IBoard {
-    data: TaskInitialStateType;
+    data: TaskListType;
     columnList: StateType[];
     moveTaskOnBoard: (arg: string, arg2: string) => void;
+    showTaskModal: () => void;
+    openTask: (arg: string) => void;
 }
 
 const Board = (props: IBoard): ReactElement => {
-    const { data, columnList, moveTaskOnBoard } = props;
+    const { data, columnList, moveTaskOnBoard, showTaskModal, openTask } = props;
     const [touchedTaskId, setTouchedTaskId] = useState<string>('');
     const [startedColumn, setStartedColumn] = useState<string>('');
     const [isHoverTab, setIsHoverTab] = useState<string>('');
@@ -67,6 +69,8 @@ const Board = (props: IBoard): ReactElement => {
                                         data={data[key]}
                                         key={key}
                                         onDragStart={onDragStart}
+                                        showTaskModal={showTaskModal}
+                                        openTask={openTask}
                                     />
                                 );
                             }

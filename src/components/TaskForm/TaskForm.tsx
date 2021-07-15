@@ -5,10 +5,15 @@ import cn from 'classnames';
 import useStyles from './styles';
 import Select from '../Select';
 import {
+    CLEAR_BTN_TXT,
     CLEAR_TASK_CONFIRM_MESSAGE,
+    CREATE_BTN_TXT,
     PRIORITY_LIST,
     SPRINT_BACKLOG,
     STATE_LIST,
+    TASK_FORM_TITLE_CREATE,
+    TASK_FORM_TITLE_UPDATE,
+    UPDATE_BTN_TXT,
 } from '@src/constants';
 import { TaskType } from '@src/redux/task/taskReducer';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
@@ -20,11 +25,15 @@ interface ITaskForm {
     sprints: SprintListType;
     checkedSprints: string[];
     setCheckedSprints: (arg: string[]) => void;
+    isOpenedTask: boolean;
 }
 
 const TaskForm = (props: ITaskForm): ReactElement => {
-    const { formik, sprints, checkedSprints, setCheckedSprints } = props;
+    const { formik, sprints, checkedSprints, setCheckedSprints, isOpenedTask } = props;
     const classes = useStyles();
+
+    const titleTxt = isOpenedTask ? TASK_FORM_TITLE_UPDATE : TASK_FORM_TITLE_CREATE;
+    const submitTxt = isOpenedTask ? UPDATE_BTN_TXT : CREATE_BTN_TXT;
 
     const handleClear = () => {
         formik.resetForm();
@@ -35,7 +44,7 @@ const TaskForm = (props: ITaskForm): ReactElement => {
         <form onSubmit={formik.handleSubmit}>
             <header className={classes.header}>
                 <Typography variant="h5" component="h2">
-                    Create a new sprint
+                    {titleTxt}
                 </Typography>
             </header>
             <div className={classes.body}>
@@ -103,16 +112,13 @@ const TaskForm = (props: ITaskForm): ReactElement => {
                 </div>
             </div>
             <footer className={classes.footer}>
-                <Confirm
-                    okMethod={handleClear}
-                    message={CLEAR_TASK_CONFIRM_MESSAGE}
-                >
+                <Confirm okMethod={handleClear} message={CLEAR_TASK_CONFIRM_MESSAGE}>
                     <Button color="secondary" onClick={handleClear}>
-                        Clear
+                        {CLEAR_BTN_TXT}
                     </Button>
                 </Confirm>
                 <Button color="primary" type="submit">
-                    Create
+                    {submitTxt}
                 </Button>
             </footer>
         </form>

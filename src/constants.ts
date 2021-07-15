@@ -34,6 +34,13 @@ export const CLEAR_PERIOD_CONFIRM_MESSAGE = 'Are you sure you want to clear the 
 export const CLEAR_TASK_CONFIRM_MESSAGE =
     'Are you sure you want to clear all the entered and selected fields?';
 
+export const TASK_FORM_TITLE_CREATE = 'Create a new task';
+export const TASK_FORM_TITLE_UPDATE = 'Update the task';
+export const SPRINT_FORM_TITLE_CREATE = 'Create a new sprint';
+export const CLEAR_BTN_TXT = 'Clear';
+export const CREATE_BTN_TXT = 'Create';
+export const UPDATE_BTN_TXT = 'Update';
+
 export const MAX_TITLE_TASK_LENGTH = 50;
 export const MAX_DESCRIPTION_TASK_LENGTH = 200;
 

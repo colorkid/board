@@ -4,7 +4,12 @@ import { Button, Typography } from '@material-ui/core';
 import AdapterDateFns from '@material-ui/pickers/adapter/date-fns';
 import { DateRange } from '@material-ui/pickers/DateRangePicker/RangeTypes';
 import useStyles from './styles';
-import { CLEAR_PERIOD_CONFIRM_MESSAGE } from '@src/constants';
+import {
+    CLEAR_BTN_TXT,
+    CLEAR_PERIOD_CONFIRM_MESSAGE,
+    CREATE_BTN_TXT,
+    SPRINT_FORM_TITLE_CREATE,
+} from '@src/constants';
 import Confirm from '@src/components/Confirm';
 
 interface ISprintForm {
@@ -23,7 +28,7 @@ const SprintForm = (props: ISprintForm): ReactElement => {
         <form>
             <header className={classes.header}>
                 <Typography variant="h5" component="h2">
-                    Create a new sprint
+                    {SPRINT_FORM_TITLE_CREATE}
                 </Typography>
             </header>
             <div className={classes.calendar}>
@@ -46,11 +51,11 @@ const SprintForm = (props: ISprintForm): ReactElement => {
                     message={CLEAR_PERIOD_CONFIRM_MESSAGE}
                 >
                     <Button color="secondary" disabled={!isEnableButtons}>
-                        Clear
+                        {CLEAR_BTN_TXT}
                     </Button>
                 </Confirm>
                 <Button color="primary" onClick={saveSprint} disabled={!isEnableButtons}>
-                    Create
+                    {CREATE_BTN_TXT}
                 </Button>
             </footer>
         </form>

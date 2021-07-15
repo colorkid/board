@@ -1,13 +1,22 @@
 import React, { ReactElement } from 'react';
 import Board from '@src/components/Board/Board';
-import { STATE_LIST } from '@src/constants';
+import { STATE_LIST, TASK_MODAL } from '@src/constants';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
-import { updateTask } from '@src/redux/task/taskReducer';
+import { updateTask, setActiveTask } from '@src/redux/task/taskReducer';
 import { getTasksSelector } from '@src/redux/selectors';
+import { showModal } from '@src/redux/ui/uiReducer';
 
 const BoardContainer = (): ReactElement => {
     const tasks = useAppSelector((state: RootState) => getTasksSelector(state));
     const dispatch = useAppDispatch();
+
+    const showTaskModal = () => {
+        dispatch(showModal(TASK_MODAL));
+    };
+
+    const openTask = (id: string) => {
+        dispatch(setActiveTask(id));
+    }
 
     const moveTaskOnBoard = (column: string, touchedTaskId: string) => {
         dispatch(
@@ -25,6 +34,8 @@ const BoardContainer = (): ReactElement => {
             data={tasks}
             columnList={STATE_LIST}
             moveTaskOnBoard={moveTaskOnBoard}
+            showTaskModal={showTaskModal}
+            openTask={openTask}
         />
     );
 };
