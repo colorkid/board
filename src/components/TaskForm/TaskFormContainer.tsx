@@ -2,7 +2,12 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import TaskForm from './TaskForm';
 import { useFormik } from 'formik';
-import { DEFAULT_VALUE_PRIORITY, DEFAULT_VALUE_STATE, SPRINT_BACKLOG } from '@src/constants';
+import {
+    DEFAULT_VALUE_PRIORITY,
+    DEFAULT_VALUE_STATE,
+    SPRINT_BACKLOG,
+    TASK_MODAL,
+} from '@src/constants';
 import { validationSchema } from '@src/components/TaskForm/validationSchema';
 import { addTask, setActiveTask, TaskType, updateTask } from '@src/redux/task/taskReducer';
 import { generateUUID } from '@src/utils';
@@ -11,18 +16,15 @@ import {
     getOpenedTaskSelector,
     getSprintsListSelector,
 } from '@src/redux/selectors';
+import useHandleCloseModal from '@src/hooks/useHandleCloseModal';
 
-interface ITaskFormContainer {
-    handleCloseModal?: () => void;
-}
-
-const TaskFormContainer = (props: ITaskFormContainer): ReactElement => {
-    const { handleCloseModal } = props;
+const TaskFormContainer = (): ReactElement => {
     const sprints = useAppSelector((state: RootState) => getSprintsListSelector(state));
     const openedTask = useAppSelector((state: RootState) => getOpenedTaskSelector(state));
     const openedTaskId = useAppSelector((state: RootState) => getOpenedTaskIdSelector(state));
     const [checkedSprints, setCheckedSprints] = useState<string[]>([]);
     const dispatch = useAppDispatch();
+    const handleClose = useHandleCloseModal(TASK_MODAL);
 
     const isOpenedTask = !!openedTask;
 
@@ -52,7 +54,9 @@ const TaskFormContainer = (props: ITaskFormContainer): ReactElement => {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             isOpenedTask ? updateOpenedTask(values) : saveTask(values);
-            handleCloseModal && handleCloseModal();
+            if (handleClose) {
+                handleClose();
+            }
         },
     });
 

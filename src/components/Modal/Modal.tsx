@@ -17,13 +17,13 @@ const Modal = (props: IModalContent): ReactElement => {
     const Component = useMemo(() => {
         switch (modal) {
             case SPRINT_MODAL:
-                return <SprintForm handleCloseModal={handleClose} />;
+                return <SprintForm />;
             case TASK_MODAL:
-                return <TaskForm handleCloseModal={handleClose} />;
+                return <TaskForm />;
             default:
                 return null;
         }
-    }, [handleClose, modal]);
+    }, [modal]);
 
     return (
         <div data-testid="modal">

@@ -112,11 +112,11 @@ const TaskForm = (props: ITaskForm): ReactElement => {
                 </div>
             </div>
             <footer className={classes.footer}>
-                <Confirm okMethod={handleClear} message={CLEAR_TASK_CONFIRM_MESSAGE}>
-                    <Button color="secondary" onClick={handleClear}>
-                        {CLEAR_BTN_TXT}
-                    </Button>
-                </Confirm>
+                {!isOpenedTask && (
+                    <Confirm okMethod={handleClear} message={CLEAR_TASK_CONFIRM_MESSAGE}>
+                        <Button color="secondary">{CLEAR_BTN_TXT}</Button>
+                    </Confirm>
+                )}
                 <Button color="primary" type="submit">
                     {submitTxt}
                 </Button>
