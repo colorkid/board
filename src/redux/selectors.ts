@@ -6,6 +6,7 @@ import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
 
 export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
+export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
 export const getTasksSelector = (state: RootState): TaskListType => state.tasks.list;
@@ -29,5 +30,21 @@ export const getOpenedTaskSelector = createSelector(
     getOpenedTaskIdSelector,
     (tasks, id) => {
         return tasks[id];
+    }
+);
+
+export const getTasksActiveSprintSelector = createSelector(
+    getTasksSelector,
+    getActiveSprintSelector,
+    (tasksList, activeSprint) => {
+        const tasks: TaskListType = {};
+
+        Object.keys(tasksList).forEach((item) => {
+            if (tasksList[item].sprints.includes(activeSprint)) {
+                tasks[item] = tasksList[item];
+            }
+        });
+
+        return tasks;
     }
 );

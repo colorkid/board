@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { ChangeEvent, ReactElement } from 'react';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { AFTER_COUNT_SPRINTS_SHOW_SCROLL_TASK_FORM, SPRINT_BACKLOG } from '@src/constants';
 import { Checkbox, FormControlLabel, FormLabel } from '@material-ui/core';
 import cn from 'classnames';
-import useStyles from './styles';
 import LabelSprint from '@src/components/LabelSprint';
+import useStyles from './styles';
 
 interface ISprintsList {
     sprints: SprintListType;
@@ -19,32 +19,33 @@ const SprintsListTaskForm = (props: ISprintsList): ReactElement => {
 
     const countSprints = Object.keys(sprints).length;
 
-    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const numberSprint = event.target.name;
-        const updatedCheckedSprints = checkedSprints.includes(numberSprint)
-            ? checkedSprints.filter((item) => item !== numberSprint)
-            : [...checkedSprints, numberSprint];
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        const idSprint = event.target.name;
+        const updatedCheckedSprints = checkedSprints.includes(idSprint)
+            ? checkedSprints.filter((item) => item !== idSprint)
+            : [...checkedSprints, idSprint];
+
         setCheckedSprints(updatedCheckedSprints);
     };
 
-    const Sprints = Object.keys(sprints).map((item) => {
-        const numberSprint = sprints[item].number;
-        const isBacklog = numberSprint === SPRINT_BACKLOG;
+    const Sprints = Object.keys(sprints).map((id) => {
+        const numberSprint = sprints[id].number;
+        const isBacklog = id === SPRINT_BACKLOG;
 
         return (
-            <div className={classes.sprintsItem} key={numberSprint}>
+            <div className={classes.sprintsItem} key={id}>
                 <FormControlLabel
                     control={
                         <Checkbox
                             disabled={isBacklog}
-                            name={numberSprint}
-                            checked={checkedSprints.includes(numberSprint.toString())}
+                            name={id}
+                            checked={checkedSprints.includes(id)}
                             onChange={onChangeHandler}
                         />
                     }
                     label={
                         <LabelSprint
-                            sprint={sprints[item]}
+                            sprint={sprints[id]}
                             isBacklog={isBacklog}
                             numberSprint={numberSprint}
                         />

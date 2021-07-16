@@ -12,6 +12,7 @@ import { validationSchema } from '@src/components/TaskForm/validationSchema';
 import { addTask, setActiveTask, TaskType, updateTask } from '@src/redux/task/taskReducer';
 import { generateUUID } from '@src/utils';
 import {
+    getActiveSprintSelector,
     getOpenedTaskIdSelector,
     getOpenedTaskSelector,
     getSprintsListSelector,
@@ -22,6 +23,7 @@ const TaskFormContainer = (): ReactElement => {
     const sprints = useAppSelector((state: RootState) => getSprintsListSelector(state));
     const openedTask = useAppSelector((state: RootState) => getOpenedTaskSelector(state));
     const openedTaskId = useAppSelector((state: RootState) => getOpenedTaskIdSelector(state));
+    const activeSprint = useAppSelector((state: RootState) => getActiveSprintSelector(state));
     const [checkedSprints, setCheckedSprints] = useState<string[]>([]);
     const dispatch = useAppDispatch();
     const handleClose = useHandleCloseModal(TASK_MODAL);
@@ -34,9 +36,11 @@ const TaskFormContainer = (): ReactElement => {
 
     useEffect(() => {
         if (isOpenedTask) {
-            setCheckedSprints([...openedTask.sprints, SPRINT_BACKLOG]);
+            setCheckedSprints([
+                ...new Set([...openedTask.sprints, ...[SPRINT_BACKLOG, activeSprint]]),
+            ]);
         } else {
-            setCheckedSprints([SPRINT_BACKLOG]);
+            setCheckedSprints([...new Set([SPRINT_BACKLOG, activeSprint])]);
         }
         return () => isOpenedTask && clearActiveTask();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,7 +53,7 @@ const TaskFormContainer = (): ReactElement => {
             state: openedTask?.state || DEFAULT_VALUE_STATE.value,
             estimation: openedTask?.estimation || '',
             priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.value,
-            sprints: openedTask?.sprints || [SPRINT_BACKLOG],
+            sprints: openedTask?.sprints || [activeSprint],
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {

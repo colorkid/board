@@ -8,16 +8,19 @@ import {
     REMOVE_SPRINT_CONFIRM_MESSAGE,
     SPRINT_BACKLOG,
 } from '@src/constants';
-import useStyles from './styles';
 import Confirm from '@src/components/Confirm';
+
+import useStyles from './styles';
 
 interface ISprintList {
     sprints: SprintListType;
     removeSprint: (arg: string) => void;
+    activeSprint: string;
+    setActiveSprint: (arg: string) => void;
 }
 
 const SprintList = (props: ISprintList): ReactElement => {
-    const { sprints, removeSprint } = props;
+    const { sprints, removeSprint, activeSprint, setActiveSprint } = props;
     const classes = useStyles();
 
     const countSprints = Object.keys(sprints).length;
@@ -26,15 +29,20 @@ const SprintList = (props: ISprintList): ReactElement => {
         removeSprint(id);
     };
 
-    const Sprints = Object.keys(sprints).map((item) => {
-        const numberSprint = sprints[item].number;
-        const isBacklog = numberSprint === SPRINT_BACKLOG;
+    const setSprintHandler = (id: string) => {
+        setActiveSprint(id);
+    };
+
+    const Sprints = Object.keys(sprints).map((id) => {
+        const numberSprint = sprints[id].number;
+        const isBacklog = id === SPRINT_BACKLOG;
+        const isActiveSprint = id === activeSprint;
 
         return (
-            <div key={numberSprint} className={classes.sprintListItem} data-testid="sprint">
+            <div key={id} className={classes.sprintListItem} data-testid="sprint">
                 <Confirm
                     disabled={isBacklog}
-                    okMethod={() => deleteHandler(item)}
+                    okMethod={() => deleteHandler(id)}
                     message={REMOVE_SPRINT_CONFIRM_MESSAGE}
                 >
                     <DeleteIcon
@@ -42,11 +50,18 @@ const SprintList = (props: ISprintList): ReactElement => {
                         color={isBacklog ? 'disabled' : 'secondary'}
                     />
                 </Confirm>
-                <LabelSprint
-                    sprint={sprints[item]}
-                    isBacklog={isBacklog}
-                    numberSprint={numberSprint}
-                />
+                <div
+                    className={cn({
+                        [classes.sprintListItemActive]: isActiveSprint,
+                    })}
+                    onClick={() => setSprintHandler(id)}
+                >
+                    <LabelSprint
+                        sprint={sprints[id]}
+                        isBacklog={isBacklog}
+                        numberSprint={numberSprint}
+                    />
+                </div>
             </div>
         );
     });

@@ -4,13 +4,18 @@ import { COMMON_PADDING } from '@src/constants';
 const useStyles = makeStyles(() =>
     createStyles({
         sprintList: {
-            maxHeight: 208,
+            maxHeight: 221,
         },
         sprintListItem: {
             display: 'flex',
             alignItems: 'center',
-            marginTop: COMMON_PADDING / 3,
-            marginBottom: COMMON_PADDING / 3,
+            paddingTop: COMMON_PADDING / 4,
+            paddingBottom: COMMON_PADDING / 4,
+            cursor: 'pointer',
+
+            '&:hover': {
+                fontWeight: 600,
+            },
         },
         sprintListDelete: {
             marginRight: COMMON_PADDING / 3,
@@ -18,6 +23,9 @@ const useStyles = makeStyles(() =>
         },
         overFlowY: {
             overflowY: 'scroll',
+        },
+        sprintListItemActive: {
+            fontWeight: 600,
         },
     })
 );

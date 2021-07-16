@@ -22,7 +22,7 @@ export const initialState = {
             dates: '',
         },
     },
-    activeSprint: '',
+    activeSprint: SPRINT_BACKLOG,
 } as SprintInitialStateType;
 
 const sprintReducer = createSlice({
@@ -38,7 +38,7 @@ const sprintReducer = createSlice({
         },
         toggleActiveSprint(state, action) {
             const { payload } = action;
-            state.activeSprint = payload.id || initialState.activeSprint;
+            state.activeSprint = payload || initialState.activeSprint;
         },
         deleteSprint(state, action) {
             const { payload } = action;

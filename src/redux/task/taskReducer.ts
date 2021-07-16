@@ -53,10 +53,29 @@ const taskReducer = createSlice({
         setActiveTask(state, action) {
             const { payload } = action;
             state.activeTask = payload;
-        }
+        },
+        deleteRemovedSprint(state, action) {
+            const { payload } = action;
+            const cleanedStateList: TaskListType = {};
+
+            Object.keys(state.list).forEach((id) => {
+                const task = state.list[id];
+                if (task.sprints.includes(payload)) {
+                    cleanedStateList[id] = {
+                        ...task,
+                        sprints: task.sprints.filter((sprint) => sprint !== payload),
+                    };
+                } else {
+                    cleanedStateList[id] = task;
+                }
+            });
+
+            state.list = cleanedStateList;
+        },
     },
 });
 
-export const { addTask, deleteTask, updateTask, setActiveTask } = taskReducer.actions;
+export const { addTask, deleteTask, updateTask, setActiveTask, deleteRemovedSprint } =
+    taskReducer.actions;
 
 export const TaskReducer = taskReducer.reducer;
