@@ -1,9 +1,10 @@
 import React, { ReactElement, useMemo } from 'react';
 import { Backdrop, Fade, Modal as ModalUI } from '@material-ui/core';
-import useStyles from '@src/components/Modal/styles';
-import { SPRINT_MODAL, TASK_MODAL } from '@src/constants';
+import { SETTINGS_MODAL, SPRINT_MODAL, TASK_MODAL } from '@src/constants';
 import SprintForm from '../SprintForm';
 import TaskForm from '../TaskForm';
+import Settings from '../Settings';
+import useStyles from '@src/components/Modal/styles';
 
 interface IModalContent {
     modal: string;
@@ -20,6 +21,8 @@ const Modal = (props: IModalContent): ReactElement => {
                 return <SprintForm />;
             case TASK_MODAL:
                 return <TaskForm />;
+            case SETTINGS_MODAL:
+                return <Settings />;
             default:
                 return null;
         }

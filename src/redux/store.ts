@@ -5,6 +5,7 @@ import { SprintReducer } from './sprint/sprintReducer';
 import { UiReducer } from './ui/uiReducer';
 import { ThunkAction } from 'redux-thunk';
 import { TaskReducer } from '@src/redux/task/taskReducer';
+import { BoardReducer } from '@src/redux/board/boardReducer';
 
 const customizedMiddleware = getDefaultMiddleware({
     serializableCheck: false,
@@ -22,6 +23,7 @@ const store =
                   sprints: SprintReducer,
                   tasks: TaskReducer,
                   ui: UiReducer,
+                  board: BoardReducer,
               },
               // @ts-ignore
               composeEnhancers,

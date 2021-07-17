@@ -2,11 +2,7 @@ import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import { FormControl, InputLabel, MenuItem, Select as SelectEl } from '@material-ui/core';
 import useStyles from './styles';
-
-type ListItemType = {
-    title: string;
-    value: string;
-};
+import { ListItemType } from '@src/redux/board/boardReducer';
 
 interface ISelect {
     id: string;
@@ -30,7 +26,7 @@ const Select = (props: ISelect): ReactElement => {
             {label && <InputLabel id={`${id}-label`}>{label}</InputLabel>}
             <SelectEl labelId={`${id}-label`} id={id} value={value} onChange={handleChange}>
                 {list.map((item) => (
-                    <MenuItem key={item.value} value={item.value}>
+                    <MenuItem key={item.id} value={item.id}>
                         {item.title}
                     </MenuItem>
                 ))}

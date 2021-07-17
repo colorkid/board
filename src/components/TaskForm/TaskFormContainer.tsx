@@ -4,7 +4,6 @@ import TaskForm from './TaskForm';
 import { useFormik } from 'formik';
 import {
     DEFAULT_VALUE_PRIORITY,
-    DEFAULT_VALUE_STATE,
     SPRINT_BACKLOG,
     TASK_MODAL,
 } from '@src/constants';
@@ -12,7 +11,7 @@ import { validationSchema } from '@src/components/TaskForm/validationSchema';
 import { addTask, setActiveTask, TaskType, updateTask } from '@src/redux/task/taskReducer';
 import { generateUUID } from '@src/utils';
 import {
-    getActiveSprintSelector,
+    getActiveSprintSelector, getColumnsStateListSelector,
     getOpenedTaskIdSelector,
     getOpenedTaskSelector,
     getSprintsListSelector,
@@ -24,11 +23,14 @@ const TaskFormContainer = (): ReactElement => {
     const openedTask = useAppSelector((state: RootState) => getOpenedTaskSelector(state));
     const openedTaskId = useAppSelector((state: RootState) => getOpenedTaskIdSelector(state));
     const activeSprint = useAppSelector((state: RootState) => getActiveSprintSelector(state));
+    const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
     const [checkedSprints, setCheckedSprints] = useState<string[]>([]);
     const dispatch = useAppDispatch();
     const handleClose = useHandleCloseModal(TASK_MODAL);
 
     const isOpenedTask = !!openedTask;
+
+    const default_state_value = columns[0];
 
     const clearActiveTask = () => {
         dispatch(setActiveTask(''));
@@ -50,9 +52,9 @@ const TaskFormContainer = (): ReactElement => {
         initialValues: {
             title: openedTask?.title || '',
             description: openedTask?.description || '',
-            state: openedTask?.state || DEFAULT_VALUE_STATE.value,
+            state: openedTask?.state || default_state_value.id,
             estimation: openedTask?.estimation || '',
-            priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.value,
+            priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.id,
             sprints: openedTask?.sprints || [activeSprint],
         },
         validationSchema: validationSchema,
@@ -88,6 +90,7 @@ const TaskFormContainer = (): ReactElement => {
 
     return (
         <TaskForm
+            columns={columns}
             checkedSprints={checkedSprints}
             setCheckedSprints={setCheckedSprints}
             formik={formik}

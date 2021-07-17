@@ -3,17 +3,11 @@ import cn from 'classnames';
 import Task from '@src/components/Board/components/Task';
 import { TaskListType } from '@src/redux/task/taskReducer';
 import useStyles from './styles';
-
-// TODO - MOVE TYPES TO REDUX
-
-type StateType = {
-    title: string;
-    value: string;
-};
+import { ListItemType } from '@src/redux/board/boardReducer';
 
 interface IBoard {
     data: TaskListType;
-    columnList: StateType[];
+    columnList: ListItemType[];
     moveTaskOnBoard: (arg: string, arg2: string) => void;
     showTaskModal: () => void;
     openTask: (arg: string) => void;
@@ -50,22 +44,22 @@ const Board = (props: IBoard): ReactElement => {
                 return (
                     <div
                         style={{ maxWidth: `${maxWidthColumn}%` }}
-                        key={item.value}
+                        key={item.id}
                         className={cn({
                             [classes.column]: true,
                             [classes.columnActive]:
-                                isHoverTab === item.value && startedColumn !== item.value,
+                                isHoverTab === item.id && startedColumn !== item.id,
                         })}
-                        onDragOver={(e) => onDragOver(e, item.value)}
-                        onDrop={() => onDrop(item.value)}
+                        onDragOver={(e) => onDragOver(e, item.id)}
+                        onDrop={() => onDrop(item.id)}
                     >
                         <header className={classes.header}>{item.title}</header>
                         {Object.keys(data).map((key) => {
-                            if (data[key].state === item.value) {
+                            if (data[key].state === item.id) {
                                 return (
                                     <Task
                                         id={key}
-                                        value={item.value}
+                                        value={item.id}
                                         data={data[key]}
                                         key={key}
                                         onDragStart={onDragStart}

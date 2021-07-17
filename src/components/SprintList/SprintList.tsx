@@ -9,7 +9,6 @@ import {
     SPRINT_BACKLOG,
 } from '@src/constants';
 import Confirm from '@src/components/Confirm';
-
 import useStyles from './styles';
 
 interface ISprintList {

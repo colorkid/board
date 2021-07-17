@@ -1,19 +1,21 @@
 import React, { ReactElement } from 'react';
 import { Button, Drawer } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import SettingsIcon from '@material-ui/icons/Settings';
 import AppTitle from '../AppTitle';
 import AuthUser from '../AuthUser/AuthUserContainer';
-import useStyles from './styles';
-import { SPRINT_MODAL } from '@src/constants';
+import { SETTINGS_BTN_TXT, SPRINT_MODAL } from '@src/constants';
 import SprintList from '../SprintList';
+import useStyles from './styles';
 
 interface IDrawerBar {
     showSprintModal: () => void;
     showTaskModal: () => void;
+    showSettingsModal: () => void;
 }
 
 const DrawerBar = (props: IDrawerBar): ReactElement => {
-    const { showSprintModal, showTaskModal } = props;
+    const { showSprintModal, showTaskModal, showSettingsModal } = props;
     const classes = useStyles();
 
     return (
@@ -46,6 +48,11 @@ const DrawerBar = (props: IDrawerBar): ReactElement => {
                 </Button>
             </div>
             <SprintList />
+            <div className={classes.buttons}>
+                <Button variant="outlined" startIcon={<SettingsIcon />} onClick={showSettingsModal}>
+                    {SETTINGS_BTN_TXT}
+                </Button>
+            </div>
             <AuthUser />
         </Drawer>
     );

@@ -1,13 +1,15 @@
 import React, { ReactElement } from 'react';
 import Board from '@src/components/Board/Board';
-import { STATE_LIST, TASK_MODAL } from '@src/constants';
+import { TASK_MODAL } from '@src/constants';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import { setActiveTask, updateTask } from '@src/redux/task/taskReducer';
-import { getTasksActiveSprintSelector } from '@src/redux/selectors';
+import { getColumnsStateListSelector, getTasksActiveSprintSelector } from '@src/redux/selectors';
 import { showModal } from '@src/redux/ui/uiReducer';
+import { sortByOrder } from '@src/utils';
 
 const BoardContainer = (): ReactElement => {
     const tasks = useAppSelector((state: RootState) => getTasksActiveSprintSelector(state));
+    const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
     const dispatch = useAppDispatch();
 
     const showTaskModal = () => {
@@ -32,7 +34,7 @@ const BoardContainer = (): ReactElement => {
     return (
         <Board
             data={tasks}
-            columnList={STATE_LIST}
+            columnList={sortByOrder(columns)}
             moveTaskOnBoard={moveTaskOnBoard}
             showTaskModal={showTaskModal}
             openTask={openTask}

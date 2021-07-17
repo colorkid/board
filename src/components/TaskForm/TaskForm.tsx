@@ -10,7 +10,6 @@ import {
     CREATE_BTN_TXT,
     PRIORITY_LIST,
     SPRINT_BACKLOG,
-    STATE_LIST,
     TASK_FORM_TITLE_CREATE,
     TASK_FORM_TITLE_UPDATE,
     UPDATE_BTN_TXT,
@@ -19,6 +18,7 @@ import { TaskType } from '@src/redux/task/taskReducer';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import SprintsList from './components/SprintsListTaskForm';
 import Confirm from '@src/components/Confirm';
+import { ListItemType } from '@src/redux/board/boardReducer';
 
 interface ITaskForm {
     formik: FormikContextType<TaskType>;
@@ -26,10 +26,11 @@ interface ITaskForm {
     checkedSprints: string[];
     setCheckedSprints: (arg: string[]) => void;
     isOpenedTask: boolean;
+    columns: ListItemType[];
 }
 
 const TaskForm = (props: ITaskForm): ReactElement => {
-    const { formik, sprints, checkedSprints, setCheckedSprints, isOpenedTask } = props;
+    const { formik, sprints, checkedSprints, setCheckedSprints, isOpenedTask, columns } = props;
     const classes = useStyles();
 
     const titleTxt = isOpenedTask ? TASK_FORM_TITLE_UPDATE : TASK_FORM_TITLE_CREATE;
@@ -39,6 +40,8 @@ const TaskForm = (props: ITaskForm): ReactElement => {
         formik.resetForm();
         setCheckedSprints([SPRINT_BACKLOG]);
     };
+
+    console.log(columns)
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -86,7 +89,7 @@ const TaskForm = (props: ITaskForm): ReactElement => {
                         className={classes.field}
                         id="state"
                         label="State"
-                        list={STATE_LIST}
+                        list={columns}
                         setFieldValue={formik.setFieldValue}
                         value={formik.values.state}
                     />

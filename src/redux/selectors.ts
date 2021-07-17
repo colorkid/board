@@ -4,7 +4,10 @@ import { SPRINT_BACKLOG } from '@src/constants';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
+import { ListItemType } from '@src/redux/board/boardReducer';
 
+export const getColumnsStateListSelector = (state: RootState): ListItemType[] =>
+    state.board.columns;
 export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
 export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
