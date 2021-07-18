@@ -41,8 +41,6 @@ const TaskForm = (props: ITaskForm): ReactElement => {
         setCheckedSprints([SPRINT_BACKLOG]);
     };
 
-    console.log(columns)
-
     return (
         <form onSubmit={formik.handleSubmit}>
             <header className={classes.header}>

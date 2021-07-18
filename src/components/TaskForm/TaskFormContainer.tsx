@@ -30,7 +30,7 @@ const TaskFormContainer = (): ReactElement => {
 
     const isOpenedTask = !!openedTask;
 
-    const default_state_value = columns[0];
+    const DEFAULT_VALUE_STATE = columns[0];
 
     const clearActiveTask = () => {
         dispatch(setActiveTask(''));
@@ -52,7 +52,7 @@ const TaskFormContainer = (): ReactElement => {
         initialValues: {
             title: openedTask?.title || '',
             description: openedTask?.description || '',
-            state: openedTask?.state || default_state_value.id,
+            state: openedTask?.state || DEFAULT_VALUE_STATE.id,
             estimation: openedTask?.estimation || '',
             priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.id,
             sprints: openedTask?.sprints || [activeSprint],

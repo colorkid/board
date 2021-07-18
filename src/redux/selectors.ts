@@ -6,14 +6,14 @@ import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
 import { ListItemType } from '@src/redux/board/boardReducer';
 
-export const getColumnsStateListSelector = (state: RootState): ListItemType[] =>
-    state.board.columns;
 export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
 export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
 export const getTasksSelector = (state: RootState): TaskListType => state.tasks.list;
 export const getOpenedTaskIdSelector = (state: RootState): string => state.tasks.activeTask;
+export const getColumnsStateListSelector = (state: RootState): ListItemType[] =>
+    state.board.columns;
 
 export const lastSprintNumberSelector = createSelector(getSprintsListSelector, (sprints) => {
     let numbers: number[] = [];

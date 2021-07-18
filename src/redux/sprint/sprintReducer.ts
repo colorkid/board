@@ -1,9 +1,9 @@
-import { SPRINT_BACKLOG } from '@src/constants';
+import { DEMO_SPRINTS, DEMO_ACTIVE_SPRINT } from '@src/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type SprintItemType = {
     number: string;
-    dates: string;
+    dates: string[];
 };
 
 export type SprintListType = {
@@ -16,13 +16,8 @@ export type SprintInitialStateType = {
 };
 
 export const initialState = {
-    list: {
-        [SPRINT_BACKLOG]: {
-            number: SPRINT_BACKLOG,
-            dates: '',
-        },
-    },
-    activeSprint: SPRINT_BACKLOG,
+    list: DEMO_SPRINTS,
+    activeSprint: DEMO_ACTIVE_SPRINT,
 } as SprintInitialStateType;
 
 const sprintReducer = createSlice({

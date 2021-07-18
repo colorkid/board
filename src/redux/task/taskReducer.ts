@@ -41,7 +41,7 @@ const taskReducer = createSlice({
         },
         deleteTask(state, action) {
             const { payload } = action;
-            delete state.list[payload.id];
+            delete state.list[payload];
         },
         updateTask(state, action) {
             const { payload } = action;

@@ -2,19 +2,22 @@ import React, { DragEvent, ReactElement, useState } from 'react';
 import cn from 'classnames';
 import Task from '@src/components/Board/components/Task';
 import { TaskListType } from '@src/redux/task/taskReducer';
-import useStyles from './styles';
 import { ListItemType } from '@src/redux/board/boardReducer';
+import { SPRINT_BACKLOG } from '@src/constants';
+import useStyles from './styles';
 
 interface IBoard {
     data: TaskListType;
     columnList: ListItemType[];
-    moveTaskOnBoard: (arg: string, arg2: string) => void;
+    moveTaskOnBoard: (column: string, touchedTaskId: string) => void;
     showTaskModal: () => void;
-    openTask: (arg: string) => void;
+    openTask: (id: string) => void;
+    activeSprint: string;
+    removeTask: (id: string) => void;
 }
 
 const Board = (props: IBoard): ReactElement => {
-    const { data, columnList, moveTaskOnBoard, showTaskModal, openTask } = props;
+    const { data, columnList, moveTaskOnBoard, showTaskModal, openTask, activeSprint, removeTask } = props;
     const [touchedTaskId, setTouchedTaskId] = useState<string>('');
     const [startedColumn, setStartedColumn] = useState<string>('');
     const [isHoverTab, setIsHoverTab] = useState<string>('');
@@ -55,7 +58,10 @@ const Board = (props: IBoard): ReactElement => {
                     >
                         <header className={classes.header}>{item.title}</header>
                         {Object.keys(data).map((key) => {
-                            if (data[key].state === item.id) {
+                            if (
+                                activeSprint === SPRINT_BACKLOG ||
+                                (activeSprint !== SPRINT_BACKLOG && data[key].state === item.id)
+                            ) {
                                 return (
                                     <Task
                                         id={key}
@@ -65,6 +71,7 @@ const Board = (props: IBoard): ReactElement => {
                                         onDragStart={onDragStart}
                                         showTaskModal={showTaskModal}
                                         openTask={openTask}
+                                        removeTask={removeTask}
                                     />
                                 );
                             }

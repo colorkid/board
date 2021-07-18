@@ -28,6 +28,14 @@ const useStyles = makeStyles((theme) =>
             justifyContent: 'space-between',
             marginTop: COMMON_PADDING / 2,
         },
+        footerInfo: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        priority: {
+            width: '100%',
+            marginRight: COMMON_PADDING / 2,
+        }
     })
 );
 

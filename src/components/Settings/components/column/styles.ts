@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) =>
         buttons: {
             display: 'flex',
             justifyContent: 'flex-end',
+            marginTop: COMMON_PADDING / 2,
         },
         delete: {
             border: `1px solid ${theme.palette.grey[400]}`,
