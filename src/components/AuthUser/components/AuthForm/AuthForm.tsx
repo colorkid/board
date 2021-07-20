@@ -8,7 +8,7 @@ import useStyles from './styles';
 import { IAuthForm } from '../../AuthUser';
 import { validationSchema } from './validationSchema';
 import ErrorMessage from '@src/components/ErrorMessage';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const authTypes = [SIGN_IN, SIGN_UP];
 
@@ -76,7 +76,7 @@ const AuthForm = (props: IAuthForm): ReactElement => {
                 <ErrorMessage
                     message={error}
                     style={{
-                        marginTop: COMMON_PADDING,
+                        marginTop: COMMON_INDENT,
                     }}
                 />
             )}

@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING, DRAWER_WIDTH } from '@src/constants';
+import { COMMON_INDENT, DRAWER_WIDTH } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -9,13 +9,13 @@ const useStyles = makeStyles(() =>
         },
         drawerPaper: {
             width: DRAWER_WIDTH,
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
         buttons: {
             display: 'flex',
         },
         marginRight: {
-            marginRight: COMMON_PADDING,
+            marginRight: COMMON_INDENT,
         },
     })
 );

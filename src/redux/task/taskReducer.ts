@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { DEMO_TASKS } from '@src/constants';
 
 export type TaskType = {
     title: string;
@@ -17,17 +16,27 @@ export type TaskListType = {
 export type TaskInitialStateType = {
     list: TaskListType;
     activeTask: string;
+    isFetching: boolean;
 };
 
-export const initialState = {
-    list: DEMO_TASKS,
+export const initialState: TaskInitialStateType = {
+    list: {},
     activeTask: '',
-} as TaskInitialStateType;
+    isFetching: false,
+};
 
 const taskReducer = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
+        fetch(state) {
+            state.isFetching = true;
+        },
+        addTasksList(state, action) {
+            const { payload } = action;
+            state.list = payload;
+            state.isFetching = false;
+        },
         addTask(state, action) {
             const { payload } = action;
             state.list[payload.id] = {
@@ -75,7 +84,7 @@ const taskReducer = createSlice({
     },
 });
 
-export const { addTask, deleteTask, updateTask, setActiveTask, deleteRemovedSprint } =
+export const { addTask, deleteTask, updateTask, setActiveTask, deleteRemovedSprint, fetch, addTasksList } =
     taskReducer.actions;
 
 export const TaskReducer = taskReducer.reducer;

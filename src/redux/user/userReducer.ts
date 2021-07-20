@@ -1,23 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export const DEFAULT_ERROR_MESSAGES = {
-    fulfilled: 'User data is not defined',
-    rejected: 'Error is undefined',
-};
+import {
+    DEFAULT_USER_ERROR_MESSAGES_FULFILLED,
+    DEFAULT_USER_ERROR_MESSAGES_REJECTED,
+} from '@src/constants';
 
 export type userInitialStateType = {
     token: string;
-    email: string | null;
+    email: string;
     isFetching: boolean;
     error: string;
 };
 
-export const initialState = {
+export const initialState: userInitialStateType = {
     token: '',
     email: '',
     isFetching: false,
     error: '',
-} as userInitialStateType;
+};
 
 const userReducer = createSlice({
     name: 'user',
@@ -32,7 +31,7 @@ const userReducer = createSlice({
                 state.token = refreshToken;
                 state.email = email;
             } else {
-                state.error = DEFAULT_ERROR_MESSAGES.fulfilled;
+                state.error = DEFAULT_USER_ERROR_MESSAGES_FULFILLED;
             }
             state.isFetching = initialState.isFetching;
         },
@@ -46,7 +45,7 @@ const userReducer = createSlice({
             if (action.payload) {
                 state.error = action.payload;
             } else {
-                state.error = DEFAULT_ERROR_MESSAGES.rejected;
+                state.error = DEFAULT_USER_ERROR_MESSAGES_REJECTED;
             }
             state.isFetching = initialState.isFetching;
         },

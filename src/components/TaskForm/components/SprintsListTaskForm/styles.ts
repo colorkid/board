@@ -1,5 +1,5 @@
 import {createStyles, makeStyles} from '@material-ui/core';
-import {COMMON_PADDING} from '@src/constants';
+import {COMMON_INDENT} from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -12,11 +12,11 @@ const useStyles = makeStyles(() =>
             overflowY: 'scroll',
         },
         sprintsLabel: {
-            marginBottom: COMMON_PADDING / 2,
+            marginBottom: COMMON_INDENT / 2,
         },
         sprintsItem: {
-            // paddingRight: COMMON_PADDING,
-            // paddingLeft: COMMON_PADDING,
+            // paddingRight: COMMON_INDENT,
+            // paddingLeft: COMMON_INDENT,
             display: 'flex',
             height: 30,
             '& .MuiTypography-root': {

@@ -1,10 +1,10 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         header: {
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
         calendar: {
             border: '1px solid',
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
         footer: {
             display: 'flex',
             justifyContent: 'flex-end',
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
     })
 );

@@ -1,30 +1,30 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
         header: {
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
         body: {
             display: 'flex',
             justifyContent: 'space-between',
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
         cell: {},
         cellLeft: {
-            width: `calc(70% - ${COMMON_PADDING / 2}px)`,
+            width: `calc(70% - ${COMMON_INDENT / 2}px)`,
         },
         cellRight: {
-            width: `calc(30% - ${COMMON_PADDING / 2}px)`,
+            width: `calc(30% - ${COMMON_INDENT / 2}px)`,
         },
         footer: {
             display: 'flex',
             justifyContent: 'flex-end',
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
         field: {
-            marginBottom: COMMON_PADDING,
+            marginBottom: COMMON_INDENT,
         },
         textArea: {
             '& .MuiInputBase-root': {

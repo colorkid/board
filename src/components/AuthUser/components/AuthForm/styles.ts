@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) =>
             color: theme.palette.grey[500],
         },
         switchTypeAuthItem: {
-            marginRight: COMMON_PADDING,
+            marginRight: COMMON_INDENT,
             cursor: 'pointer',
         },
         switchTypeAuthItemActive: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) =>
             fontWeight: theme.typography.fontWeightBold,
         },
         submit: {
-            marginTop: COMMON_PADDING,
+            marginTop: COMMON_INDENT,
         },
         form: {
             display: 'flex',

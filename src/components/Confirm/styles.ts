@@ -1,12 +1,12 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
         body: {
-            paddingLeft: COMMON_PADDING,
-            paddingRight: COMMON_PADDING,
-            paddingTop: COMMON_PADDING,
+            paddingLeft: COMMON_INDENT,
+            paddingRight: COMMON_INDENT,
+            paddingTop: COMMON_INDENT,
         },
         trigger: {
             display: 'flex',
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() =>
         buttons: {
             display: 'flex',
             justifyContent: 'space-around',
-            marginTop: COMMON_PADDING / 2,
+            marginTop: COMMON_INDENT / 2,
         },
     })
 );

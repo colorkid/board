@@ -1,13 +1,13 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
-const BORDER = `${COMMON_PADDING / 4}px solid`;
+const BORDER = `${COMMON_INDENT / 4}px solid`;
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         card: {
-            padding: COMMON_PADDING / 2,
-            marginBottom: COMMON_PADDING / 2,
+            padding: COMMON_INDENT / 2,
+            marginBottom: COMMON_INDENT / 2,
             cursor: 'pointer',
             wordBreak: 'break-all',
         },
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) =>
         footer: {
             display: 'flex',
             justifyContent: 'space-between',
-            marginTop: COMMON_PADDING / 2,
+            marginTop: COMMON_INDENT / 2,
         },
         footerInfo: {
             display: 'flex',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) =>
         },
         priority: {
             width: '100%',
-            marginRight: COMMON_PADDING / 2,
+            marginRight: COMMON_INDENT / 2,
         }
     })
 );

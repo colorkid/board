@@ -15,25 +15,20 @@ const composeEnhancers =
     // @ts-ignore
     (window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose) || compose;
 
-const store =
-    process.env.NODE_ENV !== 'test'
-        ? configureStore({
-              reducer: {
-                  user: UserReducer,
-                  sprints: SprintReducer,
-                  tasks: TaskReducer,
-                  ui: UiReducer,
-                  board: BoardReducer,
-              },
-              // @ts-ignore
-              composeEnhancers,
-              middleware: customizedMiddleware,
-          })
-        : null;
+const store = configureStore({
+    reducer: {
+        user: UserReducer,
+        sprints: SprintReducer,
+        tasks: TaskReducer,
+        ui: UiReducer,
+        board: BoardReducer,
+    },
+    // @ts-ignore
+    composeEnhancers,
+    middleware: customizedMiddleware,
+})
 
-// @ts-ignore
 export type RootState = ReturnType<typeof store.getState>;
-// @ts-ignore
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk = ThunkAction<void, RootState, unknown, Action>;
 

@@ -10,6 +10,7 @@ export const getSprintsListSelector = (state: RootState): SprintListType => stat
 export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
+export const getUserEmailSelector = (state: RootState): string => state.user.email;
 export const getTasksSelector = (state: RootState): TaskListType => state.tasks.list;
 export const getOpenedTaskIdSelector = (state: RootState): string => state.tasks.activeTask;
 export const getColumnsStateListSelector = (state: RootState): ListItemType[] =>

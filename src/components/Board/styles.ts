@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) =>
             backgroundColor: theme.palette.grey[100],
         },
         header: {
-            marginBottom: COMMON_PADDING / 2,
+            marginBottom: COMMON_INDENT / 2,
         },
         column: {
             width: '100%',
             borderRight: '1px solid',
             borderRightColor: theme.palette.grey[300],
-            padding: COMMON_PADDING / 2,
+            padding: COMMON_INDENT / 2,
             transition: '0.2s',
 
             '&:last-child': {
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) =>
             backgroundColor: theme.palette.grey[200],
         },
         card: {
-            padding: COMMON_PADDING / 2,
-            marginBottom: COMMON_PADDING / 2,
+            padding: COMMON_INDENT / 2,
+            marginBottom: COMMON_INDENT / 2,
             cursor: 'pointer',
         },
     })

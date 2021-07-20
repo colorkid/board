@@ -52,7 +52,8 @@ const TaskFormContainer = (): ReactElement => {
         initialValues: {
             title: openedTask?.title || '',
             description: openedTask?.description || '',
-            state: openedTask?.state || DEFAULT_VALUE_STATE.id,
+            state: openedTask
+                ?.state || DEFAULT_VALUE_STATE.id,
             estimation: openedTask?.estimation || '',
             priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.id,
             sprints: openedTask?.sprints || [activeSprint],

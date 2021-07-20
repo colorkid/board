@@ -1,4 +1,3 @@
-import { DEMO_SPRINTS, DEMO_ACTIVE_SPRINT } from '@src/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type SprintItemType = {
@@ -13,17 +12,27 @@ export type SprintListType = {
 export type SprintInitialStateType = {
     list: SprintListType;
     activeSprint: string;
+    isFetching: boolean;
 };
 
-export const initialState = {
-    list: DEMO_SPRINTS,
-    activeSprint: DEMO_ACTIVE_SPRINT,
-} as SprintInitialStateType;
+export const initialState: SprintInitialStateType = {
+    list: {},
+    activeSprint: '',
+    isFetching: false,
+};
 
 const sprintReducer = createSlice({
     name: 'sprints',
     initialState,
     reducers: {
+        fetch(state) {
+            state.isFetching = true;
+        },
+        addSprintsList(state, action) {
+            const { payload } = action;
+            state.list = payload;
+            state.isFetching = false;
+        },
         addSprint(state, action) {
             const { payload } = action;
             state.list[payload.id] = {
@@ -33,7 +42,8 @@ const sprintReducer = createSlice({
         },
         toggleActiveSprint(state, action) {
             const { payload } = action;
-            state.activeSprint = payload || initialState.activeSprint;
+            state.activeSprint = payload;
+            state.isFetching = false;
         },
         deleteSprint(state, action) {
             const { payload } = action;
@@ -42,6 +52,7 @@ const sprintReducer = createSlice({
     },
 });
 
-export const { addSprint, toggleActiveSprint, deleteSprint } = sprintReducer.actions;
+export const { addSprint, toggleActiveSprint, deleteSprint, addSprintsList, fetch } =
+    sprintReducer.actions;
 
 export const SprintReducer = sprintReducer.reducer;

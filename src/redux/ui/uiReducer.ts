@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export type uiInitialStateType = {
-    isModalVisible: string,
+    isModalVisible: string;
 };
 
-export const initialState = {
+export const initialState: uiInitialStateType = {
     isModalVisible: '',
-} as uiInitialStateType;
+};
 
 const uiReducer = createSlice({
     name: 'ui',
@@ -18,7 +18,7 @@ const uiReducer = createSlice({
         },
         hideModal(state) {
             state.isModalVisible = initialState.isModalVisible;
-        }
+        },
     },
 });
 

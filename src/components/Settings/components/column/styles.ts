@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -8,16 +8,16 @@ const useStyles = makeStyles((theme) =>
         },
         headerName: {
             width: 200,
-            marginRight: COMMON_PADDING,
+            marginRight: COMMON_INDENT,
         },
         headerOrder: {
             width: 75,
-            marginRight: COMMON_PADDING,
+            marginRight: COMMON_INDENT,
         },
         column: {
             display: 'flex',
-            paddingBottom: COMMON_PADDING / 2,
-            paddingTop: COMMON_PADDING / 2,
+            paddingBottom: COMMON_INDENT / 2,
+            paddingTop: COMMON_INDENT / 2,
         },
         columnDeleted: {
             filter: 'blur(5px)',
@@ -25,16 +25,16 @@ const useStyles = makeStyles((theme) =>
         },
         name: {
             width: 200,
-            marginRight: COMMON_PADDING,
+            marginRight: COMMON_INDENT,
         },
         order: {
             width: 75,
-            marginRight: COMMON_PADDING,
+            marginRight: COMMON_INDENT,
         },
         buttons: {
             display: 'flex',
             justifyContent: 'flex-end',
-            marginTop: COMMON_PADDING / 2,
+            marginTop: COMMON_INDENT / 2,
         },
         delete: {
             border: `1px solid ${theme.palette.grey[400]}`,

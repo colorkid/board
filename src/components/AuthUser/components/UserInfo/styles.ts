@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -9,13 +9,13 @@ const useStyles = makeStyles((theme) =>
             width: '100%',
         },
         submit: {
-            marginTop: COMMON_PADDING,
+            marginTop: COMMON_INDENT,
         },
         userInfoTitle: {
             display: 'flex',
         },
         userInfoName: {
-            marginRight: COMMON_PADDING / 2,
+            marginRight: COMMON_INDENT / 2,
             fontWeight: theme.typography.fontWeightBold,
         },
         userInfoEmail: {

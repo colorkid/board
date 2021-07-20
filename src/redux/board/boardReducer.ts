@@ -1,4 +1,3 @@
-import { DEMO_STATE_LIST } from '@src/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 export type ListItemType = {
@@ -9,16 +8,21 @@ export type ListItemType = {
 
 export type BoardInitialStateType = {
     columns: ListItemType[];
+    isFetching: boolean;
 };
 
-export const initialState = {
-    columns: DEMO_STATE_LIST,
-} as BoardInitialStateType;
+export const initialState: BoardInitialStateType = {
+    columns: [],
+    isFetching: false,
+};
 
 const boardReducer = createSlice({
     name: 'board',
     initialState,
     reducers: {
+        fetch(state) {
+            state.isFetching = true;
+        },
         saveColumns(state, actions) {
             const { payload } = actions;
             state.columns = payload;
@@ -26,6 +30,6 @@ const boardReducer = createSlice({
     },
 });
 
-export const { saveColumns } = boardReducer.actions;
+export const { saveColumns, fetch } = boardReducer.actions;
 
 export const BoardReducer = boardReducer.reducer;

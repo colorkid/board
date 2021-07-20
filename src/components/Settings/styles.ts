@@ -1,10 +1,10 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
         settings: {
-            padding: COMMON_PADDING,
+            padding: COMMON_INDENT,
         },
     })
 );

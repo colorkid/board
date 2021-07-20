@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_PADDING } from '@src/constants';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -9,8 +9,8 @@ const useStyles = makeStyles(() =>
         sprintListItem: {
             display: 'flex',
             alignItems: 'center',
-            paddingTop: COMMON_PADDING / 4,
-            paddingBottom: COMMON_PADDING / 4,
+            paddingTop: COMMON_INDENT / 4,
+            paddingBottom: COMMON_INDENT / 4,
             cursor: 'pointer',
 
             '&:hover': {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() =>
             },
         },
         sprintListDelete: {
-            marginRight: COMMON_PADDING / 3,
+            marginRight: COMMON_INDENT / 3,
             cursor: 'pointer',
         },
         overFlowY: {

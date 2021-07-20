@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { FormikContextType } from 'formik';
 import cn from 'classnames';
-import useStyles from './styles';
 import Select from '../Select';
 import {
     CLEAR_BTN_TXT,
@@ -19,6 +18,7 @@ import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import SprintsList from './components/SprintsListTaskForm';
 import Confirm from '@src/components/Confirm';
 import { ListItemType } from '@src/redux/board/boardReducer';
+import useStyles from './styles';
 
 interface ITaskForm {
     formik: FormikContextType<TaskType>;
