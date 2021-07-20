@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Button, Drawer } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SettingsIcon from '@material-ui/icons/Settings';
-import AppTitle from '../AppTitle';
+import AppTitle from '../../common/AppTitle';
 import AuthUser from '../AuthUser/AuthUserContainer';
 import { SETTINGS_BTN_TXT, SPRINT_MODAL } from '@src/constants';
 import SprintList from '../SprintList';

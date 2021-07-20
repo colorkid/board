@@ -9,7 +9,7 @@ import {
     MAX_TITLE_TASK_LENGTH,
     REMOVE_TASK_CONFIRM_MESSAGE,
 } from '@src/constants';
-import Confirm from '@src/components/Confirm';
+import Confirm from '@src/common/Confirm';
 import DeleteIcon from '@material-ui/icons/Delete';
 import useStyles from './styles';
 

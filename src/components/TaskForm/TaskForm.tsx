@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { FormikContextType } from 'formik';
 import cn from 'classnames';
-import Select from '../Select';
+import Select from '../../common/Select';
 import {
     CLEAR_BTN_TXT,
     CLEAR_TASK_CONFIRM_MESSAGE,
@@ -16,7 +16,7 @@ import {
 import { TaskType } from '@src/redux/task/taskReducer';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import SprintsList from './components/SprintsListTaskForm';
-import Confirm from '@src/components/Confirm';
+import Confirm from '@src/common/Confirm';
 import { ListItemType } from '@src/redux/board/boardReducer';
 import useStyles from './styles';
 

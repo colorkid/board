@@ -2,16 +2,13 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import TaskForm from './TaskForm';
 import { useFormik } from 'formik';
-import {
-    DEFAULT_VALUE_PRIORITY,
-    SPRINT_BACKLOG,
-    TASK_MODAL,
-} from '@src/constants';
+import { DEFAULT_VALUE_PRIORITY, SPRINT_BACKLOG, TASK_MODAL } from '@src/constants';
 import { validationSchema } from '@src/components/TaskForm/validationSchema';
 import { addTask, setActiveTask, TaskType, updateTask } from '@src/redux/task/taskReducer';
-import { generateUUID } from '@src/utils';
+import { generateUUID, sortByOrder } from '@src/utils';
 import {
-    getActiveSprintSelector, getColumnsStateListSelector,
+    getActiveSprintSelector,
+    getColumnsStateListSelector,
     getOpenedTaskIdSelector,
     getOpenedTaskSelector,
     getSprintsListSelector,
@@ -30,7 +27,7 @@ const TaskFormContainer = (): ReactElement => {
 
     const isOpenedTask = !!openedTask;
 
-    const DEFAULT_VALUE_STATE = columns[0];
+    const DEFAULT_VALUE_STATE = sortByOrder(columns)[0];
 
     const clearActiveTask = () => {
         dispatch(setActiveTask(''));
@@ -52,8 +49,7 @@ const TaskFormContainer = (): ReactElement => {
         initialValues: {
             title: openedTask?.title || '',
             description: openedTask?.description || '',
-            state: openedTask
-                ?.state || DEFAULT_VALUE_STATE.id,
+            state: openedTask?.state || DEFAULT_VALUE_STATE?.id,
             estimation: openedTask?.estimation || '',
             priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.id,
             sprints: openedTask?.sprints || [activeSprint],
@@ -91,7 +87,7 @@ const TaskFormContainer = (): ReactElement => {
 
     return (
         <TaskForm
-            columns={columns}
+            columns={sortByOrder(columns)}
             checkedSprints={checkedSprints}
             setCheckedSprints={setCheckedSprints}
             formik={formik}

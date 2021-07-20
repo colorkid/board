@@ -2,13 +2,13 @@ import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
-import LabelSprint from '@src/components/LabelSprint';
+import LabelSprint from '@src/common/LabelSprint';
 import {
     AFTER_COUNT_SPRINTS_SHOW_SCROLL_COMMON,
     REMOVE_SPRINT_CONFIRM_MESSAGE,
     SPRINT_BACKLOG,
 } from '@src/constants';
-import Confirm from '@src/components/Confirm';
+import Confirm from '@src/common/Confirm';
 import useStyles from './styles';
 
 interface ISprintList {

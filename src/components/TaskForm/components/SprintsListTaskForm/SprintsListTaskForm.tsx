@@ -3,7 +3,7 @@ import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { AFTER_COUNT_SPRINTS_SHOW_SCROLL_TASK_FORM, SPRINT_BACKLOG } from '@src/constants';
 import { Checkbox, FormControlLabel, FormLabel } from '@material-ui/core';
 import cn from 'classnames';
-import LabelSprint from '@src/components/LabelSprint';
+import LabelSprint from '@src/common/LabelSprint';
 import useStyles from './styles';
 
 interface ISprintsList {

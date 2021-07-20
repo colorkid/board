@@ -2,13 +2,13 @@ import React, { ReactElement } from 'react';
 import { useFormik } from 'formik';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import clsx from 'clsx';
+import cn from 'classnames';
 import { SIGN_IN, SIGN_UP } from '@src/constants';
-import useStyles from './styles';
 import { IAuthForm } from '../../AuthUser';
 import { validationSchema } from './validationSchema';
-import ErrorMessage from '@src/components/ErrorMessage';
+import ErrorMessage from '@src/common/ErrorMessage';
 import { COMMON_INDENT } from '@src/constants';
+import useStyles from './styles';
 
 const authTypes = [SIGN_IN, SIGN_UP];
 
@@ -34,7 +34,7 @@ const AuthForm = (props: IAuthForm): ReactElement => {
                             data-testid={type}
                             key={type}
                             onClick={() => setTypeAuth(type)}
-                            className={clsx([
+                            className={cn([
                                 classes.switchTypeAuthItem,
                                 {
                                     [classes.switchTypeAuthItemActive]: typeAuth === type,

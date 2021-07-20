@@ -10,7 +10,7 @@ import {
     CREATE_BTN_TXT,
     SPRINT_FORM_TITLE_CREATE,
 } from '@src/constants';
-import Confirm from '@src/components/Confirm';
+import Confirm from '@src/common/Confirm';
 
 interface ISprintForm {
     dates: DateRange;
