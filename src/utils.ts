@@ -15,3 +15,7 @@ export const cutString = (str: string, length: number): string =>
 export const sortByOrder = (data: ListItemType[]): ListItemType[] => {
     return [...data].sort((a, b) => a.order - b.order);
 };
+
+export const objectToString = <T>(data: T): string => {
+    return JSON.stringify(data);
+};

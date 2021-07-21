@@ -42,7 +42,6 @@ const TaskFormContainer = (): ReactElement => {
             setCheckedSprints([...new Set([SPRINT_BACKLOG, activeSprint])]);
         }
         return () => isOpenedTask && clearActiveTask();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const formik = useFormik({

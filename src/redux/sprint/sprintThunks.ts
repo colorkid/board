@@ -1,6 +1,6 @@
 import { AppThunk } from '@src/redux/store';
 import { ApiController } from '@src/api/ApiController';
-import { addSprintsList, fetch, SprintListType, toggleActiveSprint } from './sprintReducer';
+import { addSprintsList, fetch, toggleActiveSprint } from './sprintReducer';
 
 export const getSprints =
     (isAuth: boolean): AppThunk =>
@@ -10,11 +10,6 @@ export const getSprints =
             dispatch(addSprintsList(sprints));
         };
 
-export const setSprints =
-    (sprints: SprintListType, isAuth: boolean): AppThunk =>
-        async () =>
-            await ApiController.setSprints(isAuth, sprints);
-
 export const getActiveSprint =
     (isAuth: boolean): AppThunk =>
         async (dispatch) => {
@@ -22,8 +17,3 @@ export const getActiveSprint =
             const activeSprint = await ApiController.getActiveSprint(isAuth);
             dispatch(toggleActiveSprint(activeSprint));
         };
-
-export const setActiveSprint =
-    (activeSprint: string, isAuth: boolean): AppThunk =>
-        async () =>
-            await ApiController.setActiveSprint(isAuth, activeSprint);

@@ -9,6 +9,7 @@ export type userInitialStateType = {
     email: string;
     isFetching: boolean;
     error: string;
+    uid: string;
 };
 
 export const initialState: userInitialStateType = {
@@ -16,6 +17,7 @@ export const initialState: userInitialStateType = {
     email: '',
     isFetching: false,
     error: '',
+    uid: '',
 };
 
 const userReducer = createSlice({
@@ -27,9 +29,10 @@ const userReducer = createSlice({
         },
         signInRequest(state, action) {
             if (action.payload) {
-                const { refreshToken, email } = action.payload.user;
+                const { refreshToken, email, uid } = action.payload;
                 state.token = refreshToken;
                 state.email = email;
+                state.uid = uid;
             } else {
                 state.error = DEFAULT_USER_ERROR_MESSAGES_FULFILLED;
             }
@@ -40,6 +43,7 @@ const userReducer = createSlice({
             state.email = initialState.email;
             state.isFetching = initialState.isFetching;
             state.error = initialState.error;
+            state.uid = initialState.uid;
         },
         errorMessage(state, action) {
             if (action.payload) {

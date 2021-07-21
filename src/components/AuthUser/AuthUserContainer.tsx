@@ -1,9 +1,9 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import AuthUser from './AuthUser';
 import { SIGN_IN } from '@src/constants';
 import { userDataRequestType } from '@src/api/auth';
-import { signIn, signOut, signUp } from '@src/redux/user/userThunks';
+import { authStateObservable, signIn, signOut, signUp} from '@src/redux/user/userThunks';
 import { getUserInfoSelector } from '@src/redux/selectors';
 
 const AuthUserContainer = (): ReactElement => {
@@ -23,6 +23,10 @@ const AuthUserContainer = (): ReactElement => {
     const signOutRequest = () => {
         dispatch(signOut());
     };
+
+    useEffect(() => {
+        dispatch(authStateObservable());
+    }, []);
 
     const requestMethod = typeAuth === SIGN_IN ? singInRequest : singUpRequest;
 

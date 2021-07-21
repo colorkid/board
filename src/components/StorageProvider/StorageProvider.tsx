@@ -1,5 +1,5 @@
-import React, { ReactChild, ReactChildren, useCallback, useEffect } from 'react';
-import { getTasks, setTasks } from '@src/redux/task/taskThunks';
+import React, { ReactChild, ReactChildren, useEffect } from 'react';
+import { getTasks } from '@src/redux/task/taskThunks';
 import { DEMO_ACTIVE_SPRINT, DEMO_SPRINTS, DEMO_STATE_LIST, DEMO_TASKS } from '@src/redux/demoData';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import {
@@ -9,17 +9,18 @@ import {
     getTasksSelector,
     getUserEmailSelector,
 } from '@src/redux/selectors';
-import { ListItemType } from '@src/redux/board/boardReducer';
-import { SprintListType } from '@src/redux/sprint/sprintReducer';
-import { TaskListType } from '@src/redux/task/taskReducer';
-import { LocalStorageApi } from '@src/api/LocalStorageApi';
+import { ListItemType, saveColumns } from '@src/redux/board/boardReducer';
 import {
-    getActiveSprint,
-    getSprints,
-    setActiveSprint,
-    setSprints,
-} from '@src/redux/sprint/sprintThunks';
-import { getColumns, setColumns } from '@src/redux/board/boardThunks';
+    addSprintsList,
+    SprintListType,
+    toggleActiveSprint,
+} from '@src/redux/sprint/sprintReducer';
+import { addTasksList, TaskListType } from '@src/redux/task/taskReducer';
+import { LocalStorageApi } from '@src/api/LocalStorageApi';
+import { getActiveSprint, getSprints } from '@src/redux/sprint/sprintThunks';
+import { getColumns } from '@src/redux/board/boardThunks';
+import { objectToString } from '@src/utils';
+import { ApiController } from '@src/api/ApiController';
 
 export type StateForSaveType = ListItemType[] | SprintListType | TaskListType | string;
 
@@ -38,40 +39,56 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
 
     const dispatch = useAppDispatch();
 
-    const setDemoData = useCallback(() => {
-        dispatch(setTasks(DEMO_TASKS, !!isAuth));
-        dispatch(setSprints(DEMO_SPRINTS, !!isAuth));
-        dispatch(setActiveSprint(DEMO_ACTIVE_SPRINT, !!isAuth));
-        dispatch(setColumns(DEMO_STATE_LIST, !!isAuth));
-    }, [dispatch, isAuth]);
+    const columnsToCompare = objectToString(columns);
+    const sprintsToCompare = objectToString(sprints);
+    const tasksToCompare = objectToString(tasks);
 
-    const getData = useCallback(() => {
+    const dispatchData = () => {
         dispatch(getTasks(!!isAuth));
         dispatch(getSprints(!!isAuth));
         dispatch(getActiveSprint(!!isAuth));
         dispatch(getColumns(!!isAuth));
-    }, [dispatch, isAuth]);
+    };
 
-    const updateData = useCallback(() => {
-        dispatch(setTasks(tasks, !!isAuth));
-        dispatch(setSprints(sprints, !!isAuth));
-        dispatch(setActiveSprint(activeSprint, !!isAuth));
-        dispatch(setColumns(columns, !!isAuth));
-    }, [activeSprint, columns, dispatch, isAuth, sprints, tasks]);
+    const dispatchDemoData = () => {
+        dispatch(addTasksList(DEMO_TASKS));
+        dispatch(addSprintsList(DEMO_SPRINTS));
+        dispatch(toggleActiveSprint(DEMO_ACTIVE_SPRINT));
+        dispatch(saveColumns(DEMO_STATE_LIST));
+    };
 
     useEffect(() => {
         if (LocalStorageApi.isFirstSession()) {
-            LocalStorageApi.recordSession();
-            setDemoData();
+            LocalStorageApi.recordFirstSession();
+            dispatchDemoData();
+        } else {
+            dispatchData();
         }
-        getData();
-    }, [dispatch, getData, isAuth, setDemoData]);
+    }, []);
 
     useEffect(() => {
-        if (!LocalStorageApi.isFirstSession()) {
-            updateData();
+        if (columns.length) {
+            ApiController.setColumns(!!isAuth, columns);
         }
-    }, [dispatch, tasks, isAuth, sprints, updateData]);
+    }, [columnsToCompare]);
+
+    useEffect(() => {
+        if (activeSprint.length) {
+            ApiController.setActiveSprint(!!isAuth, activeSprint);
+        }
+    }, [activeSprint]);
+
+    useEffect(() => {
+        if (Object.keys(sprints).length) {
+            ApiController.setSprints(!!isAuth, sprints);
+        }
+    }, [sprintsToCompare]);
+
+    useEffect(() => {
+        if (Object.keys(tasks).length) {
+            ApiController.setTasks(!!isAuth, tasks);
+        }
+    }, [tasksToCompare]);
 
     return <>{children}</>;
 };

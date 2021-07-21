@@ -8,5 +8,5 @@ export const LocalStorageApi = {
     setLocal: (key: string, data: DataSetType): void =>
         localStorage.setItem(key, JSON.stringify(data)),
     isFirstSession: (): boolean => localStorage.getItem(IS_FIRST_SESSION_KEY) === null,
-    recordSession: (): void => localStorage.setItem(IS_FIRST_SESSION_KEY, 'true'),
+    recordFirstSession: (): void => localStorage.setItem(IS_FIRST_SESSION_KEY, 'true'),
 };
