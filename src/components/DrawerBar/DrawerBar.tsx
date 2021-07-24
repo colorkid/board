@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Button, Drawer } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SettingsIcon from '@material-ui/icons/Settings';
-import AppTitle from '../../common/AppTitle';
+import Logo from '../../common/Logo';
 import AuthUser from '../AuthUser/AuthUserContainer';
 import { SETTINGS_BTN_TXT, SPRINT_MODAL } from '@src/constants';
 import SprintList from '../SprintList';
@@ -26,7 +26,7 @@ const DrawerBar = (props: IDrawerBar): ReactElement => {
                 paper: classes.drawerPaper,
             }}
         >
-            <AppTitle />
+            <Logo />
             <div className={classes.buttons}>
                 <Button
                     data-testid={SPRINT_MODAL}

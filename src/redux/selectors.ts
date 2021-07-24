@@ -6,11 +6,12 @@ import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
 import { ListItemType } from '@src/redux/board/boardReducer';
 
+export const getIsAuthStateSelector = (state: RootState): string => state.user.isAuth;
 export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
 export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
-export const getUserEmailSelector = (state: RootState): string => state.user.email;
+export const getUserUIdlSelector = (state: RootState): string => state.user.uid;
 export const getTasksSelector = (state: RootState): TaskListType => state.tasks.list;
 export const getOpenedTaskIdSelector = (state: RootState): string => state.tasks.activeTask;
 export const getColumnsStateListSelector = (state: RootState): ListItemType[] =>

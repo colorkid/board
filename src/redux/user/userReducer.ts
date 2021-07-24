@@ -2,10 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
     DEFAULT_USER_ERROR_MESSAGES_FULFILLED,
     DEFAULT_USER_ERROR_MESSAGES_REJECTED,
+    FALSE,
+    NOT_CHECK_YET,
+    TRUE,
 } from '@src/constants';
 
 export type userInitialStateType = {
-    token: string;
+    isAuth: string;
     email: string;
     isFetching: boolean;
     error: string;
@@ -13,7 +16,7 @@ export type userInitialStateType = {
 };
 
 export const initialState: userInitialStateType = {
-    token: '',
+    isAuth: NOT_CHECK_YET,
     email: '',
     isFetching: false,
     error: '',
@@ -24,26 +27,30 @@ const userReducer = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        setAuth(state, action) {
+            const { payload } = action;
+            state.isAuth = payload;
+        },
         fetch(state) {
             state.isFetching = true;
         },
         signInRequest(state, action) {
             if (action.payload) {
-                const { refreshToken, email, uid } = action.payload;
-                state.token = refreshToken;
+                const { email, uid } = action.payload;
                 state.email = email;
                 state.uid = uid;
+                state.isAuth = TRUE;
             } else {
                 state.error = DEFAULT_USER_ERROR_MESSAGES_FULFILLED;
             }
             state.isFetching = initialState.isFetching;
         },
         signOutRequest(state) {
-            state.token = initialState.token;
             state.email = initialState.email;
             state.isFetching = initialState.isFetching;
             state.error = initialState.error;
             state.uid = initialState.uid;
+            state.isAuth = FALSE;
         },
         errorMessage(state, action) {
             if (action.payload) {
@@ -56,6 +63,6 @@ const userReducer = createSlice({
     },
 });
 
-export const { fetch, signInRequest, signOutRequest, errorMessage } = userReducer.actions;
+export const { fetch, signInRequest, signOutRequest, errorMessage, setAuth } = userReducer.actions;
 
 export const UserReducer = userReducer.reducer;

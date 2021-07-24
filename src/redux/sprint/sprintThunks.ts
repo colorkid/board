@@ -3,17 +3,17 @@ import { ApiController } from '@src/api/ApiController';
 import { addSprintsList, fetch, toggleActiveSprint } from './sprintReducer';
 
 export const getSprints =
-    (isAuth: boolean): AppThunk =>
+    (userId: string): AppThunk =>
         async (dispatch) => {
             dispatch(fetch());
-            const sprints = await ApiController.getSprints(isAuth);
+            const sprints = await ApiController.getSprints(userId);
             dispatch(addSprintsList(sprints));
         };
 
 export const getActiveSprint =
-    (isAuth: boolean): AppThunk =>
+    (userId: string): AppThunk =>
         async (dispatch) => {
             dispatch(fetch());
-            const activeSprint = await ApiController.getActiveSprint(isAuth);
+            const activeSprint = await ApiController.getActiveSprint(userId);
             dispatch(toggleActiveSprint(activeSprint));
         };

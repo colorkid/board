@@ -20,7 +20,7 @@ const SprintFormContainer = (): ReactElement => {
                 addSprint({
                     id: generateUUID(),
                     number: (numberLastSprint + 1).toString(),
-                    dates,
+                    dates: [dates[0].toDateString(), dates[1].toDateString()]
                 })
             );
         }

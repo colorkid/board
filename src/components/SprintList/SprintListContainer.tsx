@@ -15,6 +15,7 @@ const SprintListContainer = (): ReactElement => {
         if (id === activeSprint) {
             dispatch(toggleActiveSprint(SPRINT_BACKLOG));
         }
+
         dispatch(deleteSprint(id));
         dispatch(deleteRemovedSprint(id));
     };

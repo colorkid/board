@@ -5,9 +5,10 @@ import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import {
     getActiveSprintSelector,
     getColumnsStateListSelector,
+    getIsAuthStateSelector,
     getSprintsListSelector,
     getTasksSelector,
-    getUserEmailSelector,
+    getUserUIdlSelector,
 } from '@src/redux/selectors';
 import { ListItemType, saveColumns } from '@src/redux/board/boardReducer';
 import {
@@ -16,11 +17,14 @@ import {
     toggleActiveSprint,
 } from '@src/redux/sprint/sprintReducer';
 import { addTasksList, TaskListType } from '@src/redux/task/taskReducer';
-import { LocalStorageApi } from '@src/api/LocalStorageApi';
 import { getActiveSprint, getSprints } from '@src/redux/sprint/sprintThunks';
 import { getColumns } from '@src/redux/board/boardThunks';
 import { objectToString } from '@src/utils';
 import { ApiController } from '@src/api/ApiController';
+import { authStateObservable } from '@src/redux/user/userThunks';
+import { LocalStorageApi } from '@src/api/LocalStorageApi';
+import { NOT_CHECK_YET, TRUE } from '@src/constants';
+import Progress from '@src/common/Progress';
 
 export type StateForSaveType = ListItemType[] | SprintListType | TaskListType | string;
 
@@ -31,9 +35,10 @@ interface IStorageProvider {
 const StorageProvider = (props: IStorageProvider): JSX.Element => {
     const { children } = props;
 
+    const isAuth = useAppSelector((state: RootState) => getIsAuthStateSelector(state));
     const tasks = useAppSelector((state: RootState) => getTasksSelector(state));
     const sprints = useAppSelector((state: RootState) => getSprintsListSelector(state));
-    const isAuth = useAppSelector((state: RootState) => getUserEmailSelector(state));
+    const userId = useAppSelector((state: RootState) => getUserUIdlSelector(state));
     const activeSprint = useAppSelector((state: RootState) => getActiveSprintSelector(state));
     const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
 
@@ -44,10 +49,10 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
     const tasksToCompare = objectToString(tasks);
 
     const dispatchData = () => {
-        dispatch(getTasks(!!isAuth));
-        dispatch(getSprints(!!isAuth));
-        dispatch(getActiveSprint(!!isAuth));
-        dispatch(getColumns(!!isAuth));
+        dispatch(getTasks(userId));
+        dispatch(getSprints(userId));
+        dispatch(getActiveSprint(userId));
+        dispatch(getColumns(userId));
     };
 
     const dispatchDemoData = () => {
@@ -58,39 +63,49 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
     };
 
     useEffect(() => {
-        if (LocalStorageApi.isFirstSession()) {
-            LocalStorageApi.recordFirstSession();
-            dispatchDemoData();
-        } else {
-            dispatchData();
-        }
+        dispatch(authStateObservable());
     }, []);
 
     useEffect(() => {
-        if (columns.length) {
-            ApiController.setColumns(!!isAuth, columns);
+        if (isAuth === NOT_CHECK_YET) {
+            return;
+        } else if (isAuth === TRUE) {
+            dispatchData();
+        } else {
+            if (LocalStorageApi.isFirstSession()) {
+                LocalStorageApi.recordFirstSession();
+                dispatchDemoData();
+            } else {
+                dispatchData();
+            }
         }
-    }, [columnsToCompare]);
+    }, [isAuth]);
 
     useEffect(() => {
-        if (activeSprint.length) {
-            ApiController.setActiveSprint(!!isAuth, activeSprint);
+        if (columns.length) {
+            ApiController.setColumns(userId, columns);
         }
-    }, [activeSprint]);
+    }, [columnsToCompare, userId]);
+
+    useEffect(() => {
+        if (activeSprint?.length) {
+            ApiController.setActiveSprint(userId, activeSprint);
+        }
+    }, [activeSprint, userId]);
 
     useEffect(() => {
         if (Object.keys(sprints).length) {
-            ApiController.setSprints(!!isAuth, sprints);
+            ApiController.setSprints(userId, sprints);
         }
-    }, [sprintsToCompare]);
+    }, [sprintsToCompare, userId]);
 
     useEffect(() => {
         if (Object.keys(tasks).length) {
-            ApiController.setTasks(!!isAuth, tasks);
+            ApiController.setTasks(userId, tasks);
         }
-    }, [tasksToCompare]);
+    }, [tasksToCompare, userId]);
 
-    return <>{children}</>;
+    return <>{isAuth !== NOT_CHECK_YET ? children : <Progress />}</>;
 };
 
 export default StorageProvider;

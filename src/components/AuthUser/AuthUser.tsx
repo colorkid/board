@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import UserInfo from './components/UserInfo';
-import { CircularProgress } from '@material-ui/core';
 import AuthForm from './components/AuthForm';
-import useStyles from './styles';
+import Progress from '@src/common/Progress';
 import { userDataRequestType } from '@src/api/auth';
+import useStyles from './styles';
 
 export interface IAuthForm {
     requestMethod: (arg: userDataRequestType) => void;
@@ -26,7 +26,7 @@ const AuthUser = (props: IUser): ReactElement => {
     return (
         <div className={classes.user}>
             {isFetching ? (
-                <CircularProgress />
+                <Progress />
             ) : email ? (
                 <UserInfo signOutRequest={signOutRequest} email={email} />
             ) : (

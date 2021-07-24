@@ -2,7 +2,7 @@ import { createStyles, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
     createStyles({
-        title: {
+        logo: {
             width: '100%',
         }
     })
