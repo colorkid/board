@@ -3,7 +3,7 @@ import { createStyles, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(() =>
     createStyles({
         progress: {
-            disable: 'flex',
+            display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             marginRight: '50%',

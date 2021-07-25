@@ -8,6 +8,8 @@ import { ListItemType } from '@src/redux/board/boardReducer';
 
 export const getIsAuthStateSelector = (state: RootState): string => state.user.isAuth;
 export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
+export const getSprintsListIsFetchingSelector = (state: RootState): boolean => state.sprints.isFetching;
+export const getTasksListIsFetchingSelector = (state: RootState): boolean => state.tasks.isFetching;
 export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;

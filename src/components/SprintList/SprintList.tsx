@@ -9,6 +9,7 @@ import {
     SPRINT_BACKLOG,
 } from '@src/constants';
 import Confirm from '@src/common/Confirm';
+import Progress from '@src/common/Progress';
 import useStyles from './styles';
 
 interface ISprintList {
@@ -16,10 +17,11 @@ interface ISprintList {
     removeSprint: (arg: string) => void;
     activeSprint: string;
     setActiveSprint: (arg: string) => void;
+    isFetching: boolean;
 }
 
 const SprintList = (props: ISprintList): ReactElement => {
-    const { sprints, removeSprint, activeSprint, setActiveSprint } = props;
+    const { sprints, removeSprint, activeSprint, setActiveSprint, isFetching } = props;
     const classes = useStyles();
 
     const countSprints = Object.keys(sprints).length;
@@ -71,7 +73,13 @@ const SprintList = (props: ISprintList): ReactElement => {
                 [classes.overFlowY]: countSprints > AFTER_COUNT_SPRINTS_SHOW_SCROLL_COMMON,
             })}
         >
-            {Sprints}
+            {isFetching ? (
+                <div className={classes.sprintListProgress}>
+                    <Progress />
+                </div>
+            ) : (
+                Sprints
+            )}
         </div>
     );
 };

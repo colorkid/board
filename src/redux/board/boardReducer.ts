@@ -26,6 +26,7 @@ const boardReducer = createSlice({
         saveColumns(state, actions) {
             const { payload } = actions;
             state.columns = payload;
+            state.isFetching = false;
         },
     },
 });

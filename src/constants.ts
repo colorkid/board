@@ -54,3 +54,4 @@ export const DEFAULT_USER_ERROR_MESSAGES_REJECTED = 'Error is undefined';
 
 export const DRAWER_WIDTH = 290;
 export const COMMON_INDENT = 15;
+export const SPRINTS_LIST_HEIGHT = 221;

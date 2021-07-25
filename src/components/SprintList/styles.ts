@@ -1,10 +1,11 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import { COMMON_INDENT } from '@src/constants';
+import { COMMON_INDENT, SPRINTS_LIST_HEIGHT } from '@src/constants';
 
 const useStyles = makeStyles(() =>
     createStyles({
         sprintList: {
-            maxHeight: 221,
+            maxHeight: SPRINTS_LIST_HEIGHT,
+            minHeight: SPRINTS_LIST_HEIGHT,
         },
         sprintListItem: {
             display: 'flex',
@@ -26,6 +27,12 @@ const useStyles = makeStyles(() =>
         },
         sprintListItemActive: {
             fontWeight: 600,
+        },
+        sprintListProgress: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: SPRINTS_LIST_HEIGHT,
         },
     })
 );
