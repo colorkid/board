@@ -50,7 +50,8 @@ export const CLEAR_TASK_CONFIRM_MESSAGE =
 export const REMOVE_TASK_CONFIRM_MESSAGE = 'Are you sure you want to delete the task?';
 
 export const DEFAULT_USER_ERROR_MESSAGES_FULFILLED = 'User data is not defined';
-export const DEFAULT_USER_ERROR_MESSAGES_REJECTED = 'Error is undefined';
+export const DEFAULT_UNDEFINED_ERROR = 'Error is undefined';
+export const DEFAULT_ERROR_MESSAGE = 'Something went wrong.';
 
 export const DRAWER_WIDTH = 290;
 export const COMMON_INDENT = 15;

@@ -17,7 +17,7 @@ import { TaskType } from '@src/redux/task/taskReducer';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import SprintsList from './components/SprintsListTaskForm';
 import Confirm from '@src/common/Confirm';
-import { ListItemType } from '@src/redux/board/boardReducer';
+import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
 import useStyles from './styles';
 
 interface ITaskForm {
@@ -26,7 +26,7 @@ interface ITaskForm {
     checkedSprints: string[];
     setCheckedSprints: (arg: string[]) => void;
     isOpenedTask: boolean;
-    columns: ListItemType[];
+    columns: ColumnListItemType[];
 }
 
 const TaskForm = (props: ITaskForm): ReactElement => {

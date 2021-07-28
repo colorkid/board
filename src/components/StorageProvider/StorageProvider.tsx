@@ -7,10 +7,10 @@ import {
     getColumnsStateListSelector,
     getIsAuthStateSelector,
     getSprintsListSelector,
-    getTasksSelector,
+    getTasksListSelector,
     getUserUIdlSelector,
 } from '@src/redux/selectors';
-import { ListItemType, saveColumns } from '@src/redux/board/boardReducer';
+import { ColumnListItemType, saveColumns } from '@src/redux/columns/columnsReducer';
 import {
     addSprintsList,
     SprintListType,
@@ -18,7 +18,7 @@ import {
 } from '@src/redux/sprint/sprintReducer';
 import { addTasksList, TaskListType } from '@src/redux/task/taskReducer';
 import { getActiveSprint, getSprints } from '@src/redux/sprint/sprintThunks';
-import { getColumns } from '@src/redux/board/boardThunks';
+import { getColumns } from '@src/redux/columns/columnsThunks';
 import { objectToString } from '@src/utils';
 import { ApiController } from '@src/api/ApiController';
 import { authStateObservable } from '@src/redux/user/userThunks';
@@ -26,7 +26,7 @@ import { LocalStorageApi } from '@src/api/LocalStorageApi';
 import { NOT_CHECK_YET, TRUE } from '@src/constants';
 import Progress from '@src/common/Progress';
 
-export type StateForSaveType = ListItemType[] | SprintListType | TaskListType | string;
+export type StateForSaveType = ColumnListItemType[] | SprintListType | TaskListType | string;
 
 interface IStorageProvider {
     children: ReactChild | ReactChildren;
@@ -36,7 +36,7 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
     const { children } = props;
 
     const isAuth = useAppSelector((state: RootState) => getIsAuthStateSelector(state));
-    const tasks = useAppSelector((state: RootState) => getTasksSelector(state));
+    const tasks = useAppSelector((state: RootState) => getTasksListSelector(state));
     const sprints = useAppSelector((state: RootState) => getSprintsListSelector(state));
     const userId = useAppSelector((state: RootState) => getUserUIdlSelector(state));
     const activeSprint = useAppSelector((state: RootState) => getActiveSprintSelector(state));

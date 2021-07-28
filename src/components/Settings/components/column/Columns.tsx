@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
-import { ListItemType } from '@src/redux/board/boardReducer';
+import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
 import { Button, TextField, Typography } from '@material-ui/core';
 import { ADD_COLUMN_BTN_TXT, ORDER_KEY, TITLE_KEY } from '@src/constants';
 import DeleteIcon from '@material-ui/icons/Delete';
 import useStyles from './styles';
 
 interface IColumns {
-    columns: ListItemType[];
+    columns: ColumnListItemType[];
     deleteColumn: (name: string) => void;
     updateColumn: (name: string, value: string | number, key: string) => void;
     addColumn: () => void;

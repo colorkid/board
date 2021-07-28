@@ -5,14 +5,17 @@ import store from './redux/store';
 import App from './components/App';
 import getFirebase from '../firebase';
 import StorageProvider from '@src/components/StorageProvider';
+import ErrorBoundary from './components/ErrorBoundary';
 
 export const firebaseInstance = getFirebase();
 
 ReactDOM.render(
     <Provider store={store}>
-        <StorageProvider>
-            <App />
-        </StorageProvider>
+        <ErrorBoundary>
+            <StorageProvider>
+                <App />
+            </StorageProvider>
+        </ErrorBoundary>
     </Provider>,
     document.getElementById('root') || document.createElement('div')
 );

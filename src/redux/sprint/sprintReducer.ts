@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DEFAULT_UNDEFINED_ERROR } from '@src/constants';
 
 export type SprintItemType = {
     number: string;
@@ -13,12 +14,14 @@ export type SprintInitialStateType = {
     list: SprintListType;
     activeSprint: string;
     isFetching: boolean;
+    error: string;
 };
 
 export const initialState: SprintInitialStateType = {
     list: {},
     activeSprint: '',
     isFetching: false,
+    error: '',
 };
 
 const sprintReducer = createSlice({
@@ -27,6 +30,7 @@ const sprintReducer = createSlice({
     reducers: {
         fetch(state) {
             state.isFetching = true;
+            state.error = initialState.error;
         },
         addSprintsList(state, action) {
             const { payload } = action;
@@ -49,10 +53,18 @@ const sprintReducer = createSlice({
             const { payload } = action;
             delete state.list[payload];
         },
+        setErrorMessage(state, action) {
+            if (action.payload) {
+                state.error = action.payload;
+            } else {
+                state.error = DEFAULT_UNDEFINED_ERROR;
+            }
+            state.isFetching = initialState.isFetching;
+        },
     },
 });
 
-export const { addSprint, toggleActiveSprint, deleteSprint, addSprintsList, fetch } =
+export const { addSprint, toggleActiveSprint, deleteSprint, addSprintsList, fetch, setErrorMessage } =
     sprintReducer.actions;
 
 export const SprintReducer = sprintReducer.reducer;

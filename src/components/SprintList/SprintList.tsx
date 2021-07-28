@@ -10,6 +10,7 @@ import {
 } from '@src/constants';
 import Confirm from '@src/common/Confirm';
 import Progress from '@src/common/Progress';
+import ErrorMessage from '@src/common/ErrorMessage';
 import useStyles from './styles';
 
 interface ISprintList {
@@ -18,10 +19,20 @@ interface ISprintList {
     activeSprint: string;
     setActiveSprint: (arg: string) => void;
     isFetching: boolean;
+    error?: string;
+    reloadSprints?: () => void;
 }
 
 const SprintList = (props: ISprintList): ReactElement => {
-    const { sprints, removeSprint, activeSprint, setActiveSprint, isFetching } = props;
+    const {
+        sprints,
+        removeSprint,
+        activeSprint,
+        setActiveSprint,
+        isFetching,
+        error,
+        reloadSprints,
+    } = props;
     const classes = useStyles();
 
     const countSprints = Object.keys(sprints).length;
@@ -77,6 +88,12 @@ const SprintList = (props: ISprintList): ReactElement => {
                 <div className={classes.sprintListProgress}>
                     <Progress />
                 </div>
+            ) : error ? (
+                <ErrorMessage
+                    style={{ width: '100%', alignSelf: 'start' }}
+                    message={error}
+                    reload={reloadSprints}
+                />
             ) : (
                 Sprints
             )}

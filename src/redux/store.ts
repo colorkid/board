@@ -5,7 +5,7 @@ import { SprintReducer } from './sprint/sprintReducer';
 import { UiReducer } from './ui/uiReducer';
 import { ThunkAction } from 'redux-thunk';
 import { TaskReducer } from '@src/redux/task/taskReducer';
-import { BoardReducer } from '@src/redux/board/boardReducer';
+import { ColumnsReducer } from '@src/redux/columns/columnsReducer';
 
 const customizedMiddleware = getDefaultMiddleware({
     serializableCheck: false,
@@ -21,12 +21,12 @@ const store = configureStore({
         sprints: SprintReducer,
         tasks: TaskReducer,
         ui: UiReducer,
-        board: BoardReducer,
+        columns: ColumnsReducer,
     },
     // @ts-ignore
     composeEnhancers,
     middleware: customizedMiddleware,
-})
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

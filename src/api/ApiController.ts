@@ -14,7 +14,7 @@ export const ApiController = {
     getTasks: async (userId: string): Promise<string | Promise<firebase.database.DataSnapshot>> =>
         !userId
             ? LocalStorageApi.getLocal(TASK_LIST_KEY)
-            : (await firebase.database().ref(`${userId}/${TASK_LIST_KEY}`).once('value')).val(),
+            : (await firebase.database().ref(`${userId}/tasksList`).once('value')).val(),
     setTasks: (userId: string, data: DataSetType): void | Promise<null> =>
         !userId
             ? LocalStorageApi.setLocal(TASK_LIST_KEY, data)

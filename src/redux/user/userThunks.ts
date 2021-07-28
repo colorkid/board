@@ -5,9 +5,9 @@ import {
     userDataRequestType,
 } from '@src/api/auth';
 import {
-    errorMessage,
     fetch,
     setAuth,
+    setErrorMessage,
     signInRequest,
     signOutRequest,
 } from '@src/redux/user/userReducer';
@@ -22,7 +22,7 @@ export const signIn =
         try {
             await signInFireBase(data);
         } catch (e) {
-            dispatch(errorMessage(e.message));
+            dispatch(setErrorMessage(e.message));
         }
     };
 
@@ -33,23 +33,31 @@ export const signUp =
         try {
             await signUpFireBase(data);
         } catch (e) {
-            dispatch(errorMessage(e.message));
+            dispatch(setErrorMessage(e.message));
         }
     };
 
 export const signOut = (): AppThunk => async (dispatch) => {
     dispatch(fetch());
-    await signOutFireBase();
-    dispatch(signOutRequest());
+    try {
+        await signOutFireBase();
+        dispatch(signOutRequest());
+    } catch (e) {
+        dispatch(setErrorMessage(e.message));
+    }
 };
 
 export const authStateObservable = (): AppThunk => async (dispatch) => {
     firebaseInstance?.auth().onAuthStateChanged((user) => {
-        if (user) {
-            dispatch(signInRequest(user));
-        } else {
-            dispatch(setAuth(NOT_CHECK_YET));
-            dispatch(setAuth(FALSE));
+        try {
+            if (user) {
+                dispatch(signInRequest(user));
+            } else {
+                dispatch(setAuth(NOT_CHECK_YET));
+                dispatch(setAuth(FALSE));
+            }
+        } catch (e) {
+            dispatch(setErrorMessage(e.message));
         }
     });
 };

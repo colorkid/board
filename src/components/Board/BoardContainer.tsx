@@ -5,21 +5,54 @@ import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import { deleteTask, setActiveTask, updateTask } from '@src/redux/task/taskReducer';
 import {
     getActiveSprintSelector,
+    getColumnsErrorSelector,
+    getColumnsFetchingSelector,
     getColumnsStateListSelector,
-    getTasksActiveSprintSelector, getTasksListIsFetchingSelector,
+    getTasksActiveSprintSelector,
+    getTasksErrorSelector,
+    getTasksListIsFetchingSelector,
+    getUserUIdlSelector,
 } from '@src/redux/selectors';
 import { showModal } from '@src/redux/ui/uiReducer';
 import { sortByOrder } from '@src/utils';
 import { DEMO_COLUMN_BACKLOG } from '@src/redux/demoData';
+import { getTasks } from '@src/redux/task/taskThunks';
+import { getColumns } from '@src/redux/columns/columnsThunks';
 
 const BoardContainer = (): ReactElement => {
     const tasks = useAppSelector((state: RootState) => getTasksActiveSprintSelector(state));
-    const isFetching = useAppSelector((state: RootState) => getTasksListIsFetchingSelector(state));
+    const taskError = useAppSelector((state: RootState) => getTasksErrorSelector(state));
+    const isTaskFetching = useAppSelector((state: RootState) =>
+        getTasksListIsFetchingSelector(state)
+    );
     const activeSprint = useAppSelector((state: RootState) => getActiveSprintSelector(state));
     const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
+    const columnError = useAppSelector((state: RootState) => getColumnsErrorSelector(state));
+    const isColumnFetching = useAppSelector((state: RootState) =>
+        getColumnsFetchingSelector(state)
+    );
+    const userId = useAppSelector((state: RootState) => getUserUIdlSelector(state));
     const dispatch = useAppDispatch();
 
     const columnsBoard = activeSprint === SPRINT_BACKLOG ? [DEMO_COLUMN_BACKLOG] : columns;
+
+    const reloadColumns = () => {
+        dispatch(getColumns(userId));
+    };
+
+    const reloadTasks = () => {
+        dispatch(getTasks(userId));
+    };
+
+    const reload = () => {
+        if (taskError) {
+            reloadTasks();
+        } else if (columnError) {
+            reloadColumns();
+        } else {
+            return null;
+        }
+    };
 
     const showTaskModal = () => {
         dispatch(showModal(TASK_MODAL));
@@ -46,7 +79,9 @@ const BoardContainer = (): ReactElement => {
 
     return (
         <Board
-            isFetching={isFetching}
+            reloadData={reload}
+            error={taskError || columnError}
+            isFetching={isTaskFetching || isColumnFetching}
             activeSprint={activeSprint}
             data={tasks}
             columnList={sortByOrder(columnsBoard)}

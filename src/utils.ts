@@ -1,4 +1,4 @@
-import { ListItemType } from '@src/redux/board/boardReducer';
+import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
 
 export const generateUUID = (): string => {
     let d = new Date().getTime();
@@ -12,7 +12,7 @@ export const generateUUID = (): string => {
 export const cutString = (str: string, length: number): string =>
     str.length > length ? str.substring(0, length) + '...' : str;
 
-export const sortByOrder = (data: ListItemType[]): ListItemType[] => {
+export const sortByOrder = (data: ColumnListItemType[]): ColumnListItemType[] => {
     return [...data].sort((a, b) => a.order - b.order);
 };
 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
     DEFAULT_USER_ERROR_MESSAGES_FULFILLED,
-    DEFAULT_USER_ERROR_MESSAGES_REJECTED,
+    DEFAULT_UNDEFINED_ERROR,
     FALSE,
     NOT_CHECK_YET,
     TRUE,
@@ -33,6 +33,7 @@ const userReducer = createSlice({
         },
         fetch(state) {
             state.isFetching = true;
+            state.error = initialState.error;
         },
         signInRequest(state, action) {
             if (action.payload) {
@@ -52,17 +53,17 @@ const userReducer = createSlice({
             state.uid = initialState.uid;
             state.isAuth = FALSE;
         },
-        errorMessage(state, action) {
+        setErrorMessage(state, action) {
             if (action.payload) {
                 state.error = action.payload;
             } else {
-                state.error = DEFAULT_USER_ERROR_MESSAGES_REJECTED;
+                state.error = DEFAULT_UNDEFINED_ERROR;
             }
             state.isFetching = initialState.isFetching;
         },
     },
 });
 
-export const { fetch, signInRequest, signOutRequest, errorMessage, setAuth } = userReducer.actions;
+export const { fetch, signInRequest, signOutRequest, setErrorMessage, setAuth } = userReducer.actions;
 
 export const UserReducer = userReducer.reducer;

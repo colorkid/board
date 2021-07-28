@@ -4,20 +4,25 @@ import { SPRINT_BACKLOG } from '@src/constants';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
-import { ListItemType } from '@src/redux/board/boardReducer';
+import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
 
-export const getIsAuthStateSelector = (state: RootState): string => state.user.isAuth;
-export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
-export const getSprintsListIsFetchingSelector = (state: RootState): boolean => state.sprints.isFetching;
-export const getTasksListIsFetchingSelector = (state: RootState): boolean => state.tasks.isFetching;
-export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
 export const getUserUIdlSelector = (state: RootState): string => state.user.uid;
-export const getTasksSelector = (state: RootState): TaskListType => state.tasks.list;
+export const getIsAuthStateSelector = (state: RootState): string => state.user.isAuth;
+export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
+export const getSprintsListIsFetchingSelector = (state: RootState): boolean =>
+    state.sprints.isFetching;
+export const getSprintsErrorSelector = (state: RootState): string => state.sprints.error;
+export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
+export const getTasksListIsFetchingSelector = (state: RootState): boolean => state.tasks.isFetching;
+export const getTasksErrorSelector = (state: RootState): string => state.tasks.error;
+export const getTasksListSelector = (state: RootState): TaskListType => state.tasks.list;
 export const getOpenedTaskIdSelector = (state: RootState): string => state.tasks.activeTask;
-export const getColumnsStateListSelector = (state: RootState): ListItemType[] =>
-    state.board.columns;
+export const getColumnsFetchingSelector = (state: RootState): boolean => state.columns.isFetching;
+export const getColumnsErrorSelector = (state: RootState): string => state.columns.error;
+export const getColumnsStateListSelector = (state: RootState): ColumnListItemType[] =>
+    state.columns.columns;
 
 export const lastSprintNumberSelector = createSelector(getSprintsListSelector, (sprints) => {
     let numbers: number[] = [];
@@ -33,7 +38,7 @@ export const lastSprintNumberSelector = createSelector(getSprintsListSelector, (
 });
 
 export const getOpenedTaskSelector = createSelector(
-    getTasksSelector,
+    getTasksListSelector,
     getOpenedTaskIdSelector,
     (tasks, id) => {
         return tasks[id];
@@ -41,7 +46,7 @@ export const getOpenedTaskSelector = createSelector(
 );
 
 export const getTasksActiveSprintSelector = createSelector(
-    getTasksSelector,
+    getTasksListSelector,
     getActiveSprintSelector,
     (tasksList, activeSprint) => {
         const tasks: TaskListType = {};

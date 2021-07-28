@@ -2,20 +2,23 @@ import React, { DragEvent, ReactElement, useState } from 'react';
 import cn from 'classnames';
 import Task from '@src/components/Board/components/Task';
 import { TaskListType } from '@src/redux/task/taskReducer';
-import { ListItemType } from '@src/redux/board/boardReducer';
+import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
 import { SPRINT_BACKLOG } from '@src/constants';
 import useStyles from './styles';
 import Progress from '@src/common/Progress';
+import ErrorMessage from '@src/common/ErrorMessage';
 
 interface IBoard {
     data: TaskListType;
-    columnList: ListItemType[];
+    columnList: ColumnListItemType[];
     moveTaskOnBoard: (column: string, touchedTaskId: string) => void;
     showTaskModal: () => void;
     openTask: (id: string) => void;
     activeSprint: string;
     removeTask: (id: string) => void;
     isFetching: boolean;
+    error?: string;
+    reloadData?: () => void;
 }
 
 const Board = (props: IBoard): ReactElement => {
@@ -28,6 +31,8 @@ const Board = (props: IBoard): ReactElement => {
         activeSprint,
         removeTask,
         isFetching,
+        error,
+        reloadData,
     } = props;
     const [touchedTaskId, setTouchedTaskId] = useState<string>('');
     const [startedColumn, setStartedColumn] = useState<string>('');
@@ -56,6 +61,12 @@ const Board = (props: IBoard): ReactElement => {
         <div className={classes.board}>
             {isFetching ? (
                 <Progress />
+            ) : error ? (
+                <ErrorMessage
+                    style={{ width: '100%', alignSelf: 'start' }}
+                    message={error}
+                    reload={reloadData}
+                />
             ) : (
                 columnList.map((item) => {
                     return (

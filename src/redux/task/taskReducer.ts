@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DEFAULT_UNDEFINED_ERROR } from '@src/constants';
 
 export type TaskType = {
     title: string;
@@ -17,12 +18,14 @@ export type TaskInitialStateType = {
     list: TaskListType;
     activeTask: string;
     isFetching: boolean;
+    error: string;
 };
 
 export const initialState: TaskInitialStateType = {
     list: {},
     activeTask: '',
     isFetching: false,
+    error: '',
 };
 
 const taskReducer = createSlice({
@@ -31,6 +34,7 @@ const taskReducer = createSlice({
     reducers: {
         fetch(state) {
             state.isFetching = true;
+            state.error = initialState.error;
         },
         addTasksList(state, action) {
             const { payload } = action;
@@ -81,10 +85,26 @@ const taskReducer = createSlice({
 
             state.list = cleanedStateList;
         },
+        setErrorMessage(state, action) {
+            if (action.payload) {
+                state.error = action.payload;
+            } else {
+                state.error = DEFAULT_UNDEFINED_ERROR;
+            }
+            state.isFetching = initialState.isFetching;
+        },
     },
 });
 
-export const { addTask, deleteTask, updateTask, setActiveTask, deleteRemovedSprint, fetch, addTasksList } =
-    taskReducer.actions;
+export const {
+    addTask,
+    deleteTask,
+    updateTask,
+    setActiveTask,
+    deleteRemovedSprint,
+    fetch,
+    addTasksList,
+    setErrorMessage,
+} = taskReducer.actions;
 
 export const TaskReducer = taskReducer.reducer;
