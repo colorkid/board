@@ -5,9 +5,30 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         board: {
             display: 'flex',
+            flexWrap: 'wrap',
             width: '100%',
             minHeight: '100vh',
             backgroundColor: theme.palette.grey[100],
+
+            '&:after': {
+                content: '""',
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'rgba(0,0,0,0)',
+                transition: '0.2s',
+                left: 0,
+                top: 0,
+                zIndex: '-1',
+            },
+        },
+        boardDark: {
+            [theme.breakpoints.down('sm')]: {
+                '&:after': {
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    zIndex: '0',
+                },
+            },
         },
         header: {
             marginBottom: COMMON_INDENT / 2,

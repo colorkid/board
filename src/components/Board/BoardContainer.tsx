@@ -7,7 +7,7 @@ import {
     getActiveSprintSelector,
     getColumnsErrorSelector,
     getColumnsFetchingSelector,
-    getColumnsStateListSelector,
+    getColumnsStateListSelector, getIsShowedMobileDrawerSelector,
     getTasksActiveSprintSelector,
     getTasksErrorSelector,
     getTasksListIsFetchingSelector,
@@ -20,6 +20,7 @@ import { getTasks } from '@src/redux/task/taskThunks';
 import { getColumns } from '@src/redux/columns/columnsThunks';
 
 const BoardContainer = (): ReactElement => {
+    const isShowedMobileDrawer = useAppSelector((state: RootState) => getIsShowedMobileDrawerSelector(state));
     const tasks = useAppSelector((state: RootState) => getTasksActiveSprintSelector(state));
     const taskError = useAppSelector((state: RootState) => getTasksErrorSelector(state));
     const isTaskFetching = useAppSelector((state: RootState) =>
@@ -79,6 +80,7 @@ const BoardContainer = (): ReactElement => {
 
     return (
         <Board
+            isShowedMobileDrawer={isShowedMobileDrawer}
             reloadData={reload}
             error={taskError || columnError}
             isFetching={isTaskFetching || isColumnFetching}

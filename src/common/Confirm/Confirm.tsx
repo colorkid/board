@@ -1,4 +1,4 @@
-import React, { ReactChild, ReactChildren, ReactElement, useState } from 'react';
+import React, { memo, ReactChild, ReactChildren, ReactElement, useState } from 'react';
 import { Button, Popover, Typography } from '@material-ui/core';
 import useStyles from './styles';
 
@@ -66,4 +66,4 @@ const Confirm = (props: IConfirm): ReactElement => {
     );
 };
 
-export default Confirm;
+export default memo(Confirm);

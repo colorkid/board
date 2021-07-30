@@ -1,4 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
+import { COMMON_INDENT } from '@src/constants';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -6,6 +7,7 @@ const useStyles = makeStyles((theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            margin: COMMON_INDENT,
         },
         paper: {
             backgroundColor: theme.palette.background.paper,

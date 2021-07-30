@@ -3,14 +3,15 @@ import { LocalizationProvider, StaticDateRangePicker } from '@material-ui/picker
 import { Button, Typography } from '@material-ui/core';
 import AdapterDateFns from '@material-ui/pickers/adapter/date-fns';
 import { DateRange } from '@material-ui/pickers/DateRangePicker/RangeTypes';
-import useStyles from './styles';
 import {
     CLEAR_BTN_TXT,
     CLEAR_PERIOD_CONFIRM_MESSAGE,
-    CREATE_BTN_TXT,
+    CREATE_BTN_TXT, MIN_DESKTOP_WIDTH,
     SPRINT_FORM_TITLE_CREATE,
 } from '@src/constants';
 import Confirm from '@src/common/Confirm';
+import useWindowSize from "@src/hooks/useWindowSize";
+import useStyles from './styles';
 
 interface ISprintForm {
     dates: DateRange;
@@ -22,7 +23,10 @@ interface ISprintForm {
 
 const SprintForm = (props: ISprintForm): ReactElement => {
     const { dates, setDates, isEnableButtons, setInitialDates, saveSprint } = props;
+    const { width } = useWindowSize();
     const classes = useStyles();
+
+    const devise = width >= MIN_DESKTOP_WIDTH ? "desktop" : 'mobile';
 
     return (
         <form>
@@ -34,7 +38,7 @@ const SprintForm = (props: ISprintForm): ReactElement => {
             <div className={classes.calendar}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <StaticDateRangePicker
-                        displayStaticWrapperAs="desktop"
+                        displayStaticWrapperAs={devise}
                         value={dates}
                         // @ts-ignore
                         onChange={(newDates) => setDates(newDates)}

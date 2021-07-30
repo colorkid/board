@@ -1,5 +1,5 @@
 import { AppThunk } from '@src/redux/store';
-import { ApiController } from '@src/api/ApiController';
+import { ApiAdapter } from '@src/api/ApiAdapter';
 import { addSprintsList, fetch, setErrorMessage, toggleActiveSprint } from './sprintReducer';
 
 export const getSprints =
@@ -7,7 +7,7 @@ export const getSprints =
         async (dispatch) => {
             dispatch(fetch());
             try {
-                const sprints = await ApiController.getSprints(userId);
+                const sprints = await ApiAdapter.getSprints(userId);
                 dispatch(addSprintsList(sprints));
             } catch (e) {
                 dispatch(setErrorMessage(e.message));
@@ -19,7 +19,7 @@ export const getActiveSprint =
         async (dispatch) => {
             dispatch(fetch());
             try {
-                const activeSprint = await ApiController.getActiveSprint(userId);
+                const activeSprint = await ApiAdapter.getActiveSprint(userId);
                 dispatch(toggleActiveSprint(activeSprint));
             } catch (e) {
                 dispatch(setErrorMessage(e.message));

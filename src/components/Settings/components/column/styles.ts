@@ -7,11 +7,13 @@ const useStyles = makeStyles((theme) =>
             display: 'flex',
         },
         headerName: {
-            width: 200,
+            maxWidth: 200,
+            width: '100%',
             marginRight: COMMON_INDENT,
         },
         headerOrder: {
-            width: 75,
+            maxWidth: 75,
+            width: '100%',
             marginRight: COMMON_INDENT,
         },
         column: {
@@ -24,11 +26,13 @@ const useStyles = makeStyles((theme) =>
             pointerEvents: 'none',
         },
         name: {
-            width: 200,
+            maxWidth: 200,
+            width: '100%',
             marginRight: COMMON_INDENT,
         },
         order: {
-            width: 75,
+            maxWidth: 75,
+            width: '100%',
             marginRight: COMMON_INDENT,
         },
         buttons: {

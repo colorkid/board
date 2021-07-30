@@ -6,15 +6,11 @@ import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
 import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
 
+export const getIsShowedMobileDrawerSelector = (state: RootState): boolean => state.ui.isShowedMobileDrawer;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
 export const getUserUIdlSelector = (state: RootState): string => state.user.uid;
 export const getIsAuthStateSelector = (state: RootState): string => state.user.isAuth;
-export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
-export const getSprintsListIsFetchingSelector = (state: RootState): boolean =>
-    state.sprints.isFetching;
-export const getSprintsErrorSelector = (state: RootState): string => state.sprints.error;
-export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
 export const getTasksListIsFetchingSelector = (state: RootState): boolean => state.tasks.isFetching;
 export const getTasksErrorSelector = (state: RootState): string => state.tasks.error;
 export const getTasksListSelector = (state: RootState): TaskListType => state.tasks.list;
@@ -23,6 +19,11 @@ export const getColumnsFetchingSelector = (state: RootState): boolean => state.c
 export const getColumnsErrorSelector = (state: RootState): string => state.columns.error;
 export const getColumnsStateListSelector = (state: RootState): ColumnListItemType[] =>
     state.columns.columns;
+export const getSprintsListIsFetchingSelector = (state: RootState): boolean =>
+    state.sprints.isFetching;
+export const getSprintsErrorSelector = (state: RootState): string => state.sprints.error;
+export const getActiveSprintSelector = (state: RootState): string => state.sprints.activeSprint;
+export const getSprintsListSelector = (state: RootState): SprintListType => state.sprints.list;
 
 export const lastSprintNumberSelector = createSelector(getSprintsListSelector, (sprints) => {
     let numbers: number[] = [];

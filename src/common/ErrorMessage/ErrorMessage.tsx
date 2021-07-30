@@ -16,7 +16,7 @@ const ErrorMessage = (props: ErrorMessageType): ReactElement => {
     const classes = useStyles();
 
     return (
-        <div className={classes.errorMessage} style={style} data-testid="errorMessage">
+        <div className={classes.errorMessage} style={style}>
             <div className={classes.errorMessageLeft}>
                 <ErrorOutlineIcon />
                 {isSaveMarkup ? (

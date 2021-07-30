@@ -20,7 +20,7 @@ import { addTasksList, TaskListType } from '@src/redux/task/taskReducer';
 import { getActiveSprint, getSprints } from '@src/redux/sprint/sprintThunks';
 import { getColumns } from '@src/redux/columns/columnsThunks';
 import { objectToString } from '@src/utils';
-import { ApiController } from '@src/api/ApiController';
+import { ApiAdapter } from '@src/api/ApiAdapter';
 import { authStateObservable } from '@src/redux/user/userThunks';
 import { LocalStorageApi } from '@src/api/LocalStorageApi';
 import { NOT_CHECK_YET, TRUE } from '@src/constants';
@@ -83,25 +83,25 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
 
     useEffect(() => {
         if (columns.length) {
-            ApiController.setColumns(userId, columns);
+            ApiAdapter.setColumns(userId, columns);
         }
     }, [columnsToCompare, userId]);
 
     useEffect(() => {
         if (activeSprint?.length) {
-            ApiController.setActiveSprint(userId, activeSprint);
+            ApiAdapter.setActiveSprint(userId, activeSprint);
         }
     }, [activeSprint, userId]);
 
     useEffect(() => {
         if (Object.keys(sprints).length) {
-            ApiController.setSprints(userId, sprints);
+            ApiAdapter.setSprints(userId, sprints);
         }
     }, [sprintsToCompare, userId]);
 
     useEffect(() => {
         if (Object.keys(tasks).length) {
-            ApiController.setTasks(userId, tasks);
+            ApiAdapter.setTasks(userId, tasks);
         }
     }, [tasksToCompare, userId]);
 

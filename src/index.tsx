@@ -7,7 +7,7 @@ import getFirebase from '../firebase';
 import StorageProvider from '@src/components/StorageProvider';
 import ErrorBoundary from './components/ErrorBoundary';
 
-export const firebaseInstance = getFirebase();
+getFirebase();
 
 ReactDOM.render(
     <Provider store={store}>

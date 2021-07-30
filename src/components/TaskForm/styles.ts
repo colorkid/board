@@ -1,7 +1,7 @@
 import { createStyles, makeStyles } from '@material-ui/core';
 import { COMMON_INDENT } from '@src/constants';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         header: {
             padding: COMMON_INDENT,
@@ -10,8 +10,16 @@ const useStyles = makeStyles(() =>
             display: 'flex',
             justifyContent: 'space-between',
             padding: COMMON_INDENT,
+
+            [theme.breakpoints.down('sm')]: {
+                flexWrap: 'wrap',
+            },
         },
-        cell: {},
+        cell: {
+            [theme.breakpoints.down('sm')]: {
+                width: '100%!important',
+            },
+        },
         cellLeft: {
             width: `calc(70% - ${COMMON_INDENT / 2}px)`,
         },

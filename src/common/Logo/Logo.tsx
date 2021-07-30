@@ -4,7 +4,7 @@ import useStyles from './styles';
 const Logo = (): ReactElement => {
     const classes = useStyles();
 
-    return <div className={classes.logo}>Board - App</div>;
+    return <div className={classes.logo} />;
 };
 
 export default Logo;

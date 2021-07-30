@@ -1,9 +1,19 @@
 import { createStyles, makeStyles } from '@material-ui/core';
+import logo from '@src/assest/logo.png';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         logo: {
             width: '100%',
+            backgroundImage: `url(${logo})`,
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '100%',
+            minHeight: '195px',
+
+            [theme.breakpoints.down('sm')]: {
+                display: 'none',
+            },
         }
     })
 );

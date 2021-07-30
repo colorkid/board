@@ -3,10 +3,11 @@ import cn from 'classnames';
 import Task from '@src/components/Board/components/Task';
 import { TaskListType } from '@src/redux/task/taskReducer';
 import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
-import { SPRINT_BACKLOG } from '@src/constants';
-import useStyles from './styles';
+import { MIN_DESKTOP_WIDTH, SPRINT_BACKLOG } from '@src/constants';
 import Progress from '@src/common/Progress';
 import ErrorMessage from '@src/common/ErrorMessage';
+import useStyles from './styles';
+import useWindowSize from '@src/hooks/useWindowSize';
 
 interface IBoard {
     data: TaskListType;
@@ -19,6 +20,7 @@ interface IBoard {
     isFetching: boolean;
     error?: string;
     reloadData?: () => void;
+    isShowedMobileDrawer: boolean;
 }
 
 const Board = (props: IBoard): ReactElement => {
@@ -33,13 +35,16 @@ const Board = (props: IBoard): ReactElement => {
         isFetching,
         error,
         reloadData,
+        isShowedMobileDrawer,
     } = props;
     const [touchedTaskId, setTouchedTaskId] = useState<string>('');
     const [startedColumn, setStartedColumn] = useState<string>('');
     const [isHoverTab, setIsHoverTab] = useState<string>('');
+    const { width } = useWindowSize();
     const classes = useStyles();
 
-    const maxWidthColumn = 100 / columnList.length;
+    const ratioSize = width >= MIN_DESKTOP_WIDTH ? 1 : 2;
+    const maxWidthColumn = (100 / columnList.length) * ratioSize;
 
     const onDragStart = (id: string, startColumn: string) => {
         setTouchedTaskId(id);
@@ -58,7 +63,7 @@ const Board = (props: IBoard): ReactElement => {
     };
 
     return (
-        <div className={classes.board}>
+        <div className={cn({ [classes.board]: true, [classes.boardDark]: isShowedMobileDrawer })}>
             {isFetching ? (
                 <Progress />
             ) : error ? (

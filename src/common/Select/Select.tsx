@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import { FormControl, InputLabel, MenuItem, Select as SelectEl } from '@material-ui/core';
-import useStyles from './styles';
 import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
+import useStyles from './styles';
 
 interface ISelect {
     id: string;

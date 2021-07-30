@@ -16,7 +16,7 @@ const UserInfo = (props: UserInfoType): ReactElement => {
         <div className={classes.userInfo}>
             <div className={classes.userInfoTitle}>
                 <div className={classes.userInfoName}>User:</div>
-                <div className={classes.userInfoEmail} data-testid="userEmail">
+                <div className={classes.userInfoEmail}>
                     {email}
                 </div>
             </div>

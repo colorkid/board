@@ -1,11 +1,17 @@
 import React, { ReactElement } from 'react';
 import DrawerBar from './DrawerBar';
-import { useAppDispatch } from '@src/redux/store';
+import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import { SETTINGS_MODAL, SPRINT_MODAL, TASK_MODAL } from '@src/constants';
-import { showModal } from '@src/redux/ui/uiReducer';
+import { showModal, toggleShowedMobileDrawer } from '@src/redux/ui/uiReducer';
+import { getIsShowedMobileDrawerSelector } from '@src/redux/selectors';
 
 const DrawerBarContainer = (): ReactElement => {
+    const isShowedMobileDrawer = useAppSelector((state: RootState) => getIsShowedMobileDrawerSelector(state));
     const dispatch = useAppDispatch();
+
+    const setIsShowedMobileDrawer = () => {
+        dispatch(toggleShowedMobileDrawer(!isShowedMobileDrawer));
+    };
 
     const showSprintModal = () => {
         dispatch(showModal(SPRINT_MODAL));
@@ -24,6 +30,8 @@ const DrawerBarContainer = (): ReactElement => {
             showSprintModal={showSprintModal}
             showTaskModal={showTaskModal}
             showSettingsModal={showSettingsModal}
+            isShowedMobileDrawer={isShowedMobileDrawer}
+            setIsShowedMobileDrawer={setIsShowedMobileDrawer}
         />
     );
 };

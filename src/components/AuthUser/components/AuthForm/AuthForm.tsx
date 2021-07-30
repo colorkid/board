@@ -26,12 +26,11 @@ const AuthForm = (props: IAuthForm): ReactElement => {
     });
 
     return (
-        <div className={classes.formWrapper} data-testid="authForm">
+        <div className={classes.formWrapper}>
             <div className={classes.switchTypeAuth}>
                 {authTypes.map((type) => {
                     return (
                         <div
-                            data-testid={type}
                             key={type}
                             onClick={() => setTypeAuth(type)}
                             className={cn([

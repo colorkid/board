@@ -1,12 +1,14 @@
-import React, { ReactElement } from 'react';
+import React, { memo, ReactElement } from 'react';
 import { Paper, Typography } from '@material-ui/core';
 import cn from 'classnames';
 import { TaskType } from '@src/redux/task/taskReducer';
 import { cutString } from '@src/utils';
 import {
+    ESTIMATION,
     MAX_DESCRIPTION_TASK_LENGTH,
     MAX_ESTIMATION_TASK_LENGTH,
     MAX_TITLE_TASK_LENGTH,
+    PRIORITY,
     REMOVE_TASK_CONFIRM_MESSAGE,
 } from '@src/constants';
 import Confirm from '@src/common/Confirm';
@@ -63,11 +65,13 @@ const Task = (props: ITask): ReactElement => {
                         variant="caption"
                         className={classes.priority}
                     >
-                        Priority: {priority}
+                        {PRIORITY}: {priority}
                     </Typography>
-                    <Typography color="textSecondary" variant="caption">
-                        Estimation: {cutString(estimation, MAX_ESTIMATION_TASK_LENGTH)}
-                    </Typography>
+                    {estimation && (
+                        <Typography color="textSecondary" variant="caption">
+                            {ESTIMATION}: {cutString(estimation, MAX_ESTIMATION_TASK_LENGTH)}
+                        </Typography>
+                    )}
                 </div>
                 <Confirm okMethod={deleteHandler} message={REMOVE_TASK_CONFIRM_MESSAGE}>
                     <DeleteIcon color="secondary" />
@@ -77,4 +81,4 @@ const Task = (props: ITask): ReactElement => {
     );
 };
 
-export default Task;
+export default memo(Task);

@@ -29,7 +29,7 @@ const Modal = (props: IModalContent): ReactElement => {
     }, [modal]);
 
     return (
-        <div data-testid="modal">
+        <div>
             <ModalUI
                 className={classes.modal}
                 open={!!modal}

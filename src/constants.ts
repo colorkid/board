@@ -53,6 +53,11 @@ export const DEFAULT_USER_ERROR_MESSAGES_FULFILLED = 'User data is not defined';
 export const DEFAULT_UNDEFINED_ERROR = 'Error is undefined';
 export const DEFAULT_ERROR_MESSAGE = 'Something went wrong.';
 
+export const ESTIMATION = 'Estimation';
+export const PRIORITY = 'Priority';
+
+export const MIN_DESKTOP_WIDTH = 960;
+
 export const DRAWER_WIDTH = 290;
 export const COMMON_INDENT = 15;
-export const SPRINTS_LIST_HEIGHT = 221;
+export const SPRINTS_LIST_HEIGHT = 225;

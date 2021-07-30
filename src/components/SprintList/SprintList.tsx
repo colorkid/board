@@ -51,7 +51,7 @@ const SprintList = (props: ISprintList): ReactElement => {
         const isActiveSprint = id === activeSprint;
 
         return (
-            <div key={id} className={classes.sprintListItem} data-testid="sprint">
+            <div key={id} className={classes.sprintListItem}>
                 <Confirm
                     disabled={isBacklog}
                     okMethod={() => deleteHandler(id)}
@@ -64,7 +64,8 @@ const SprintList = (props: ISprintList): ReactElement => {
                 </Confirm>
                 <div
                     className={cn({
-                        [classes.sprintListItemActive]: isActiveSprint,
+                        [classes.sprintListItemLabel]: true,
+                        [classes.sprintListItemLabelActive]: isActiveSprint,
                     })}
                     onClick={() => setSprintHandler(id)}
                 >

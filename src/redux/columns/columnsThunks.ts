@@ -1,5 +1,5 @@
 import { AppThunk } from '@src/redux/store';
-import { ApiController } from '@src/api/ApiController';
+import { ApiAdapter } from '@src/api/ApiAdapter';
 import { fetch, saveColumns, setErrorMessage } from '@src/redux/columns/columnsReducer';
 
 export const getColumns =
@@ -7,7 +7,7 @@ export const getColumns =
     async (dispatch) => {
         dispatch(fetch());
         try {
-            const columns = await ApiController.getColumns(userId);
+            const columns = await ApiAdapter.getColumns(userId);
             dispatch(saveColumns(columns));
         } catch (e) {
             dispatch(setErrorMessage(e.message));

@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) =>
             justifyContent: 'center',
             alignItems: 'center',
             padding: COMMON_INDENT,
+            marginTop: COMMON_INDENT,
             backgroundColor: theme.palette.grey[300],
             borderRadius: theme.shape.borderRadius,
         },

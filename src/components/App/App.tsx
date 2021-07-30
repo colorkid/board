@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { AppBar, CssBaseline, Toolbar } from '@material-ui/core';
+import { CssBaseline } from '@material-ui/core';
 import DrawerBar from '@src/components/DrawerBar';
 import Modal from '@src/components/Modal';
 import Board from '@src/components/Board';
@@ -11,9 +11,6 @@ const App = (): ReactElement => {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>Toolbar - Board</Toolbar>
-            </AppBar>
             <DrawerBar />
             <div className={classes.body}>
                 <Board />
