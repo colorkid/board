@@ -77,7 +77,7 @@ const SprintList = (props: ISprintList): ReactElement => {
                 </div>
             </div>
         );
-    });
+    }).reverse();
 
     return (
         <div

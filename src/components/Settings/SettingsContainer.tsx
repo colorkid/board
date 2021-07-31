@@ -30,7 +30,7 @@ const SettingsContainer = (): ReactElement => {
 
     const addColumn = () => {
         const newColumn = {
-            title: `Column-${columns.length + 1}`,
+            title: `Column-${columns?.length + 1}`,
             id: generateUUID(),
             order: 0,
         };

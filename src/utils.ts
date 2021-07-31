@@ -13,7 +13,7 @@ export const cutString = (str: string, length: number): string =>
     str.length > length ? str.substring(0, length) + '...' : str;
 
 export const sortByOrder = (data: ColumnListItemType[]): ColumnListItemType[] => {
-    return [...data].sort((a, b) => a.order - b.order);
+    return Array.isArray(data) ? [...data].sort((a, b) => a.order - b.order) : [];
 };
 
 export const objectToString = <T>(data: T): string => {

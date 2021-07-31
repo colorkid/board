@@ -53,7 +53,7 @@ const SprintsListTaskForm = (props: ISprintsList): ReactElement => {
                 />
             </div>
         );
-    });
+    }).reverse();
 
     return (
         <div

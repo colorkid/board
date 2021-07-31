@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-    DEFAULT_USER_ERROR_MESSAGES_FULFILLED,
     DEFAULT_UNDEFINED_ERROR,
-    FALSE,
+    DEFAULT_USER_ERROR_MESSAGES_FULFILLED,
     NOT_CHECK_YET,
+    SIGN_OUT,
     TRUE,
 } from '@src/constants';
 
@@ -51,7 +51,7 @@ const userReducer = createSlice({
             state.isFetching = initialState.isFetching;
             state.error = initialState.error;
             state.uid = initialState.uid;
-            state.isAuth = FALSE;
+            state.isAuth = SIGN_OUT;
         },
         setErrorMessage(state, action) {
             if (action.payload) {
@@ -64,6 +64,7 @@ const userReducer = createSlice({
     },
 });
 
-export const { fetch, signInRequest, signOutRequest, setErrorMessage, setAuth } = userReducer.actions;
+export const { fetch, signInRequest, signOutRequest, setErrorMessage, setAuth } =
+    userReducer.actions;
 
 export const UserReducer = userReducer.reducer;

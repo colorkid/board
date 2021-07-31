@@ -8,7 +8,7 @@ export const getTasks =
         dispatch(fetch());
         try {
             const tasks = await ApiAdapter.getTasks(userId);
-            dispatch(addTasksList(tasks));
+            dispatch(addTasksList(JSON.parse(tasks)));
         } catch (e) {
             dispatch(setErrorMessage(e.message));
         }

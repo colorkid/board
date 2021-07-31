@@ -4,7 +4,7 @@ import { StateForSaveType } from '@src/components/StorageProvider/StorageProvide
 
 export const getSprintsRequest = async (
     userId: string
-): Promise<firebase.database.DataSnapshot> => {
+): Promise<string> => {
     return (await firebase.database().ref(`${userId}/${SPRINT_LIST_KEY}`).once('value')).val();
 };
 

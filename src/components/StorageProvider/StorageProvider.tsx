@@ -11,22 +11,18 @@ import {
     getUserUIdlSelector,
 } from '@src/redux/selectors';
 import { ColumnListItemType, saveColumns } from '@src/redux/columns/columnsReducer';
-import {
-    addSprintsList,
-    SprintListType,
-    toggleActiveSprint,
-} from '@src/redux/sprint/sprintReducer';
-import { addTasksList, TaskListType } from '@src/redux/task/taskReducer';
+import { addSprintsList, toggleActiveSprint } from '@src/redux/sprint/sprintReducer';
+import { addTasksList } from '@src/redux/task/taskReducer';
 import { getActiveSprint, getSprints } from '@src/redux/sprint/sprintThunks';
 import { getColumns } from '@src/redux/columns/columnsThunks';
 import { objectToString } from '@src/utils';
 import { ApiAdapter } from '@src/api/ApiAdapter';
 import { authStateObservable } from '@src/redux/user/userThunks';
 import { LocalStorageApi } from '@src/api/LocalStorageApi';
-import { NOT_CHECK_YET, TRUE } from '@src/constants';
+import { FALSE, NOT_CHECK_YET, SIGN_OUT, TRUE } from '@src/constants';
 import Progress from '@src/common/Progress';
 
-export type StateForSaveType = ColumnListItemType[] | SprintListType | TaskListType | string;
+export type StateForSaveType = ColumnListItemType[] | string;
 
 interface IStorageProvider {
     children: ReactChild | ReactChildren;
@@ -71,39 +67,41 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
             return;
         } else if (isAuth === TRUE) {
             dispatchData();
-        } else {
+        } else if (isAuth === FALSE) {
             if (LocalStorageApi.isFirstSession()) {
                 LocalStorageApi.recordFirstSession();
                 dispatchDemoData();
             } else {
                 dispatchData();
             }
+        } else if (isAuth === SIGN_OUT) {
+            location.reload();
         }
     }, [isAuth]);
 
     useEffect(() => {
-        if (columns.length) {
+        if (columns?.length) {
             ApiAdapter.setColumns(userId, columns);
         }
-    }, [columnsToCompare, userId]);
+    }, [columnsToCompare]);
 
     useEffect(() => {
         if (activeSprint?.length) {
             ApiAdapter.setActiveSprint(userId, activeSprint);
         }
-    }, [activeSprint, userId]);
+    }, [activeSprint]);
 
     useEffect(() => {
         if (Object.keys(sprints).length) {
-            ApiAdapter.setSprints(userId, sprints);
+            ApiAdapter.setSprints(userId, JSON.stringify(sprints));
         }
-    }, [sprintsToCompare, userId]);
+    }, [sprintsToCompare]);
 
     useEffect(() => {
         if (Object.keys(tasks).length) {
-            ApiAdapter.setTasks(userId, tasks);
+            ApiAdapter.setTasks(userId, JSON.stringify(tasks));
         }
-    }, [tasksToCompare, userId]);
+    }, [tasksToCompare]);
 
     return <>{isAuth !== NOT_CHECK_YET ? children : <Progress />}</>;
 };

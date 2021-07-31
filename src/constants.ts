@@ -42,6 +42,7 @@ export const TITLE_KEY = 'title';
 export const NOT_CHECK_YET = 'NOT_CHECK_YET';
 export const FALSE = 'FALSE';
 export const TRUE = 'TRUE';
+export const SIGN_OUT = 'SIGN_OUT';
 
 export const REMOVE_SPRINT_CONFIRM_MESSAGE = 'Are you sure you want to delete the sprint?';
 export const CLEAR_PERIOD_CONFIRM_MESSAGE = 'Are you sure you want to clear the selected period?';

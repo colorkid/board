@@ -12,13 +12,13 @@ import { FirebaseApi } from '@src/api/FirebaseApi';
 type DataSetType = StateForSaveType;
 
 export const ApiAdapter = {
-    getTasks: async (userId: string): Promise<string | Promise<firebase.database.DataSnapshot>> =>
+    getTasks: async (userId: string): Promise<string> =>
         !userId ? LocalStorageApi.getLocal(TASK_LIST_KEY) : FirebaseApi.getTasksRequest(userId),
     setTasks: (userId: string, data: DataSetType): void | Promise<null> =>
         !userId
             ? LocalStorageApi.setLocal(TASK_LIST_KEY, data)
             : FirebaseApi.postTasksRequest(userId, data),
-    getSprints: async (userId: string): Promise<string | Promise<firebase.database.DataSnapshot>> =>
+    getSprints: async (userId: string): Promise<string> =>
         !userId ? LocalStorageApi.getLocal(SPRINT_LIST_KEY) : FirebaseApi.getSprintsRequest(userId),
     setSprints: (userId: string, data: DataSetType): void | Promise<null> =>
         !userId

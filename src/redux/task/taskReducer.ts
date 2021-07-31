@@ -38,8 +38,8 @@ const taskReducer = createSlice({
         },
         addTasksList(state, action) {
             const { payload } = action;
-            state.list = payload;
-            state.isFetching = false;
+            state.list = payload || initialState.list;
+            state.isFetching = initialState.isFetching;
         },
         addTask(state, action) {
             const { payload } = action;

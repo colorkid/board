@@ -12,11 +12,15 @@ export const DEMO_STATE_LIST = [
 
 export const DEMO_ACTIVE_SPRINT = 'id01';
 
-export const DEMO_SPRINTS = {
+export const DEFAULT_SPRINT_BACKLOG = {
     [SPRINT_BACKLOG]: {
         number: SPRINT_BACKLOG,
         dates: [''],
     },
+};
+
+export const DEMO_SPRINTS = {
+    ...DEFAULT_SPRINT_BACKLOG,
     [DEMO_ACTIVE_SPRINT]: {
         number: '1',
         dates: [`${new Date()}`, `${addDays(new Date(), 14)}`],

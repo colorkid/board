@@ -29,7 +29,7 @@ const columnsReducer = createSlice({
         },
         saveColumns(state, actions) {
             const { payload } = actions;
-            state.columns = payload;
+            state.columns = payload || [];
             state.isFetching = false;
         },
         setErrorMessage(state, action) {

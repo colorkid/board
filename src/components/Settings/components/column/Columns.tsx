@@ -30,7 +30,7 @@ const Columns = (props: IColumns): ReactElement => {
                         Order
                     </Typography>
                 </div>
-                {columns.map((column) => {
+                {columns?.map((column) => {
                     return (
                         <div key={column.id} className={classes.column}>
                             <TextField
