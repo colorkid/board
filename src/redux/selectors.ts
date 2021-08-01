@@ -4,7 +4,7 @@ import { SPRINT_BACKLOG } from '@src/constants';
 import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
-import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
+import { ColumnListType } from '@src/redux/columns/columnsReducer';
 
 export const getIsShowedMobileDrawerSelector = (state: RootState): boolean => state.ui.isShowedMobileDrawer;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
@@ -17,7 +17,7 @@ export const getTasksListSelector = (state: RootState): TaskListType => state.ta
 export const getOpenedTaskIdSelector = (state: RootState): string => state.tasks.activeTask;
 export const getColumnsFetchingSelector = (state: RootState): boolean => state.columns.isFetching;
 export const getColumnsErrorSelector = (state: RootState): string => state.columns.error;
-export const getColumnsStateListSelector = (state: RootState): ColumnListItemType[] =>
+export const getColumnsStateListSelector = (state: RootState): ColumnListType =>
     state.columns.columns;
 export const getSprintsListIsFetchingSelector = (state: RootState): boolean =>
     state.sprints.isFetching;

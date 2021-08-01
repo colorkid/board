@@ -10,7 +10,7 @@ import {
     getTasksListSelector,
     getUserUIdlSelector,
 } from '@src/redux/selectors';
-import { ColumnListItemType, saveColumns } from '@src/redux/columns/columnsReducer';
+import { ColumnListType, saveColumns } from '@src/redux/columns/columnsReducer';
 import { addSprintsList, toggleActiveSprint } from '@src/redux/sprint/sprintReducer';
 import { addTasksList } from '@src/redux/task/taskReducer';
 import { getActiveSprint, getSprints } from '@src/redux/sprint/sprintThunks';
@@ -22,7 +22,7 @@ import { LocalStorageApi } from '@src/api/LocalStorageApi';
 import { FALSE, NOT_CHECK_YET, SIGN_OUT, TRUE } from '@src/constants';
 import Progress from '@src/common/Progress';
 
-export type StateForSaveType = ColumnListItemType[] | string;
+export type StateForSaveType = ColumnListType | string;
 
 interface IStorageProvider {
     children: ReactChild | ReactChildren;

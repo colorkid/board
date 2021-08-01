@@ -35,9 +35,12 @@ export const PRIORITY_LIST = [
 ];
 
 export const DEFAULT_VALUE_PRIORITY = PRIORITY_LIST[0];
+export const DEFAULT_ORDER_TASK = '0';
 
 export const ORDER_KEY = 'order';
 export const TITLE_KEY = 'title';
+
+export const DATA_ORDER = 'data-order';
 
 export const NOT_CHECK_YET = 'NOT_CHECK_YET';
 export const FALSE = 'FALSE';

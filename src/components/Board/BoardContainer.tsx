@@ -1,26 +1,29 @@
 import React, { ReactElement } from 'react';
 import Board from '@src/components/Board/Board';
-import { SPRINT_BACKLOG, TASK_MODAL } from '@src/constants';
+import {DATA_ORDER, SPRINT_BACKLOG, TASK_MODAL} from '@src/constants';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import { deleteTask, setActiveTask, updateTask } from '@src/redux/task/taskReducer';
 import {
     getActiveSprintSelector,
     getColumnsErrorSelector,
     getColumnsFetchingSelector,
-    getColumnsStateListSelector, getIsShowedMobileDrawerSelector,
+    getColumnsStateListSelector,
+    getIsShowedMobileDrawerSelector,
     getTasksActiveSprintSelector,
     getTasksErrorSelector,
     getTasksListIsFetchingSelector,
     getUserUIdlSelector,
 } from '@src/redux/selectors';
 import { showModal } from '@src/redux/ui/uiReducer';
-import { sortByOrder } from '@src/utils';
+import { sortByOrderColumns, sortByOrderTasks } from '@src/utils';
 import { DEMO_COLUMN_BACKLOG } from '@src/redux/demoData';
 import { getTasks } from '@src/redux/task/taskThunks';
 import { getColumns } from '@src/redux/columns/columnsThunks';
 
 const BoardContainer = (): ReactElement => {
-    const isShowedMobileDrawer = useAppSelector((state: RootState) => getIsShowedMobileDrawerSelector(state));
+    const isShowedMobileDrawer = useAppSelector((state: RootState) =>
+        getIsShowedMobileDrawerSelector(state)
+    );
     const tasks = useAppSelector((state: RootState) => getTasksActiveSprintSelector(state));
     const taskError = useAppSelector((state: RootState) => getTasksErrorSelector(state));
     const isTaskFetching = useAppSelector((state: RootState) =>
@@ -67,12 +70,23 @@ const BoardContainer = (): ReactElement => {
         dispatch(deleteTask(id));
     };
 
-    const moveTaskOnBoard = (column: string, touchedTaskId: string) => {
+    const getOrder = (target: EventTarget) => {
+        // @ts-ignore
+        return target?.closest(`[${DATA_ORDER}]`)?.getAttribute(`${DATA_ORDER}`);
+    };
+
+    const moveTaskOnColumns = (column: string, touchedTaskId: string, target: EventTarget) => {
+        let orderTarget = getOrder(target);
+        orderTarget = orderTarget && (Number(orderTarget) - 1).toString();
+
+        const allOrders = Object.keys(tasks).map((task) => Number(tasks[task].order));
+
         dispatch(
             updateTask({
                 id: touchedTaskId,
                 body: {
                     state: column,
+                    order: orderTarget || (Math.max(...allOrders) + 1).toString(),
                 },
             })
         );
@@ -85,9 +99,9 @@ const BoardContainer = (): ReactElement => {
             error={taskError || columnError}
             isFetching={isTaskFetching || isColumnFetching}
             activeSprint={activeSprint}
-            data={tasks}
-            columnList={sortByOrder(columnsBoard)}
-            moveTaskOnBoard={moveTaskOnBoard}
+            data={sortByOrderTasks(tasks)}
+            columnList={sortByOrderColumns(columnsBoard)}
+            moveTaskOnColumns={moveTaskOnColumns}
             showTaskModal={showTaskModal}
             openTask={openTask}
             removeTask={removeTask}

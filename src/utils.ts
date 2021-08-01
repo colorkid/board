@@ -1,4 +1,5 @@
-import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
+import { ColumnListType } from '@src/redux/columns/columnsReducer';
+import { TaskListType } from '@src/redux/task/taskReducer';
 
 export const generateUUID = (): string => {
     let d = new Date().getTime();
@@ -12,8 +13,14 @@ export const generateUUID = (): string => {
 export const cutString = (str: string, length: number): string =>
     str.length > length ? str.substring(0, length) + '...' : str;
 
-export const sortByOrder = (data: ColumnListItemType[]): ColumnListItemType[] => {
+export const sortByOrderColumns = (data: ColumnListType): ColumnListType => {
     return Array.isArray(data) ? [...data].sort((a, b) => a.order - b.order) : [];
+};
+
+export const sortByOrderTasks = (data: TaskListType): TaskListType => {
+    return Object.fromEntries(
+        Object.entries(data).sort((a, b) => Number(a[1].order) - Number(b[1].order))
+    );
 };
 
 export const objectToString = <T>(data: T): string => {

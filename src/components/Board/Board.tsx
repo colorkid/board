@@ -2,17 +2,17 @@ import React, { DragEvent, ReactElement, useState } from 'react';
 import cn from 'classnames';
 import Task from '@src/components/Board/components/Task';
 import { TaskListType } from '@src/redux/task/taskReducer';
-import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
+import { ColumnListType } from '@src/redux/columns/columnsReducer';
 import { MIN_DESKTOP_WIDTH, SPRINT_BACKLOG } from '@src/constants';
 import Progress from '@src/common/Progress';
 import ErrorMessage from '@src/common/ErrorMessage';
-import useStyles from './styles';
 import useWindowSize from '@src/hooks/useWindowSize';
+import useStyles from './styles';
 
 interface IBoard {
     data: TaskListType;
-    columnList: ColumnListItemType[];
-    moveTaskOnBoard: (column: string, touchedTaskId: string) => void;
+    columnList: ColumnListType;
+    moveTaskOnColumns: (column: string, touchedTaskId: string, target: EventTarget) => void;
     showTaskModal: () => void;
     openTask: (id: string) => void;
     activeSprint: string;
@@ -27,7 +27,7 @@ const Board = (props: IBoard): ReactElement => {
     const {
         data,
         columnList,
-        moveTaskOnBoard,
+        moveTaskOnColumns,
         showTaskModal,
         openTask,
         activeSprint,
@@ -56,8 +56,12 @@ const Board = (props: IBoard): ReactElement => {
         e.preventDefault();
     };
 
-    const onDrop = (column: string) => {
-        moveTaskOnBoard(column, touchedTaskId);
+
+    const onDrop = (column: string, e: DragEvent<HTMLDivElement>) => {
+        if (column !== SPRINT_BACKLOG) {
+            moveTaskOnColumns(column, touchedTaskId, e.target);
+        }
+
         setIsHoverTab('');
         setStartedColumn('');
     };
@@ -84,7 +88,7 @@ const Board = (props: IBoard): ReactElement => {
                                     isHoverTab === item.id && startedColumn !== item.id,
                             })}
                             onDragOver={(e) => onDragOver(e, item.id)}
-                            onDrop={() => onDrop(item.id)}
+                            onDrop={(e) => onDrop(item.id, e)}
                         >
                             <header className={classes.header}>{item.title}</header>
                             {Object.keys(data).map((key) => {

@@ -8,6 +8,7 @@ export type TaskType = {
     estimation: string;
     priority: string;
     sprints: string[];
+    order: string;
 };
 
 export type TaskListType = {
@@ -50,6 +51,7 @@ const taskReducer = createSlice({
                 estimation: payload.estimation,
                 priority: payload.priority,
                 sprints: payload.sprints,
+                order: payload.order,
             };
         },
         deleteTask(state, action) {

@@ -36,6 +36,7 @@ export const DEMO_TASKS = {
         estimation: '30 m',
         priority: 'high',
         sprints: [SPRINT_BACKLOG, DEMO_ACTIVE_SPRINT],
+        order: '4',
     },
     id02: {
         title: 'Work out in the gym',
@@ -45,6 +46,7 @@ export const DEMO_TASKS = {
         estimation: '2 h',
         priority: 'middle',
         sprints: [SPRINT_BACKLOG, DEMO_ACTIVE_SPRINT],
+        order: '3',
     },
     id03: {
         title: 'Design a shopping cart',
@@ -54,6 +56,7 @@ export const DEMO_TASKS = {
         estimation: '8 days',
         priority: 'low',
         sprints: [SPRINT_BACKLOG],
+        order: '2',
     },
     id04: {
         title: 'Check the operation of the authorization widget',
@@ -63,5 +66,6 @@ export const DEMO_TASKS = {
         estimation: '1 day',
         priority: 'middle',
         sprints: [SPRINT_BACKLOG],
+        order: '1',
     },
 };

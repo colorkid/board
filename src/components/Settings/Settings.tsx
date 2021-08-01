@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
-import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
+import { ColumnListType } from '@src/redux/columns/columnsReducer';
 import Columns from './components/column';
 import useStyles from './styles';
 
 interface ISettings {
-    columns: ColumnListItemType[];
+    columns: ColumnListType;
     deleteColumn: (name: string) => void;
     updateColumn: (name: string, value: string | number, key: string) => void;
     addColumn: () => void;

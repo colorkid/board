@@ -7,8 +7,10 @@ export type ColumnListItemType = {
     order: number;
 };
 
+export type ColumnListType = ColumnListItemType[];
+
 export type ColumnsInitialStateType = {
-    columns: ColumnListItemType[];
+    columns: ColumnListType;
     isFetching: boolean;
     error: string;
 };

@@ -2,20 +2,27 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import TaskForm from './TaskForm';
 import { useFormik } from 'formik';
-import { DEFAULT_VALUE_PRIORITY, SPRINT_BACKLOG, TASK_MODAL } from '@src/constants';
+import {
+    DEFAULT_ORDER_TASK,
+    DEFAULT_VALUE_PRIORITY,
+    SPRINT_BACKLOG,
+    TASK_MODAL,
+} from '@src/constants';
 import { validationSchema } from '@src/components/TaskForm/validationSchema';
 import { addTask, setActiveTask, TaskType, updateTask } from '@src/redux/task/taskReducer';
-import { generateUUID, sortByOrder } from '@src/utils';
+import { generateUUID, sortByOrderColumns } from '@src/utils';
 import {
     getActiveSprintSelector,
     getColumnsStateListSelector,
     getOpenedTaskIdSelector,
     getOpenedTaskSelector,
     getSprintsListSelector,
+    getTasksListSelector,
 } from '@src/redux/selectors';
 import useHandleCloseModal from '@src/hooks/useHandleCloseModal';
 
 const TaskFormContainer = (): ReactElement => {
+    const allTasks = useAppSelector((state: RootState) => getTasksListSelector(state));
     const sprints = useAppSelector((state: RootState) => getSprintsListSelector(state));
     const openedTask = useAppSelector((state: RootState) => getOpenedTaskSelector(state));
     const openedTaskId = useAppSelector((state: RootState) => getOpenedTaskIdSelector(state));
@@ -25,9 +32,11 @@ const TaskFormContainer = (): ReactElement => {
     const dispatch = useAppDispatch();
     const handleClose = useHandleCloseModal(TASK_MODAL);
 
+    const allOrders = Object.keys(allTasks).map((task) => Number(allTasks[task].order));
+
     const isOpenedTask = !!openedTask;
 
-    const DEFAULT_VALUE_STATE = sortByOrder(columns)[0];
+    const DEFAULT_VALUE_STATE = sortByOrderColumns(columns)[0];
 
     const clearActiveTask = () => {
         dispatch(setActiveTask(''));
@@ -52,9 +61,16 @@ const TaskFormContainer = (): ReactElement => {
             estimation: openedTask?.estimation || '',
             priority: openedTask?.priority || DEFAULT_VALUE_PRIORITY.id,
             sprints: openedTask?.sprints || [activeSprint],
+            order: openedTask
+                ? openedTask?.order
+                : allOrders.length
+                ? (Math.max(...allOrders) + 1).toString()
+                : DEFAULT_ORDER_TASK,
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
+            console.log(isOpenedTask);
+            console.log(values);
             isOpenedTask ? updateOpenedTask(values) : saveTask(values);
             if (handleClose) {
                 handleClose();
@@ -86,7 +102,7 @@ const TaskFormContainer = (): ReactElement => {
 
     return (
         <TaskForm
-            columns={sortByOrder(columns)}
+            columns={sortByOrderColumns(columns)}
             checkedSprints={checkedSprints}
             setCheckedSprints={setCheckedSprints}
             formik={formik}

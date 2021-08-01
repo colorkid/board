@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
 import cn from 'classnames';
 import { FormControl, InputLabel, MenuItem, Select as SelectEl } from '@material-ui/core';
-import { ColumnListItemType } from '@src/redux/columns/columnsReducer';
+import { ColumnListType } from '@src/redux/columns/columnsReducer';
 import useStyles from './styles';
 
 interface ISelect {
     id: string;
     label?: string;
-    list: ColumnListItemType[];
+    list: ColumnListType;
     setFieldValue: (field: string, value: string, shouldValidate?: boolean) => void;
     value: string;
     className?: string;

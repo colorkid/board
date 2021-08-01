@@ -27,7 +27,7 @@ interface ITask {
 
 const Task = (props: ITask): ReactElement => {
     const {
-        data: { title, description, estimation, priority },
+        data: { title, description, estimation, priority, order },
         value,
         id,
         onDragStart,
@@ -53,6 +53,7 @@ const Task = (props: ITask): ReactElement => {
             draggable
             // @ts-ignore
             className={cn(classes.card, classes[priority])}
+            data-order={order}
         >
             <Typography variant="subtitle1">{cutString(title, MAX_TITLE_TASK_LENGTH)}</Typography>
             <Typography color="textSecondary" variant="body2">
