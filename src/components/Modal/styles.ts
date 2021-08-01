@@ -5,9 +5,14 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         modal: {
             display: 'flex',
-            alignItems: 'center',
             justifyContent: 'center',
+            alignItems: 'center',
             margin: COMMON_INDENT,
+            overflow: 'auto',
+
+            [theme.breakpoints.down('sm')]: {
+                alignItems: 'flex-start',
+            },
         },
         paper: {
             backgroundColor: theme.palette.background.paper,
