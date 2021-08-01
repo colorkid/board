@@ -6,6 +6,7 @@ import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const Dotenv = require('dotenv-webpack');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: 'development',
@@ -31,7 +32,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
+                type: 'asset',
             },
         ],
     },
@@ -61,6 +62,11 @@ module.exports = {
         }),
         new Dotenv({
             ignoreStub: true,
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "src/asset", to: "asset" },
+            ],
         }),
     ],
 };

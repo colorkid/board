@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from '@material-ui/core';
-import logo from '@src/assest/logo.png';
+import logo from '@src/asset/logo.png';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
