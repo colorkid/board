@@ -48,6 +48,7 @@ const Task = (props: ITask): ReactElement => {
 
     return (
         <Paper
+            onTouchStart={() => onDragStart(id, value)}
             onDragStart={() => onDragStart(id, value)}
             onDoubleClick={onDoubleClickHandler}
             draggable

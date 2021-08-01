@@ -1,4 +1,4 @@
-import React, { DragEvent, ReactElement, useState } from 'react';
+import React, { DragEvent, ReactElement, TouchEvent, useState } from 'react';
 import cn from 'classnames';
 import Task from '@src/components/Board/components/Task';
 import { TaskListType } from '@src/redux/task/taskReducer';
@@ -56,8 +56,7 @@ const Board = (props: IBoard): ReactElement => {
         e.preventDefault();
     };
 
-
-    const onDrop = (column: string, e: DragEvent<HTMLDivElement>) => {
+    const onDrop = (column: string, e: DragEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
         if (column !== SPRINT_BACKLOG) {
             moveTaskOnColumns(column, touchedTaskId, e.target);
         }
@@ -89,6 +88,7 @@ const Board = (props: IBoard): ReactElement => {
                             })}
                             onDragOver={(e) => onDragOver(e, item.id)}
                             onDrop={(e) => onDrop(item.id, e)}
+                            onTouchEnd={(e) => onDrop(item.id, e)}
                         >
                             <header className={classes.header}>{item.title}</header>
                             {Object.keys(data).map((key) => {
