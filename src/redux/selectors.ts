@@ -5,8 +5,11 @@ import { SprintListType } from '@src/redux/sprint/sprintReducer';
 import { userInitialStateType } from '@src/redux/user/userReducer';
 import { TaskListType } from '@src/redux/task/taskReducer';
 import { ColumnListType } from '@src/redux/columns/columnsReducer';
+import { PaletteType } from '@material-ui/core';
 
-export const getIsShowedMobileDrawerSelector = (state: RootState): boolean => state.ui.isShowedMobileDrawer;
+export const getThemeSelector = (state: RootState): PaletteType | undefined => state.ui.theme;
+export const getIsShowedMobileDrawerSelector = (state: RootState): boolean =>
+    state.ui.isShowedMobileDrawer;
 export const getVisibleModalSelector = (state: RootState): string => state.ui.isModalVisible;
 export const getUserInfoSelector = (state: RootState): userInitialStateType => state.user;
 export const getUserUIdlSelector = (state: RootState): string => state.user.uid;

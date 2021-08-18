@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) =>
             alignItems: 'center',
             padding: COMMON_INDENT,
             marginTop: COMMON_INDENT,
-            backgroundColor: theme.palette.grey[300],
+            backgroundColor: theme.palette.divider,
             borderRadius: theme.shape.borderRadius,
         },
     })

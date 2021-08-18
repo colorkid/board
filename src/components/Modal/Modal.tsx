@@ -3,7 +3,7 @@ import { Backdrop, Fade, Modal as ModalUI } from '@material-ui/core';
 import { SETTINGS_MODAL, SPRINT_MODAL, TASK_MODAL } from '@src/constants';
 import SprintForm from '../SprintForm';
 import TaskForm from '../TaskForm';
-import Settings from '../Settings';
+import ColumnsSettings from '../ColumnsSettings';
 import useStyles from '@src/components/Modal/styles';
 
 interface IModalContent {
@@ -22,7 +22,7 @@ const Modal = (props: IModalContent): ReactElement => {
             case TASK_MODAL:
                 return <TaskForm />;
             case SETTINGS_MODAL:
-                return <Settings />;
+                return <ColumnsSettings />;
             default:
                 return null;
         }

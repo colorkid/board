@@ -4,6 +4,7 @@ import {
     BOARD_COLUMNS_KEY,
     SPRINT_LIST_KEY,
     TASK_LIST_KEY,
+    THEME_KEY,
 } from '@src/constants';
 import { StateForSaveType } from '@src/components/StorageProvider/StorageProvider';
 import { LocalStorageApi } from '@src/api/LocalStorageApi';
@@ -12,6 +13,10 @@ import { FirebaseApi } from '@src/api/FirebaseApi';
 type DataSetType = StateForSaveType;
 
 export const ApiAdapter = {
+    getTheme: async (): Promise<string> =>
+        LocalStorageApi.getLocal(THEME_KEY),
+    setTheme: (data: DataSetType): void | Promise<null> =>
+        LocalStorageApi.setLocal(THEME_KEY, data),
     getTasks: async (userId: string): Promise<string> =>
         !userId ? LocalStorageApi.getLocal(TASK_LIST_KEY) : FirebaseApi.getTasksRequest(userId),
     setTasks: (userId: string, data: DataSetType): void | Promise<null> =>

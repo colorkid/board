@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) =>
             flexWrap: 'wrap',
             width: '100%',
             minHeight: '100vh',
-            backgroundColor: theme.palette.grey[100],
+            backgroundColor: theme.palette.background.default,
 
             '&:after': {
                 content: '""',
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) =>
             },
         },
         columnActive: {
-            backgroundColor: theme.palette.grey[200],
+            backgroundColor: theme.palette.action.hover,
         },
         card: {
             padding: COMMON_INDENT / 2,

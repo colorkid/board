@@ -54,11 +54,11 @@ const SprintForm = (props: ISprintForm): ReactElement => {
                     okMethod={setInitialDates}
                     message={CLEAR_PERIOD_CONFIRM_MESSAGE}
                 >
-                    <Button color="secondary" disabled={!isEnableButtons}>
+                    <Button disabled={!isEnableButtons}>
                         {CLEAR_BTN_TXT}
                     </Button>
                 </Confirm>
-                <Button color="primary" onClick={saveSprint} disabled={!isEnableButtons}>
+                <Button onClick={saveSprint} disabled={!isEnableButtons}>
                     {CREATE_BTN_TXT}
                 </Button>
             </footer>

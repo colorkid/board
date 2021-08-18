@@ -21,7 +21,6 @@ const UserInfo = (props: UserInfoType): ReactElement => {
                 </div>
             </div>
             <Button
-                color="secondary"
                 variant="outlined"
                 className={classes.submit}
                 onClick={signOutRequest}

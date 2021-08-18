@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
-import Settings from './Settings';
+import ColumnsSettings from './ColumnsSettings';
 import { RootState, useAppDispatch, useAppSelector } from '@src/redux/store';
 import { getColumnsStateListSelector } from '@src/redux/selectors';
 import { generateUUID } from '@src/utils';
 import { saveColumns } from '@src/redux/columns/columnsReducer';
 
-const SettingsContainer = (): ReactElement => {
+const ColumnsSettingsContainer = (): ReactElement => {
     const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
     const dispatch = useAppDispatch();
 
@@ -39,7 +39,7 @@ const SettingsContainer = (): ReactElement => {
     };
 
     return (
-        <Settings
+        <ColumnsSettings
             columns={columns}
             deleteColumn={deleteColumn}
             updateColumn={updateColumn}
@@ -48,4 +48,4 @@ const SettingsContainer = (): ReactElement => {
     );
 };
 
-export default SettingsContainer;
+export default ColumnsSettingsContainer;

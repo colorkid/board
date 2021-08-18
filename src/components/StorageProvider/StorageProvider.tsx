@@ -8,6 +8,7 @@ import {
     getIsAuthStateSelector,
     getSprintsListSelector,
     getTasksListSelector,
+    getThemeSelector,
     getUserUIdlSelector,
 } from '@src/redux/selectors';
 import { ColumnListType, saveColumns } from '@src/redux/columns/columnsReducer';
@@ -19,10 +20,12 @@ import { objectToString } from '@src/utils';
 import { ApiAdapter } from '@src/api/ApiAdapter';
 import { authStateObservable } from '@src/redux/user/userThunks';
 import { LocalStorageApi } from '@src/api/LocalStorageApi';
-import { FALSE, NOT_CHECK_YET, SIGN_OUT, TRUE } from '@src/constants';
+import { FALSE, LIGHT, NOT_CHECK_YET, SIGN_OUT, TRUE } from '@src/constants';
 import Progress from '@src/common/Progress';
+import { getTheme } from '@src/redux/ui/uiThunks';
+import { toggleTheme } from '@src/redux/ui/uiReducer';
 
-export type StateForSaveType = ColumnListType | string;
+export type StateForSaveType = ColumnListType | string | undefined;
 
 interface IStorageProvider {
     children: ReactChild | ReactChildren;
@@ -37,6 +40,7 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
     const userId = useAppSelector((state: RootState) => getUserUIdlSelector(state));
     const activeSprint = useAppSelector((state: RootState) => getActiveSprintSelector(state));
     const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
+    const theme = useAppSelector((state: RootState) => getThemeSelector(state));
 
     const dispatch = useAppDispatch();
 
@@ -49,9 +53,11 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
         dispatch(getSprints(userId));
         dispatch(getActiveSprint(userId));
         dispatch(getColumns(userId));
+        dispatch(getTheme());
     };
 
     const dispatchDemoData = () => {
+        dispatch(toggleTheme(LIGHT));
         dispatch(addTasksList(DEMO_TASKS));
         dispatch(addSprintsList(DEMO_SPRINTS));
         dispatch(toggleActiveSprint(DEMO_ACTIVE_SPRINT));
@@ -102,6 +108,12 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
             ApiAdapter.setTasks(userId, JSON.stringify(tasks));
         }
     }, [tasksToCompare]);
+
+    useEffect(() => {
+        if (theme) {
+            ApiAdapter.setTheme(theme);
+        }
+    }, [theme]);
 
     return <>{isAuth !== NOT_CHECK_YET ? children : <Progress />}</>;
 };

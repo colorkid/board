@@ -67,7 +67,7 @@ const AuthForm = (props: IAuthForm): ReactElement => {
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
                 />
-                <Button color="primary" variant="outlined" type="submit" className={classes.submit}>
+                <Button variant="outlined" type="submit" className={classes.submit}>
                     {typeAuth}
                 </Button>
             </form>

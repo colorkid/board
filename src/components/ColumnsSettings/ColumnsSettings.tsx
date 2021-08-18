@@ -3,14 +3,14 @@ import { ColumnListType } from '@src/redux/columns/columnsReducer';
 import Columns from './components/column';
 import useStyles from './styles';
 
-interface ISettings {
+interface IColumnsSettings {
     columns: ColumnListType;
     deleteColumn: (name: string) => void;
     updateColumn: (name: string, value: string | number, key: string) => void;
     addColumn: () => void;
 }
 
-const Settings = (props: ISettings): ReactElement => {
+const ColumnsSettings = (props: IColumnsSettings): ReactElement => {
     const { columns, deleteColumn, updateColumn, addColumn } = props;
     const classes = useStyles();
 
@@ -26,4 +26,4 @@ const Settings = (props: ISettings): ReactElement => {
     );
 };
 
-export default Settings;
+export default ColumnsSettings;

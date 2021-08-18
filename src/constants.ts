@@ -7,7 +7,7 @@ export const SPRINT_FORM_TITLE_CREATE = 'Create a new sprint';
 export const CLEAR_BTN_TXT = 'Clear';
 export const CREATE_BTN_TXT = 'Create';
 export const UPDATE_BTN_TXT = 'Update';
-export const SETTINGS_BTN_TXT = 'Settings';
+export const COLUMNS_BTN_TXT = 'Columns';
 export const ADD_COLUMN_BTN_TXT = 'Add column';
 
 export const AFTER_COUNT_SPRINTS_SHOW_SCROLL_COMMON = 7;
@@ -16,6 +16,7 @@ export const MAX_TITLE_TASK_LENGTH = 50;
 export const MAX_DESCRIPTION_TASK_LENGTH = 200;
 export const MAX_ESTIMATION_TASK_LENGTH = 10;
 
+export const THEME_KEY = 'theme';
 export const TASK_LIST_KEY = 'tasksList';
 export const SPRINT_LIST_KEY = 'sprintsList';
 export const BOARD_COLUMNS_KEY = 'boardColumns';
@@ -56,6 +57,10 @@ export const REMOVE_TASK_CONFIRM_MESSAGE = 'Are you sure you want to delete the 
 export const DEFAULT_USER_ERROR_MESSAGES_FULFILLED = 'User data is not defined';
 export const DEFAULT_UNDEFINED_ERROR = 'Error is undefined';
 export const DEFAULT_ERROR_MESSAGE = 'Something went wrong.';
+
+export const DARK_TOGGLE_TXT = 'Dark';
+export const DARK = 'dark';
+export const LIGHT = 'light';
 
 export const ESTIMATION = 'Estimation';
 export const PRIORITY = 'Priority';

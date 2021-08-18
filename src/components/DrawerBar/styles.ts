@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) =>
         },
         settings: {
             display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
             marginTop: COMMON_INDENT,
         },
         burger: {

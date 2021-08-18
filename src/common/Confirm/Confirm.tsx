@@ -53,10 +53,10 @@ const Confirm = (props: IConfirm): ReactElement => {
                 <div className={classes.body}>
                     <Typography>{message}</Typography>
                     <div className={classes.buttons}>
-                        <Button color="secondary" onClick={handleClose}>
+                        <Button onClick={handleClose}>
                             No
                         </Button>
-                        <Button color="primary" onClick={handleOk}>
+                        <Button onClick={handleOk}>
                             Yes
                         </Button>
                     </div>

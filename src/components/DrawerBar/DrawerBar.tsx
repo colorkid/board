@@ -5,10 +5,11 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Logo from '../../common/Logo';
 import AuthUser from '../AuthUser/AuthUserContainer';
-import { SETTINGS_BTN_TXT } from '@src/constants';
+import { COLUMNS_BTN_TXT } from '@src/constants';
 import SprintList from '../SprintList';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import ThemeToggle from "@src/components/ThemeToggle/ThemeToggleContainer";
 import useStyles from './styles';
 
 interface IDrawerBar {
@@ -76,8 +77,9 @@ const DrawerBar = (props: IDrawerBar): ReactElement => {
                         startIcon={<SettingsIcon />}
                         onClick={showSettingsModal}
                     >
-                        {SETTINGS_BTN_TXT}
+                        {COLUMNS_BTN_TXT}
                     </Button>
+                    <ThemeToggle />
                 </div>
             </Drawer>
             <IconButton className={classes.burger} onClick={burgerMenuHandler}>
