@@ -20,9 +20,8 @@ import { objectToString } from '@src/utils';
 import { ApiAdapter } from '@src/api/ApiAdapter';
 import { authStateObservable } from '@src/redux/user/userThunks';
 import { LocalStorageApi } from '@src/api/LocalStorageApi';
-import { FALSE, LIGHT, NOT_CHECK_YET, SIGN_OUT, TRUE } from '@src/constants';
+import {FALSE, LIGHT, NOT_CHECK_YET, SIGN_OUT, THEME_KEY, TRUE} from '@src/constants';
 import Progress from '@src/common/Progress';
-import { getTheme } from '@src/redux/ui/uiThunks';
 import { toggleTheme } from '@src/redux/ui/uiReducer';
 
 export type StateForSaveType = ColumnListType | string | undefined;
@@ -42,6 +41,8 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
     const columns = useAppSelector((state: RootState) => getColumnsStateListSelector(state));
     const theme = useAppSelector((state: RootState) => getThemeSelector(state));
 
+    const currentTheme = LocalStorageApi.getLocal(THEME_KEY);
+
     const dispatch = useAppDispatch();
 
     const columnsToCompare = objectToString(columns);
@@ -53,7 +54,7 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
         dispatch(getSprints(userId));
         dispatch(getActiveSprint(userId));
         dispatch(getColumns(userId));
-        dispatch(getTheme());
+        dispatch(toggleTheme(currentTheme));
     };
 
     const dispatchDemoData = () => {
@@ -111,7 +112,7 @@ const StorageProvider = (props: IStorageProvider): JSX.Element => {
 
     useEffect(() => {
         if (theme) {
-            ApiAdapter.setTheme(theme);
+            LocalStorageApi.setLocal(THEME_KEY, theme)
         }
     }, [theme]);
 

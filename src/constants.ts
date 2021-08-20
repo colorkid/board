@@ -22,8 +22,14 @@ export const SPRINT_LIST_KEY = 'sprintsList';
 export const BOARD_COLUMNS_KEY = 'boardColumns';
 export const IS_FIRST_SESSION_KEY = 'isFirstSession';
 export const ACTIVE_SPRINT_KEY = 'activeSprint';
+export const ON_BOARDING_STEP_ONE = 'on_boarding_step_one';
 
 export const SPRINT_BACKLOG = 'Backlog';
+
+export const PREV = 'Prev';
+export const NEXT = 'Next';
+export const FINISH = 'Finish';
+export const SKIP = 'Skip';
 
 export const SPRINT_MODAL = 'sprint_modal';
 export const TASK_MODAL = 'task_modal';
@@ -57,6 +63,15 @@ export const REMOVE_TASK_CONFIRM_MESSAGE = 'Are you sure you want to delete the 
 export const DEFAULT_USER_ERROR_MESSAGES_FULFILLED = 'User data is not defined';
 export const DEFAULT_UNDEFINED_ERROR = 'Error is undefined';
 export const DEFAULT_ERROR_MESSAGE = 'Something went wrong.';
+
+export const ONBOARDING_MESSAGES = {
+    '1': 'Welcome to the board. Here you can organize the list of your tasks and group them into sprints,' +
+        ' also it has all the classic kanban board techniques are also available to you.',
+    '2': 'Manage the names and order of the columns on the board. Customize it for any of your goals and the goals' +
+        ' of your business processes.',
+    '3': 'Register and log in to record the status of your board in the cloud database.' +
+        ' All board data from unauthorized users is stored in the browser\'s localStorage.',
+};
 
 export const DARK_TOGGLE_TXT = 'Dark';
 export const DARK = 'dark';

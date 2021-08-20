@@ -1,9 +1,10 @@
 import React, { ReactElement, useMemo } from 'react';
 import { Backdrop, Fade, Modal as ModalUI } from '@material-ui/core';
-import { SETTINGS_MODAL, SPRINT_MODAL, TASK_MODAL } from '@src/constants';
+import {ON_BOARDING_STEP_ONE, SETTINGS_MODAL, SPRINT_MODAL, TASK_MODAL} from '@src/constants';
 import SprintForm from '../SprintForm';
 import TaskForm from '../TaskForm';
 import ColumnsSettings from '../ColumnsSettings';
+import OnBoarding from "@src/components/OnBoarding";
 import useStyles from '@src/components/Modal/styles';
 
 interface IModalContent {
@@ -23,6 +24,8 @@ const Modal = (props: IModalContent): ReactElement => {
                 return <TaskForm />;
             case SETTINGS_MODAL:
                 return <ColumnsSettings />;
+            case ON_BOARDING_STEP_ONE:
+                return <OnBoarding />
             default:
                 return null;
         }
